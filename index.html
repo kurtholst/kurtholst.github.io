@@ -195,6 +195,32 @@
     .card .links a { font-size: .86rem; font-weight: 600; color: var(--accent-ink); display: inline-flex; align-items: center; gap: 5px; }
     .card .links a:hover { text-decoration: underline; }
 
+    /* RECOMMENDATIONS */
+    .rec-grid { columns: 3; column-gap: 20px; }
+    .rec {
+      break-inside: avoid; margin: 0 0 20px; background: var(--surface); border: 1px solid var(--line);
+      border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow);
+      transition: transform .12s, box-shadow .15s;
+    }
+    .rec:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+    .rec blockquote { position: relative; color: var(--ink-2); font-size: .93rem; line-height: 1.6; }
+    .rec blockquote::before { content: "\201C"; font-family: Georgia, serif; font-size: 2.6rem; color: var(--accent); line-height: 0; position: absolute; top: 10px; left: -4px; opacity: .25; }
+    .rec figcaption { display: flex; align-items: center; gap: 12px; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line); }
+    .rec-avatar { width: 40px; height: 40px; flex-shrink: 0; border-radius: 50%; background: var(--slate); color: var(--accent); display: grid; place-items: center; font-family: 'Space Grotesk'; font-weight: 700; font-size: .9rem; }
+    .rec-who { display: flex; flex-direction: column; }
+    .rec-name { font-weight: 700; font-size: .92rem; color: var(--ink); }
+    .rec-title { font-size: .78rem; color: var(--muted); }
+    .rec-hidden { display: none; }
+    .rec-more-wrap { text-align: center; margin-top: 12px; }
+
+    /* AWARDS */
+    .awards-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .award { display: flex; gap: 16px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 24px; box-shadow: var(--shadow); transition: transform .12s, box-shadow .15s; }
+    .award:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+    .award .medal { font-size: 1.9rem; width: 52px; height: 52px; flex-shrink: 0; border-radius: 14px; background: linear-gradient(135deg, #fef3c7, #fde68a); display: grid; place-items: center; }
+    .award-name { font-family: 'Space Grotesk'; font-weight: 700; font-size: 1.05rem; color: var(--ink); }
+    .award-meta { font-size: .85rem; color: var(--muted); margin-top: 3px; }
+
     /* CONTACT */
     .contact { background: var(--slate); border-radius: 28px; padding: 56px; text-align: center; color: #fff; position: relative; overflow: hidden; }
     .contact::before { content: ""; position: absolute; inset: 0; background: radial-gradient(500px 260px at 50% -20%, rgba(255,107,53,.25), transparent 60%); }
@@ -218,7 +244,8 @@
       .hero-grid, .about-grid { grid-template-columns: 1fr; }
       .hero-photo { order: -1; }
       .stats { grid-template-columns: repeat(2, 1fr); }
-      .skills-grid, .proj-grid, .cert-grid { grid-template-columns: 1fr; }
+      .skills-grid, .proj-grid, .cert-grid, .awards-grid { grid-template-columns: 1fr; }
+      .rec-grid { columns: 1; }
       .nav-links { display: none; position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; background: var(--surface); border-bottom: 1px solid var(--line); padding: 8px; }
       .nav-links.open { display: flex; }
       .nav-links a { padding: 12px; }
@@ -242,6 +269,7 @@
         <a href="#projects">Projects</a>
         <a href="#education">Education</a>
         <a href="#certifications">Certifications</a>
+        <a href="#recommendations">Recommendations</a>
         <a href="#contact">Contact</a>
       </nav>
     </div>
@@ -254,7 +282,7 @@
         <span class="avail"><span class="dot"></span> Solution Architect · Databricks</span>
         <h1>Turning data &amp; AI into <span class="accent">working solutions.</span></h1>
         <div class="role">Solution Architect @ Databricks · SAP &amp; ML background</div>
-        <p class="lede">I design and build end-to-end data &amp; AI platforms – from Lakeflow ingestion and Unity Catalog governance to GenAI, Genie, and production Databricks Apps. Two decades bridging enterprise data (SAP HANA, ML) and modern Lakehouse architecture.</p>
+        <p class="lede">I design and build end-to-end data &amp; AI platforms – from Lakeflow ingestion and Unity Catalog governance to GenAI, Genie, and production Databricks Apps. Nearly three decades bridging Business Intelligence, SAP, and the modern Lakehouse.</p>
         <div class="cta-row">
           <a class="btn btn-primary" href="#projects">View my work →</a>
           <a class="btn btn-ghost" href="#contact">Get in touch</a>
@@ -279,10 +307,10 @@
 
     <div class="wrap">
       <div class="stats">
-        <div class="stat reveal"><div class="num"><span class="accent">10</span>+</div><div class="lbl">Years in enterprise data &amp; ML</div></div>
-        <div class="stat reveal"><div class="num">20+</div><div class="lbl">Public data &amp; AI projects</div></div>
-        <div class="stat reveal"><div class="num">6</div><div class="lbl">Databricks capabilities, end-to-end</div></div>
-        <div class="stat reveal"><div class="num">SAP<span class="accent">→</span>AI</div><div class="lbl">From HANA to the Lakehouse</div></div>
+        <div class="stat reveal"><div class="num"><span class="accent">25</span>+</div><div class="lbl">Years in data &amp; analytics</div></div>
+        <div class="stat reveal"><div class="num">22</div><div class="lbl">Databricks certifications &amp; badges</div></div>
+        <div class="stat reveal"><div class="num">15</div><div class="lbl">Recommendations received</div></div>
+        <div class="stat reveal"><div class="num">BI<span class="accent">→</span>AI</div><div class="lbl">From data warehousing to GenAI</div></div>
       </div>
     </div>
   </section>
@@ -295,7 +323,7 @@
       <div class="about-grid" style="margin-top:32px">
         <div class="reveal">
           <p>I'm a Solution Architect at <strong>Databricks</strong>, helping organizations turn ambitious data &amp; AI ideas into working, production-grade solutions on the Lakehouse. My focus is end-to-end: data ingestion and governance, machine learning and GenAI, natural-language analytics with Genie, and the apps that put it all in front of business users.</p>
-          <p>My background runs deep in enterprise data – years of hands-on work with <strong>SAP HANA</strong>, machine learning in R and Python, and Spark – which lets me speak both the language of established enterprise systems and the modern Lakehouse. I like building the whole thing: from synthetic data generators and declarative pipelines to model-serving endpoints and full-stack Databricks Apps.</p>
+          <p>My background runs deep - nearly three decades in data &amp; analytics, from building Business Intelligence and data warehouses in the late 1990s, through years as a Principal Consultant in <strong>SAP Predictive Analytics</strong> and <strong>SAP HANA</strong>, to data science with machine learning and geospatial analytics. That history lets me speak both the language of established enterprise systems and the modern Lakehouse. I like building the whole thing: from synthetic data generators and declarative pipelines to model-serving endpoints and full-stack Databricks Apps.</p>
           <p>Lately I've been shipping GenAI-powered prototypes – predictive-maintenance agents, maintenance control towers, and end-to-end industry data workbenches – often built entirely through natural-language prompts. I care about solutions that actually run, with the evidence to prove it.</p>
         </div>
         <div class="about-card reveal">
@@ -303,8 +331,9 @@
           <div class="fact"><span class="k">Role</span><span class="v">Solution Architect</span></div>
           <div class="fact"><span class="k">Company</span><span class="v">Databricks</span></div>
           <div class="fact"><span class="k">Focus</span><span class="v">Data &amp; AI, GenAI, Lakehouse</span></div>
-          <div class="fact"><span class="k">Roots</span><span class="v">SAP HANA · ML · Spark</span></div>
-          <div class="fact"><span class="k">On GitHub</span><span class="v">Since 2014</span></div>
+          <div class="fact"><span class="k">Roots</span><span class="v">BI · SAP HANA · Data Science</span></div>
+          <div class="fact"><span class="k">Based in</span><span class="v">Copenhagen, Denmark</span></div>
+          <div class="fact"><span class="k">In the field</span><span class="v">Since 1996</span></div>
         </div>
       </div>
     </div>
@@ -314,36 +343,84 @@
   <section id="experience" style="background:var(--surface); border-top:1px solid var(--line); border-bottom:1px solid var(--line)">
     <div class="wrap">
       <div class="reveal"><div class="eyebrow">Experience</div>
-      <h2 class="section-title">A path from enterprise data to AI solutions</h2>
-      <p class="section-sub">Roles and focus areas across a career spanning SAP HANA, machine learning, and the Databricks Lakehouse.</p></div>
+      <h2 class="section-title">Nearly three decades in data &amp; analytics</h2>
+      <p class="section-sub">A career spanning Business Intelligence, SAP predictive analytics, data science, and the modern Databricks Lakehouse - with a parallel life as a university lecturer.</p></div>
       <div class="timeline reveal">
         <div class="tl-item">
-          <div class="tl-date">Present</div>
-          <div class="tl-role">Solution Architect</div>
-          <div class="tl-org">Databricks</div>
-          <p>Architecting and building end-to-end Data &amp; AI solutions on the Databricks Lakehouse for enterprise customers.</p>
+          <div class="tl-date">Jan 2025 – Present</div>
+          <div class="tl-role">Solutions Architect</div>
+          <div class="tl-org">Databricks · Copenhagen (Hybrid)</div>
+          <p>Showing how the Databricks Data Intelligence Platform solves complex data challenges, building tailored solutions with a customer-focused team.</p>
           <ul>
-            <li>Designing full data journeys: Lakeflow ingestion → Unity Catalog governance → Lakebase serving → ML/GenAI → Genie → Databricks Apps.</li>
-            <li>Building GenAI-powered prototypes and predictive-ML solutions across manufacturing, logistics, and retail.</li>
-            <li>Bringing an SAP &amp; enterprise-data perspective to modernization and migration conversations.</li>
+            <li>Lead hands-on evaluations and build mock-ups using Databricks with Spark, Python, and SQL.</li>
+            <li>Develop reference architectures, how-to guides, and demo applications for customers.</li>
+            <li>Engage the Databricks technical community through workshops, seminars, and meetups.</li>
           </ul>
         </div>
         <div class="tl-item">
-          <div class="tl-date">Prior</div>
-          <div class="tl-role">Data Science &amp; ML Practitioner</div>
-          <div class="tl-org">Enterprise data &amp; analytics</div>
-          <p>Hands-on machine learning and analytics work bridging SAP systems and open data-science tooling.</p>
+          <div class="tl-date">Oct 2019 – Dec 2024 · 5 yrs</div>
+          <div class="tl-role">Chief Consultant, Data Science</div>
+          <div class="tl-org">EPA / SGAV · Odense (On-site)</div>
+          <p>Applied Databricks, machine learning, and geospatial analytics to environmental challenges, with a focus on environmental classification.</p>
           <ul>
-            <li>Built ML models in R and Python – supervised learning, Bayesian optimization, and forecasting.</li>
-            <li>Integrated SAP HANA with machine learning workflows and Spark on Azure.</li>
-            <li>Authored technical write-ups, including work on Overall Equipment Effectiveness (OEE).</li>
+            <li>Led AI/ML proofs of concept for environmental surveillance, building nationwide geospatial maps.</li>
+            <li>Established scalable data infrastructure for ML training across satellite imagery, aerial photos, and geospatial data.</li>
+            <li>Drove innovation in a project team focused on mockups and early adoption of emerging technologies.</li>
           </ul>
         </div>
+        <div class="tl-item">
+          <div class="tl-date">Mar 2014 – Sep 2019 · 5.5 yrs</div>
+          <div class="tl-role">Principal Consultant, SAP Predictive Analytics</div>
+          <div class="tl-org">SAP · Denmark</div>
+          <p>Delivered predictive analytics solutions using SAP Predictive Analytics, SAP HANA, R, and Python - across presales, custom development, and production.</p>
+          <ul>
+            <li>Built ML models with SAP HANA PAL, R, and SAP Predictive Analytics to optimize business outcomes.</li>
+            <li>Developed custom R and Python algorithms (e.g. changepoint detection, vibration-data analysis).</li>
+            <li>Delivered SCADA time-series analysis and forecasting models; authored best-practice use cases.</li>
+          </ul>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">Jan 2012 – Feb 2014 · 2 yrs</div>
+          <div class="tl-role">Senior SAP Business Intelligence Consultant</div>
+          <div class="tl-org">SAP · Denmark</div>
+          <p>BI strategy, solution architecture, and performance management on SAP BusinessObjects, BW, and HANA.</p>
+          <ul>
+            <li>Designed BI strategy and roadmaps linked to company strategic goals and the SAP BI product roadmap.</li>
+            <li>Modeled BI in SAP HANA Studio and BusinessObjects; named Knowledge Champion in BO Modeling &amp; Data Management (2013).</li>
+            <li>Implemented performance management with SAP BusinessObjects Strategy Management.</li>
+          </ul>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">Feb 2009 – Dec 2011 · 3 yrs</div>
+          <div class="tl-role">SAP BI Architect &amp; Developer</div>
+          <div class="tl-org">Energinet.dk</div>
+          <p>Designed and implemented Energinet.dk's enterprise BI solutions on SAP BusinessObjects, plus BI strategy, roadmap, and governance.</p>
+          <ul>
+            <li>Built an enterprise data warehouse combining SAP Business Warehouse &amp; SAP Data Services.</li>
+            <li>Delivered reporting and enterprise performance management with SAP BusinessObjects.</li>
+          </ul>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">Jan 2005 – Jan 2009 · 4 yrs</div>
+          <div class="tl-role">External Lecturer</div>
+          <div class="tl-org">University of Southern Denmark · Odense</div>
+          <p>Taught "Data Warehouse &amp; Data Mining" alongside a full-time BI career, and advised bachelor's and master's projects.</p>
+          <ul>
+            <li>Developed teaching materials and practical exercises in data mining, BI, and data-warehouse modeling.</li>
+            <li>Mentored students on Business Intelligence, Balanced Scorecard, and Data Warehousing - many of whom credit this work in their recommendations below.</li>
+          </ul>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">Aug 2007 – Feb 2009 · 1.5 yrs</div>
+          <div class="tl-role">Senior Consultant, Data Warehouse Development</div>
+          <div class="tl-org">Energinet.dk</div>
+          <p>Developed data warehouse and business intelligence solutions for one of Denmark's most significant infrastructure companies.</p>
+        </div>
         <div class="tl-item past">
-          <div class="tl-date">Foundation</div>
-          <div class="tl-role">SAP HANA &amp; Enterprise Data</div>
-          <div class="tl-org">SAP ecosystem</div>
-          <p>Deep experience with SAP HANA and enterprise data platforms – the foundation for translating between established enterprise systems and the modern Lakehouse.</p>
+          <div class="tl-date">1996 – 2007 · 11 yrs</div>
+          <div class="tl-role">Business Intelligence Consultant → Senior BI Consultant</div>
+          <div class="tl-org">Intentia International / Lawson Software</div>
+          <p>Where it began: end-to-end BI implementation - presales, stakeholder interviews, data modeling, development, testing, and training - for manufacturing, retail, and distribution customers, on Cognos and BusinessObjects.</p>
         </div>
       </div>
     </div>
@@ -701,16 +778,186 @@
     <div class="wrap">
       <div class="reveal"><div class="eyebrow">Recommendations</div>
       <h2 class="section-title">What colleagues say</h2>
-      <p class="section-sub">Recommendations received from colleagues and collaborators.</p></div>
-      <div class="proj-grid" id="rec-grid">
-        <!-- RECOMMENDATIONS: replace with real quotes + attributions -->
-        <div class="card reveal">
-          <div class="body">
-            <p style="font-size:1rem; color:var(--ink-2); font-style:italic">"Add a recommendation quote here."</p>
-            <div class="links" style="margin-top:14px">
-              <span style="font-weight:700; color:var(--ink)">Name</span>
-            </div>
-            <div style="font-size:.85rem; color:var(--muted)">Title · Company</div>
+      <p class="section-sub">15 recommendations received over the years from managers, colleagues, clients, and students.</p></div>
+      <div class="rec-grid" id="rec-grid">
+        <figure class="rec">
+          <blockquote>Kurt has been a great colleague and fantastic to work with. He brings a perfect mix of humour, professionalism and curiosity to projects and daily work.</blockquote>
+          <figcaption>
+            <span class="rec-avatar">SI</span>
+            <span class="rec-who">
+              <span class="rec-name">Simon Iversen</span>
+              <span class="rec-title">Director of Product Management · Nov 2020</span>
+            </span>
+          </figcaption>
+        </figure>
+        <figure class="rec">
+          <blockquote>Kurt was one of the key drivers of the most important BI project of SAP in 2012. Kurt was driving a lot of customer cases and he was helping to de-escalate some customer projects. Kurt is very experienced in all technical topics in SAP BI, but he also is very experienced from an end-2-end BI architecture. Kurt is goal oriented and he is able to bring things to an end, always as promised in time, budget and effort. Last but not least Kurt created some important how-to-guides and supported a lot our knowledge transfer process.</blockquote>
+          <figcaption>
+            <span class="rec-avatar">MS</span>
+            <span class="rec-who">
+              <span class="rec-name">Markus Schunter</span>
+              <span class="rec-title">VP Enterprise Architecture Advisory, SAP · Feb 2013</span>
+            </span>
+          </figcaption>
+        </figure>
+        <figure class="rec">
+          <blockquote>I have had the pleasure to work with Kurt in different projects and every time he showed a very committed effort to reach the project goals. Kurt is a serious and trustworthy professional with the ability to enter into every project with high spirits and a drive that sets the example to follow. Kurt makes the gap between technology and business so much easier to close. I can only give Kurt my highest recommendations.</blockquote>
+          <figcaption>
+            <span class="rec-avatar">NP</span>
+            <span class="rec-who">
+              <span class="rec-name">Nicolaj Nørgaard Peulicke</span>
+              <span class="rec-title">Senior Vice President, CIO, Energinet · Oct 2011</span>
+            </span>
+          </figcaption>
+        </figure>
+        <figure class="rec">
+          <blockquote>Kurt was my main contact for the Energinet strategy management project. I was very impressed with his dedication, postponing his vacation to meet with me and to take their SSM project to the next step. Kurt is very quick to understand and to transpose Performance Management into Balanced Scorecard concepts, and he sees the potential it represents for his company. It is a pleasure to work with him as he is always available for new perspectives dedicated to improving the Performance Management environment.</blockquote>
+          <figcaption>
+            <span class="rec-avatar">OD</span>
+            <span class="rec-who">
+              <span class="rec-name">Olivier Delcourt</span>
+              <span class="rec-title">KSA / Middle East Regional Sales Leader · Nov 2011</span>
+            </span>
+          </figcaption>
+        </figure>
+        <figure class="rec">
+          <blockquote>I had the pleasure of having Kurt Holst as my teacher on the DW/BI subject at Syddansk Universitet and later as a supervisor/coach for my B.Sc. project, and I highly recommend Kurt for those roles. Not only is he a subject expert but he is also inspirational and highly professional. He created very good structure and was highly critical (positive) without dictating the course of the project. He enabled me to do quality work and inspired me to create a career in the BI/DW area. Kurt gets my highest recommendation.</blockquote>
+          <figcaption>
+            <span class="rec-avatar">ÁG</span>
+            <span class="rec-who">
+              <span class="rec-name">Ásgeir Gunnarsson</span>
+              <span class="rec-title">Data person, trainer and Microsoft MVP · Sep 2011</span>
+            </span>
+          </figcaption>
+        </figure>
+        <figure class="rec">
+          <blockquote>I worked with Kurt Holst on the implementation of a Business Information System and Datamart in an international Sales &amp; Marketing organisation through 2005 and 2006. In his role as an external consultant Kurt excellently managed to translate complex business requirements into technical solutions, as well as make the underlying functionality understandable to an organisation of laymen. I would be happy to recommend Kurt for his business acumen and personal style in hectic surroundings.</blockquote>
+          <figcaption>
+            <span class="rec-avatar">RP</span>
+            <span class="rec-who">
+              <span class="rec-name">Rune Pilegaard</span>
+              <span class="rec-title">Commercial performance in Pharma · Jun 2007</span>
+            </span>
+          </figcaption>
+        </figure>
+        <figure class="rec rec-hidden">
+          <blockquote>Kurt was, at my time at Intentia (now Lawson), a fully skilled senior business consultant within the area of Business Intelligence. Kurt did a great job both in creating the demand and fulfilling the tasks.</blockquote>
+          <figcaption>
+            <span class="rec-avatar">CG</span>
+            <span class="rec-who">
+              <span class="rec-name">Christian Gierahn</span>
+              <span class="rec-title">Director at Mazeppa Denmark · Jun 2007</span>
+            </span>
+          </figcaption>
+        </figure>
+        <figure class="rec rec-hidden">
+          <blockquote>Kurt Holst helps me by teaching a BA Business Intelligence course and by supervising the students when they write their BA projects here at SDU. He does an excellent job!</blockquote>
+          <figcaption>
+            <span class="rec-avatar">TB</span>
+            <span class="rec-who">
+              <span class="rec-name">Dr. Tor Beltov</span>
+              <span class="rec-title">Co-Owner @ Aggregator Solutions · Jun 2007</span>
+            </span>
+          </figcaption>
+        </figure>
+        <figure class="rec rec-hidden">
+          <blockquote>Jeg skylder Kurt meget for hvor jeg selv sidder i dag. I undervisningen forstod Kurt at indlemme os i et - for de fleste - helt nyt univers, nemlig Business Intelligence og Data Warehousing. Med sin gode humor, fine humør og altid helt utrolige engagement åbnede Kurt mine øjne for i hvilken retning jeg skulle gå. Kurt var også vores vejleder på det afsluttende bachelorprojekt, hvor han på én gang forstod at motivere og vejlede/inspirere til et vellykket projekt. Tak Kurt!</blockquote>
+          <figcaption>
+            <span class="rec-avatar">KD</span>
+            <span class="rec-who">
+              <span class="rec-name">Kasper Dueholm</span>
+              <span class="rec-title">Senior Support Consultant &amp; Partner at CogniTech A/S · Jan 2012</span>
+            </span>
+          </figcaption>
+        </figure>
+        <figure class="rec rec-hidden">
+          <blockquote>Det har været en stor fornøjelse at have Kurt som vejleder. Igennem forløbet var Kurt en sparringspartner der med sin uendelige viden, skarpe kritik og struktur sikrede at specialet aldrig mistede tråden og blev vejledt sikkert i mål. Kurt leverede en vejledning der var yderst målrettet, struktureret og inspirerende. Jeg kan uden forbehold anbefale Kurt som vejleder for alle der ønsker at skrive afhandling.</blockquote>
+          <figcaption>
+            <span class="rec-avatar">RK</span>
+            <span class="rec-who">
+              <span class="rec-name">René Kragsfeldt</span>
+              <span class="rec-title">Business Intelligence Architect · Sep 2011</span>
+            </span>
+          </figcaption>
+        </figure>
+        <figure class="rec rec-hidden">
+          <blockquote>I forbindelse med mit HA(dat.) studie ved Syddansk Universitet havde jeg i 2005 fornøjelsen af at have Kurt Holst som min underviser i faget Datawarehouse/Data Mining. Her leverede Kurt undervisningen med et stort engagement og altid med sin hjælpsomme og inspirerende væremåde. Som vejleder er Kurt altid klar med konstruktiv kritik på den motiverende facon. Med Kurt som inspirator og mentor var kursen sat for min videre færd ind i data warehouse- og business intelligence-verdenen.</blockquote>
+          <figcaption>
+            <span class="rec-avatar">TK</span>
+            <span class="rec-who">
+              <span class="rec-name">Torben Fenger Kornum</span>
+              <span class="rec-title">Head of Consultancy West &amp; Principal Architect, twoday Data &amp; AI · Sep 2011</span>
+            </span>
+          </figcaption>
+        </figure>
+        <figure class="rec rec-hidden">
+          <blockquote>Som Kurts direkte chef var det en stor oplevelse at opleve både høj performance-, kvalitets- og ansvarsbevidsthed samt stor loyalitet. Disse kvaliteter udmøntede sig sammen med stor faglighed og intelligens i en meget høj kundetilfredshed. Som menneske er Kurt en særdeles behagelig person. Kurt er ydmyg i forhold til kunder og kollegaer, men er alligevel ikke bange for at kæmpe for at den rigtige løsning vælges. Det er en stor fornøjelse at have været Kurts chef og kollega!</blockquote>
+          <figcaption>
+            <span class="rec-avatar">LL</span>
+            <span class="rec-who">
+              <span class="rec-name">Lambert Lambertsen</span>
+              <span class="rec-title">IT Manager | Project Manager · Jun 2007</span>
+            </span>
+          </figcaption>
+        </figure>
+        <figure class="rec rec-hidden">
+          <blockquote>Kurt er uden sammenligning DEN dygtigste BI-konsulent jeg har haft fornøjelsen at arbejde sammen med. Han har en professionel indstilling til sine opgaver, som han ikke anser for løst før kunden er fuldt tilfreds. Jeg kan anbefale Kurt uden nogen form for forbehold.</blockquote>
+          <figcaption>
+            <span class="rec-avatar">TM</span>
+            <span class="rec-who">
+              <span class="rec-name">Torben Magnusson</span>
+              <span class="rec-title">Consultant at Columbus A/S · Jun 2007</span>
+            </span>
+          </figcaption>
+        </figure>
+        <figure class="rec rec-hidden">
+          <blockquote>Kurt Holst er ikke blot en dygtig Business Intelligence-konsulent, men også en meget dygtig underviser i faget Data Warehouse. Under min uddannelse på SDU var jeg så heldig at have ham som min underviser/mentor. Dygtig, kompetent og altid hjælpsom med min udvikling indenfor faget. Jeg giver ham min bedste anbefaling med på vejen.</blockquote>
+          <figcaption>
+            <span class="rec-avatar">JL</span>
+            <span class="rec-who">
+              <span class="rec-name">Jan Levin</span>
+              <span class="rec-title">Senior Business Analytics Architect at Kapacity · Jan 2007</span>
+            </span>
+          </figcaption>
+        </figure>
+        <figure class="rec rec-hidden">
+          <blockquote>Jeg kender Kurt fra MITKO-studiet, hvor han arbejder og deltager med stort engagement og bidrager til at højne niveauet. Han er dedikeret og giver sig 100%. Han er en omgængelig person og bidrager også socialt til det gode studiemiljø.</blockquote>
+          <figcaption>
+            <span class="rec-avatar">JB</span>
+            <span class="rec-who">
+              <span class="rec-name">Jens Bøgner</span>
+              <span class="rec-title">Projektleder | MBA it, kommunikation og organisation · Mar 2008</span>
+            </span>
+          </figcaption>
+        </figure>
+      </div>
+      <div class="rec-more-wrap">
+        <button class="btn btn-ghost" id="rec-more" onclick="
+          document.querySelectorAll('.rec-hidden').forEach(e=>e.classList.remove('rec-hidden'));
+          this.style.display='none';">Show all 15 recommendations →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- HONORS & AWARDS -->
+  <section id="awards" style="background:var(--surface); border-top:1px solid var(--line); border-bottom:1px solid var(--line)">
+    <div class="wrap">
+      <div class="reveal"><div class="eyebrow">Honors &amp; awards</div>
+      <h2 class="section-title">Recognition</h2>
+      <p class="section-sub">Awards recognizing top performance across enterprise software careers.</p></div>
+      <div class="awards-grid">
+        <div class="award reveal">
+          <div class="medal">🏆</div>
+          <div>
+            <div class="award-name">SAP Winners Circle</div>
+            <div class="award-meta">Issued by SAP · Jan 2014</div>
+          </div>
+        </div>
+        <div class="award reveal">
+          <div class="medal">🥇</div>
+          <div>
+            <div class="award-name">High Performance Club</div>
+            <div class="award-meta">Issued by Intentia International (Lawson Software) · Jan 2003</div>
           </div>
         </div>
       </div>
