@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kurt Holst — Solution Architect @ Databricks</title>
+  <meta name="description" content="Kurt Holst — Solution Architect at Databricks. Data & AI platforms, GenAI, and end-to-end Databricks solutions. SAP HANA & ML background." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230f172a'/><text x='50' y='68' font-size='54' font-family='Georgia,serif' fill='%23ff6b35' text-anchor='middle'>K</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f7f8fa;
+      --surface: #ffffff;
+      --ink: #0f172a;
+      --ink-2: #334155;
+      --muted: #64748b;
+      --line: #e2e8f0;
+      --accent: #ff6b35;
+      --accent-ink: #d94f1c;
+      --slate: #0f172a;
+      --slate-2: #1e293b;
+      --radius: 16px;
+      --shadow: 0 1px 2px rgba(15,23,42,.04), 0 8px 24px rgba(15,23,42,.06);
+      --shadow-lg: 0 12px 40px rgba(15,23,42,.12);
+      --maxw: 1080px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, .display { font-family: 'Space Grotesk', 'Inter', sans-serif; letter-spacing: -.02em; }
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+    section { padding: 88px 0; }
+    .eyebrow {
+      font-size: .8rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--accent-ink); margin-bottom: 12px;
+    }
+    .section-title { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700; margin-bottom: 8px; }
+    .section-sub { color: var(--muted); max-width: 620px; margin-bottom: 40px; }
+
+    /* NAV */
+    header.nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(247,248,250,.82); backdrop-filter: saturate(180%) blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .brand { display: flex; align-items: center; gap: 10px; font-family: 'Space Grotesk'; font-weight: 700; font-size: 1.05rem; }
+    .brand .mark {
+      width: 30px; height: 30px; border-radius: 9px; background: var(--slate);
+      color: var(--accent); display: grid; place-items: center; font-size: 1rem;
+    }
+    .nav-links { display: flex; gap: 4px; align-items: center; }
+    .nav-links a {
+      font-size: .9rem; font-weight: 500; color: var(--ink-2); padding: 8px 12px; border-radius: 8px;
+      transition: background .15s, color .15s;
+    }
+    .nav-links a:hover { background: var(--surface); color: var(--ink); }
+    .nav-toggle { display: none; background: none; border: 0; font-size: 1.5rem; cursor: pointer; color: var(--ink); }
+
+    /* HERO */
+    .hero { padding: 96px 0 72px; position: relative; overflow: hidden; }
+    .hero::before {
+      content: ""; position: absolute; inset: 0;
+      background:
+        radial-gradient(600px 300px at 80% -10%, rgba(255,107,53,.10), transparent 60%),
+        radial-gradient(500px 300px at 10% 10%, rgba(15,23,42,.05), transparent 60%);
+      pointer-events: none;
+    }
+    .hero-grid { display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: center; position: relative; }
+    .hero .avail {
+      display: inline-flex; align-items: center; gap: 8px; font-size: .82rem; font-weight: 600;
+      color: var(--ink-2); background: var(--surface); border: 1px solid var(--line);
+      padding: 6px 14px; border-radius: 999px; box-shadow: var(--shadow); margin-bottom: 22px;
+    }
+    .avail .dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 0 3px rgba(34,197,94,.2); }
+    .hero h1 { font-size: clamp(2.4rem, 6vw, 3.8rem); line-height: 1.05; font-weight: 700; }
+    .hero h1 .accent { color: var(--accent-ink); }
+    .hero .role { font-size: clamp(1.05rem, 2.4vw, 1.4rem); color: var(--ink-2); font-weight: 600; margin-top: 16px; font-family: 'Space Grotesk'; }
+    .hero p.lede { color: var(--muted); font-size: 1.05rem; margin-top: 18px; max-width: 560px; }
+    .cta-row { display: flex; gap: 12px; margin-top: 30px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: .95rem;
+      padding: 12px 22px; border-radius: 999px; border: 1px solid transparent; cursor: pointer;
+      transition: transform .12s, box-shadow .15s, background .15s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--slate); color: #fff; box-shadow: var(--shadow); }
+    .btn-primary:hover { background: var(--slate-2); box-shadow: var(--shadow-lg); }
+    .btn-ghost { background: var(--surface); color: var(--ink); border-color: var(--line); box-shadow: var(--shadow); }
+    .socials { display: flex; gap: 10px; margin-top: 26px; }
+    .socials a {
+      width: 42px; height: 42px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line);
+      display: grid; place-items: center; color: var(--ink-2); box-shadow: var(--shadow);
+      transition: transform .12s, color .15s, border-color .15s;
+    }
+    .socials a:hover { transform: translateY(-3px); color: var(--accent-ink); border-color: var(--accent); }
+    .socials svg { width: 20px; height: 20px; }
+    .hero-photo { position: relative; }
+    .hero-photo img {
+      width: 220px; height: 220px; border-radius: 28px; object-fit: cover;
+      border: 4px solid var(--surface); box-shadow: var(--shadow-lg);
+    }
+    .hero-photo .badge {
+      position: absolute; bottom: -14px; left: 50%; transform: translateX(-50%);
+      background: var(--slate); color: #fff; font-size: .78rem; font-weight: 600;
+      padding: 7px 16px; border-radius: 999px; white-space: nowrap; box-shadow: var(--shadow-lg);
+    }
+    .hero-photo .badge b { color: var(--accent); }
+
+    /* STATS */
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 56px; position: relative; }
+    .stat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow); }
+    .stat .num { font-family: 'Space Grotesk'; font-size: 1.8rem; font-weight: 700; color: var(--ink); }
+    .stat .num .accent { color: var(--accent-ink); }
+    .stat .lbl { font-size: .85rem; color: var(--muted); margin-top: 2px; }
+
+    /* ABOUT */
+    .about-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 48px; align-items: start; }
+    .about-grid p { color: var(--ink-2); margin-bottom: 16px; }
+    .about-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; box-shadow: var(--shadow); }
+    .about-card h3 { font-size: 1rem; margin-bottom: 14px; }
+    .fact { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: .92rem; }
+    .fact:last-child { border-bottom: 0; }
+    .fact .k { color: var(--muted); min-width: 92px; }
+    .fact .v { font-weight: 600; }
+
+    /* TIMELINE */
+    .timeline { position: relative; margin-left: 8px; }
+    .timeline::before { content: ""; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 2px; background: var(--line); }
+    .tl-item { position: relative; padding: 0 0 34px 40px; }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-item::before {
+      content: ""; position: absolute; left: 0; top: 5px; width: 16px; height: 16px; border-radius: 50%;
+      background: var(--surface); border: 3px solid var(--accent);
+    }
+    .tl-item.past::before { border-color: var(--muted); }
+    .tl-date { font-size: .8rem; font-weight: 700; color: var(--accent-ink); letter-spacing: .04em; text-transform: uppercase; }
+    .tl-role { font-size: 1.15rem; font-weight: 700; font-family: 'Space Grotesk'; margin-top: 4px; }
+    .tl-org { color: var(--ink-2); font-weight: 600; font-size: .95rem; }
+    .tl-item p { color: var(--muted); margin-top: 8px; font-size: .95rem; }
+    .tl-item ul { margin: 10px 0 0; padding-left: 18px; color: var(--ink-2); font-size: .93rem; }
+    .tl-item li { margin-bottom: 5px; }
+
+    /* SKILLS */
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .skill-cat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
+    .skill-cat h3 { font-size: 1rem; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+    .skill-cat h3 .ico { width: 34px; height: 34px; border-radius: 10px; background: rgba(255,107,53,.12); color: var(--accent-ink); display: grid; place-items: center; }
+    .tag-list { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag { font-size: .82rem; font-weight: 500; color: var(--ink-2); background: var(--bg); border: 1px solid var(--line); padding: 5px 12px; border-radius: 999px; }
+
+    /* PROJECTS */
+    .proj-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+    .card {
+      background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden;
+      box-shadow: var(--shadow); transition: transform .15s, box-shadow .15s, border-color .15s; display: flex; flex-direction: column;
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: #cbd5e1; }
+    .card .thumb { height: 118px; background: linear-gradient(135deg, var(--slate), var(--slate-2)); position: relative; overflow: hidden; }
+    .card .thumb::after {
+      content: ""; position: absolute; inset: 0;
+      background: radial-gradient(400px 200px at 80% 0%, rgba(255,107,53,.35), transparent 60%);
+    }
+    .card .thumb .emoji { position: absolute; left: 20px; bottom: 14px; font-size: 2rem; z-index: 1; }
+    .card .thumb .lang { position: absolute; right: 14px; top: 14px; z-index: 1; font-size: .72rem; font-weight: 600; color: #fff; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.22); padding: 3px 10px; border-radius: 999px; }
+    .card .body { padding: 20px 22px 22px; display: flex; flex-direction: column; flex: 1; }
+    .card h3 { font-size: 1.1rem; margin-bottom: 8px; }
+    .card p { color: var(--muted); font-size: .92rem; flex: 1; }
+    .card .links { display: flex; gap: 14px; margin-top: 16px; }
+    .card .links a { font-size: .86rem; font-weight: 600; color: var(--accent-ink); display: inline-flex; align-items: center; gap: 5px; }
+    .card .links a:hover { text-decoration: underline; }
+
+    /* CONTACT */
+    .contact { background: var(--slate); border-radius: 28px; padding: 56px; text-align: center; color: #fff; position: relative; overflow: hidden; }
+    .contact::before { content: ""; position: absolute; inset: 0; background: radial-gradient(500px 260px at 50% -20%, rgba(255,107,53,.25), transparent 60%); }
+    .contact h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); position: relative; }
+    .contact p { color: #cbd5e1; max-width: 480px; margin: 14px auto 30px; position: relative; }
+    .contact .btn-primary { background: var(--accent); color: #fff; position: relative; }
+    .contact .btn-primary:hover { background: #ff7d4d; }
+    .contact .socials { justify-content: center; }
+    .contact .socials a { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.16); color: #e2e8f0; }
+    .contact .socials a:hover { color: #fff; border-color: var(--accent); }
+
+    /* FOOTER */
+    footer { padding: 40px 0 56px; text-align: center; color: var(--muted); font-size: .88rem; }
+    footer a { color: var(--ink-2); font-weight: 600; }
+
+    /* reveal animation */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    @media (max-width: 860px) {
+      .hero-grid, .about-grid { grid-template-columns: 1fr; }
+      .hero-photo { order: -1; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .skills-grid, .proj-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; background: var(--surface); border-bottom: 1px solid var(--line); padding: 8px; }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 12px; }
+      .nav-toggle { display: block; }
+      .contact { padding: 40px 24px; }
+    }
+    @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a href="#top" class="brand"><span class="mark">K</span> Kurt Holst</a>
+      <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('navlinks').classList.toggle('open')">☰</button>
+      <nav class="nav-links" id="navlinks">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="wrap hero-grid">
+      <div class="reveal">
+        <span class="avail"><span class="dot"></span> Solution Architect · Databricks</span>
+        <h1>Turning data &amp; AI into <span class="accent">working solutions.</span></h1>
+        <div class="role">Solution Architect @ Databricks · SAP &amp; ML background</div>
+        <p class="lede">I design and build end-to-end data &amp; AI platforms — from Lakeflow ingestion and Unity Catalog governance to GenAI, Genie, and production Databricks Apps. Two decades bridging enterprise data (SAP HANA, ML) and modern Lakehouse architecture.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#projects">View my work →</a>
+          <a class="btn btn-ghost" href="#contact">Get in touch</a>
+        </div>
+        <div class="socials">
+          <a href="https://github.com/kurtholst" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.8 18.3 5.1 18.3 5.1c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .4.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/kurtholst/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+          </a>
+          <a href="mailto:kurt.holst@databricks.com" aria-label="Email" title="Email">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="hero-photo reveal">
+        <img src="assets/avatar.jpg" alt="Kurt Holst" />
+        <span class="badge">Building on <b>Databricks</b></span>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <div class="stats">
+        <div class="stat reveal"><div class="num"><span class="accent">10</span>+</div><div class="lbl">Years in enterprise data &amp; ML</div></div>
+        <div class="stat reveal"><div class="num">20+</div><div class="lbl">Public data &amp; AI projects</div></div>
+        <div class="stat reveal"><div class="num">6</div><div class="lbl">Databricks capabilities, end-to-end</div></div>
+        <div class="stat reveal"><div class="num">SAP<span class="accent">→</span>AI</div><div class="lbl">From HANA to the Lakehouse</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="reveal"><div class="eyebrow">About me</div>
+      <h2 class="section-title">Bridging enterprise data and modern AI</h2></div>
+      <div class="about-grid" style="margin-top:32px">
+        <div class="reveal">
+          <p>I'm a Solution Architect at <strong>Databricks</strong>, helping organizations turn ambitious data &amp; AI ideas into working, production-grade solutions on the Lakehouse. My focus is end-to-end: data ingestion and governance, machine learning and GenAI, natural-language analytics with Genie, and the apps that put it all in front of business users.</p>
+          <p>My background runs deep in enterprise data — years of hands-on work with <strong>SAP HANA</strong>, machine learning in R and Python, and Spark — which lets me speak both the language of established enterprise systems and the modern Lakehouse. I like building the whole thing: from synthetic data generators and declarative pipelines to model-serving endpoints and full-stack Databricks Apps.</p>
+          <p>Lately I've been shipping GenAI-powered prototypes — predictive-maintenance agents, maintenance control towers, and end-to-end industry data workbenches — often built entirely through natural-language prompts. I care about solutions that actually run, with the evidence to prove it.</p>
+        </div>
+        <div class="about-card reveal">
+          <h3>At a glance</h3>
+          <div class="fact"><span class="k">Role</span><span class="v">Solution Architect</span></div>
+          <div class="fact"><span class="k">Company</span><span class="v">Databricks</span></div>
+          <div class="fact"><span class="k">Focus</span><span class="v">Data &amp; AI, GenAI, Lakehouse</span></div>
+          <div class="fact"><span class="k">Roots</span><span class="v">SAP HANA · ML · Spark</span></div>
+          <div class="fact"><span class="k">On GitHub</span><span class="v">Since 2014</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" style="background:var(--surface); border-top:1px solid var(--line); border-bottom:1px solid var(--line)">
+    <div class="wrap">
+      <div class="reveal"><div class="eyebrow">Experience</div>
+      <h2 class="section-title">A path from enterprise data to AI solutions</h2>
+      <p class="section-sub">Roles and focus areas across a career spanning SAP HANA, machine learning, and the Databricks Lakehouse.</p></div>
+      <div class="timeline reveal">
+        <div class="tl-item">
+          <div class="tl-date">Present</div>
+          <div class="tl-role">Solution Architect</div>
+          <div class="tl-org">Databricks</div>
+          <p>Architecting and building end-to-end Data &amp; AI solutions on the Databricks Lakehouse for enterprise customers.</p>
+          <ul>
+            <li>Designing full data journeys: Lakeflow ingestion → Unity Catalog governance → Lakebase serving → ML/GenAI → Genie → Databricks Apps.</li>
+            <li>Building GenAI-powered prototypes and predictive-ML solutions across manufacturing, logistics, and retail.</li>
+            <li>Bringing an SAP &amp; enterprise-data perspective to modernization and migration conversations.</li>
+          </ul>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">Prior</div>
+          <div class="tl-role">Data Science &amp; ML Practitioner</div>
+          <div class="tl-org">Enterprise data &amp; analytics</div>
+          <p>Hands-on machine learning and analytics work bridging SAP systems and open data-science tooling.</p>
+          <ul>
+            <li>Built ML models in R and Python — supervised learning, Bayesian optimization, and forecasting.</li>
+            <li>Integrated SAP HANA with machine learning workflows and Spark on Azure.</li>
+            <li>Authored technical write-ups, including work on Overall Equipment Effectiveness (OEE).</li>
+          </ul>
+        </div>
+        <div class="tl-item past">
+          <div class="tl-date">Foundation</div>
+          <div class="tl-role">SAP HANA &amp; Enterprise Data</div>
+          <div class="tl-org">SAP ecosystem</div>
+          <p>Deep experience with SAP HANA and enterprise data platforms — the foundation for translating between established enterprise systems and the modern Lakehouse.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="wrap">
+      <div class="reveal"><div class="eyebrow">Skills</div>
+      <h2 class="section-title">What I work with</h2>
+      <p class="section-sub">A toolkit spanning the modern Lakehouse, applied AI, and full-stack delivery.</p></div>
+      <div class="skills-grid">
+        <div class="skill-cat reveal">
+          <h3><span class="ico">🧱</span> Databricks Platform</h3>
+          <div class="tag-list">
+            <span class="tag">Lakeflow</span><span class="tag">Unity Catalog</span><span class="tag">Lakebase</span>
+            <span class="tag">Genie</span><span class="tag">Databricks Apps</span><span class="tag">MLflow</span>
+            <span class="tag">Model Serving</span><span class="tag">Delta Lake</span><span class="tag">Spark</span>
+          </div>
+        </div>
+        <div class="skill-cat reveal">
+          <h3><span class="ico">🤖</span> AI &amp; Machine Learning</h3>
+          <div class="tag-list">
+            <span class="tag">GenAI &amp; LLMs</span><span class="tag">AI Agents</span><span class="tag">Predictive ML</span>
+            <span class="tag">Forecasting</span><span class="tag">Supervised Learning</span><span class="tag">Bayesian Optimization</span>
+            <span class="tag">Vector Search</span>
+          </div>
+        </div>
+        <div class="skill-cat reveal">
+          <h3><span class="ico">💻</span> Engineering</h3>
+          <div class="tag-list">
+            <span class="tag">Python</span><span class="tag">TypeScript</span><span class="tag">R</span>
+            <span class="tag">SQL</span><span class="tag">FastAPI</span><span class="tag">React</span>
+            <span class="tag">Shell</span>
+          </div>
+        </div>
+        <div class="skill-cat reveal">
+          <h3><span class="ico">🗄️</span> Enterprise Data</h3>
+          <div class="tag-list">
+            <span class="tag">SAP HANA</span><span class="tag">Data Modeling</span><span class="tag">Medallion Architecture</span>
+            <span class="tag">Data Governance</span><span class="tag">ETL / ELT</span>
+          </div>
+        </div>
+        <div class="skill-cat reveal">
+          <h3><span class="ico">📊</span> Analytics &amp; Viz</h3>
+          <div class="tag-list">
+            <span class="tag">Lakeview Dashboards</span><span class="tag">KPI Design</span><span class="tag">Recharts</span>
+            <span class="tag">Leaflet / Geospatial</span><span class="tag">Streamlit</span>
+          </div>
+        </div>
+        <div class="skill-cat reveal">
+          <h3><span class="ico">🏭</span> Domains</h3>
+          <div class="tag-list">
+            <span class="tag">Manufacturing / IoT</span><span class="tag">Logistics</span><span class="tag">Retail</span>
+            <span class="tag">Predictive Maintenance</span><span class="tag">Supply Chain</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" style="background:var(--surface); border-top:1px solid var(--line); border-bottom:1px solid var(--line)">
+    <div class="wrap">
+      <div class="reveal"><div class="eyebrow">Projects</div>
+      <h2 class="section-title">Selected public work</h2>
+      <p class="section-sub">A sample of open projects on GitHub — end-to-end Databricks prototypes and applied ML.</p></div>
+      <div class="proj-grid">
+
+        <div class="card reveal">
+          <div class="thumb"><span class="emoji">📦</span><span class="lang">Python</span></div>
+          <div class="body">
+            <h3>DSV Data Workbench</h3>
+            <p>An end-to-end Databricks prototype for parcel logistics — one synthetic booking dataset powering booking-volume and quality analytics across all six mandated capabilities: Lakeflow, Unity Catalog, Lakebase, ML/GenAI, Genie, and a Databricks App.</p>
+            <div class="links"><a href="https://github.com/kurtholst/dsv-data-workbench" target="_blank" rel="noopener">View repo →</a></div>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="thumb"><span class="emoji">🛠️</span><span class="lang">Python</span></div>
+          <div class="body">
+            <h3>Manufacturing Risk Agent</h3>
+            <p>A predictive-maintenance platform on Databricks — real-time signal simulation, risk scoring, and AI-generated summaries over IoT telemetry, with health scores and time-to-failure predictions served from Lakebase. Built entirely with natural-language prompts.</p>
+            <div class="links"><a href="https://github.com/kurtholst/risk-agent" target="_blank" rel="noopener">View repo →</a></div>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="thumb"><span class="emoji">🏭</span><span class="lang">Python</span></div>
+          <div class="body">
+            <h3>Maintenance Control Tower</h3>
+            <p>A Databricks App that lets plant teams chat with manufacturing asset data — SQL tool-calling over Unity Catalog tables to generate actionable repair plans from natural-language questions.</p>
+            <div class="links"><a href="https://github.com/kurtholst/mct-app" target="_blank" rel="noopener">View repo →</a></div>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="thumb"><span class="emoji">📈</span><span class="lang">R</span></div>
+          <div class="body">
+            <h3>SAP HANA Machine Learning from R</h3>
+            <p>Machine learning against SAP HANA driven from R — bridging enterprise data with open-source data science tooling.</p>
+            <div class="links"><a href="https://github.com/kurtholst/HANA_R_ML" target="_blank" rel="noopener">View repo →</a></div>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="thumb"><span class="emoji">⚙️</span><span class="lang">Data</span></div>
+          <div class="body">
+            <h3>OEE Blogpost &amp; Data</h3>
+            <p>Reproducible data and materials behind a blog post on Overall Equipment Effectiveness (OEE) — a core manufacturing performance metric.</p>
+            <div class="links"><a href="https://github.com/kurtholst/blogpost-oee" target="_blank" rel="noopener">View repo →</a></div>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="thumb"><span class="emoji">🔥</span><span class="lang">R</span></div>
+          <div class="body">
+            <h3>Spark ML on Azure</h3>
+            <p>Machine learning with R on Azure Spark — distributed model training and supervised-learning experiments.</p>
+            <div class="links"><a href="https://github.com/kurtholst/spark_ML" target="_blank" rel="noopener">View repo →</a></div>
+          </div>
+        </div>
+
+      </div>
+      <div style="text-align:center; margin-top:36px" class="reveal">
+        <a class="btn btn-ghost" href="https://github.com/kurtholst?tab=repositories" target="_blank" rel="noopener">See all repositories on GitHub →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION / BACKGROUND -->
+  <section id="education">
+    <div class="wrap">
+      <div class="reveal"><div class="eyebrow">Background &amp; recognition</div>
+      <h2 class="section-title">Grounded in enterprise data science</h2>
+      <p class="section-sub">A career built on applied machine learning, enterprise platforms, and continuous hands-on building.</p></div>
+      <div class="skills-grid">
+        <div class="skill-cat reveal">
+          <h3><span class="ico">🎓</span> Focus areas</h3>
+          <div class="tag-list">
+            <span class="tag">Machine Learning</span><span class="tag">Data Engineering</span><span class="tag">Cloud Data Platforms</span>
+            <span class="tag">Applied Statistics</span>
+          </div>
+        </div>
+        <div class="skill-cat reveal">
+          <h3><span class="ico">📚</span> Continuous learning</h3>
+          <div class="tag-list">
+            <span class="tag">GenAI Engineering</span><span class="tag">Databricks Lakehouse</span><span class="tag">Agentic Systems</span>
+          </div>
+        </div>
+        <div class="skill-cat reveal">
+          <h3><span class="ico">✍️</span> Sharing</h3>
+          <div class="tag-list">
+            <span class="tag">Technical writing (OEE)</span><span class="tag">Prototypes &amp; demos</span><span class="tag">Open-source projects</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap reveal">
+      <div class="contact">
+        <h2>Let's build something.</h2>
+        <p>Interested in Databricks, data &amp; AI solutions, or just want to connect? I'd love to hear from you.</p>
+        <a class="btn btn-primary" href="mailto:kurt.holst@databricks.com">Say hello →</a>
+        <div class="socials">
+          <a href="https://github.com/kurtholst" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.8 18.3 5.1 18.3 5.1c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .4.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/kurtholst/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+          </a>
+          <a href="mailto:kurt.holst@databricks.com" aria-label="Email" title="Email">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      © <span id="year"></span> Kurt Holst · Solution Architect @ Databricks · Built with ❤ &amp; hosted on <a href="https://github.com/kurtholst/kurtholst.github.io" target="_blank" rel="noopener">GitHub Pages</a>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    // scroll reveal
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach((el, i) => { el.style.transitionDelay = (i % 4 * 60) + 'ms'; io.observe(el); });
+    // close mobile menu on link click
+    document.querySelectorAll('#navlinks a').forEach(a => a.addEventListener('click', () => document.getElementById('navlinks').classList.remove('open')));
+  </script>
+</body>
+</html>
