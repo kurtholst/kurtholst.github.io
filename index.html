@@ -75,7 +75,9 @@
         radial-gradient(500px 300px at 10% 10%, rgba(15,23,42,.05), transparent 60%);
       pointer-events: none;
     }
-    .hero-grid { display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: center; position: relative; }
+    #node-net { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: .55; }
+    .hero-grid { display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: center; position: relative; z-index: 1; }
+    .hero .wrap { position: relative; z-index: 1; }
     .hero .avail {
       display: inline-flex; align-items: center; gap: 8px; font-size: .82rem; font-weight: 600;
       color: var(--ink-2); background: var(--surface); border: 1px solid var(--line);
@@ -195,6 +197,55 @@
     .card .links a { font-size: .86rem; font-weight: 600; color: var(--accent-ink); display: inline-flex; align-items: center; gap: 5px; }
     .card .links a:hover { text-decoration: underline; }
 
+    /* PUBLICATIONS */
+    .pub-list { display: flex; flex-direction: column; gap: 18px; }
+    .pub {
+      position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+      padding: 26px 28px 26px 32px; box-shadow: var(--shadow); overflow: hidden;
+      transition: transform .12s, box-shadow .15s, border-color .15s;
+    }
+    .pub::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--accent); }
+    .pub:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); border-color: #cbd5e1; }
+    .pub-type { font-size: .74rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent-ink); margin-bottom: 8px; }
+    .pub h3 { font-size: 1.18rem; line-height: 1.3; margin-bottom: 6px; }
+    .pub-meta { font-size: .86rem; color: var(--muted); font-weight: 600; margin-bottom: 12px; }
+    .pub p { color: var(--ink-2); font-size: .95rem; }
+    .pub-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .pub-links { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 16px; }
+    .pub-links a { font-size: .88rem; font-weight: 600; color: var(--accent-ink); }
+    .pub-links a:hover { text-decoration: underline; }
+
+    /* OEE INTERACTIVE DEMO */
+    .oee-demo {
+      display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center;
+      margin-top: 32px; background: var(--slate); border-radius: 24px; padding: 40px 44px; color: #fff;
+      position: relative; overflow: hidden;
+    }
+    .oee-demo::before { content: ""; position: absolute; inset: 0; background: radial-gradient(500px 260px at 90% -10%, rgba(255,107,53,.22), transparent 60%); pointer-events: none; }
+    .oee-intro { position: relative; z-index: 1; }
+    .oee-intro .eyebrow { color: var(--accent); }
+    .oee-intro h3 { font-size: 1.5rem; margin-bottom: 10px; }
+    .oee-intro p { color: #cbd5e1; font-size: .95rem; max-width: 520px; }
+    .oee-sliders { display: flex; flex-direction: column; gap: 14px; margin-top: 22px; max-width: 420px; }
+    .oee-sliders label { display: grid; grid-template-columns: 1fr auto; align-items: center; font-size: .9rem; font-weight: 600; gap: 4px 12px; }
+    .oee-sliders output { font-family: 'Space Grotesk'; color: var(--accent); font-weight: 700; }
+    .oee-sliders input[type=range] {
+      grid-column: 1 / -1; -webkit-appearance: none; appearance: none; height: 6px; border-radius: 999px;
+      background: rgba(255,255,255,.18); outline: none;
+    }
+    .oee-sliders input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none; width: 20px; height: 20px; border-radius: 50%;
+      background: var(--accent); cursor: pointer; border: 3px solid #fff; box-shadow: 0 2px 6px rgba(0,0,0,.3);
+    }
+    .oee-sliders input[type=range]::-moz-range-thumb {
+      width: 20px; height: 20px; border-radius: 50%; background: var(--accent); cursor: pointer; border: 3px solid #fff;
+    }
+    .oee-rating { margin-top: 18px; font-size: .9rem; font-weight: 600; position: relative; z-index: 1; }
+    .oee-rating .pill { display: inline-block; padding: 4px 14px; border-radius: 999px; font-size: .82rem; margin-left: 8px; }
+    .oee-gauge { position: relative; z-index: 1; display: grid; place-items: center; }
+    #oee-arc { transition: stroke-dashoffset .4s ease, stroke .4s ease; }
+    #oee-num { transition: fill .3s; }
+
     /* RECOMMENDATIONS */
     .rec-grid { columns: 3; column-gap: 20px; }
     .rec {
@@ -246,6 +297,8 @@
       .stats { grid-template-columns: repeat(2, 1fr); }
       .skills-grid, .proj-grid, .cert-grid, .awards-grid { grid-template-columns: 1fr; }
       .rec-grid { columns: 1; }
+      .oee-demo { grid-template-columns: 1fr; padding: 32px 24px; gap: 28px; }
+      .oee-gauge { justify-self: center; }
       .nav-links { display: none; position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; background: var(--surface); border-bottom: 1px solid var(--line); padding: 8px; }
       .nav-links.open { display: flex; }
       .nav-links a { padding: 12px; }
@@ -267,6 +320,7 @@
         <a href="#experience">Experience</a>
         <a href="#skills">Skills</a>
         <a href="#projects">Projects</a>
+        <a href="#publications">Writing</a>
         <a href="#education">Education</a>
         <a href="#certifications">Certifications</a>
         <a href="#recommendations">Recommendations</a>
@@ -277,6 +331,7 @@
 
   <!-- HERO -->
   <section class="hero" id="top">
+    <canvas id="node-net" aria-hidden="true"></canvas>
     <div class="wrap hero-grid">
       <div class="reveal">
         <span class="avail"><span class="dot"></span> Solutions Architect · Databricks</span>
@@ -547,6 +602,77 @@
       </div>
       <div style="text-align:center; margin-top:36px" class="reveal">
         <a class="btn btn-ghost" href="https://github.com/kurtholst?tab=repositories" target="_blank" rel="noopener">See all repositories on GitHub →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section id="publications">
+    <div class="wrap">
+      <div class="reveal"><div class="eyebrow">Writing &amp; research</div>
+      <h2 class="section-title">Publications &amp; articles</h2>
+      <p class="section-sub">Peer-reviewed research and applied engineering write-ups on AI, disinformation, and industrial optimization.</p></div>
+
+      <div class="pub-list">
+        <article class="pub reveal">
+          <div class="pub-type">Master's thesis</div>
+          <h3>Generativ AI som forsvar mod desinformation</h3>
+          <div class="pub-meta">Master in Intelligence &amp; Cyber Studies · University of Southern Denmark · 2024</div>
+          <p>Investigates whether and how generative AI can identify and respond to disinformation in a Danish context. Built a Python prototype ("AI-Panoptikon") and argues for a Human-in-the-Loop approach - pairing AI scale with human oversight to counter model hallucinations - alongside the ethical, legal, and AI Act considerations of deploying such systems.</p>
+          <div class="pub-tags"><span class="tag">Generative AI</span><span class="tag">Disinformation</span><span class="tag">Human-in-the-Loop</span><span class="tag">AI Act</span></div>
+          <div class="pub-links"><a href="https://www.researchgate.net/publication/392094323_Generativ_AI_som_forsvar_mod_desinformation" target="_blank" rel="noopener">Read on ResearchGate →</a></div>
+        </article>
+
+        <article class="pub reveal">
+          <div class="pub-type">Technical article</div>
+          <h3>Building an AI Optimization Agent on Databricks to Boost Overall Equipment Effectiveness</h3>
+          <div class="pub-meta">With Debadatta Mohapatra · Feb 2026</div>
+          <p>An end-to-end, low-code multi-agent architecture that helps manufacturing teams compute, explain, and act on OEE. Combines Genie (conversational SQL over governed Delta tables), an Agent Bricks Knowledge Assistant (RAG over root-cause PDFs), an MCP web-search connector, and a Mosaic AI supervisor agent - all traced with MLflow and surfaced through a Databricks App.</p>
+          <div class="pub-tags"><span class="tag">Multi-agent AI</span><span class="tag">Genie</span><span class="tag">RAG</span><span class="tag">Mosaic AI</span><span class="tag">OEE</span></div>
+          <div class="pub-links">
+            <a href="https://www.linkedin.com/pulse/building-ai-optimization-agent-databricks-boost-overall-kurt-holst-tvqwe" target="_blank" rel="noopener">Read article →</a>
+            <a href="https://github.com/kurtholst/blogpost-oee" target="_blank" rel="noopener">Reproducible repo →</a>
+          </div>
+        </article>
+
+        <article class="pub reveal">
+          <div class="pub-type">Applied research</div>
+          <h3>Kunstig intelligens til kortlægning af særlig værdifuld skov</h3>
+          <div class="pub-meta">AI for mapping particularly valuable forest (§25) · Danish EPA</div>
+          <p>A supervised CatBoost classifier that predicts where naturally valuable forest occurs in private woodland, so costly field surveys can be targeted. Fuses LiDAR point clouds, Sentinel-2 optical bands, orthophotos, soil/terrain maps, and local weather into a 10×10 m probability map - trained and scaled on Databricks with stratified cluster sampling to avoid geographic bias.</p>
+          <div class="pub-tags"><span class="tag">Geospatial ML</span><span class="tag">CatBoost</span><span class="tag">LiDAR + Sentinel-2</span><span class="tag">Environmental AI</span></div>
+          <div class="pub-links"><a href="https://dk.linkedin.com/pulse/kunstig-intelligens-til-kortl%C3%A6gning-af-s%C3%A6rlig-v%C3%A6rdifuld-kurt-holst" target="_blank" rel="noopener">Read article →</a></div>
+        </article>
+      </div>
+
+      <!-- Interactive OEE calculator tied to the OEE article -->
+      <div class="oee-demo reveal">
+        <div class="oee-intro">
+          <div class="eyebrow">Try it · interactive</div>
+          <h3>Overall Equipment Effectiveness, live</h3>
+          <p>OEE = Availability × Performance × Quality. Drag the sliders to see how each loss compounds into the single number that manufacturers use to unlock hidden capacity - the metric behind my Databricks OEE agent.</p>
+          <div class="oee-sliders">
+            <label>Availability <output id="oee-a-val">90%</output>
+              <input type="range" id="oee-a" min="40" max="100" value="90" />
+            </label>
+            <label>Performance <output id="oee-p-val">95%</output>
+              <input type="range" id="oee-p" min="40" max="100" value="95" />
+            </label>
+            <label>Quality <output id="oee-q-val">99%</output>
+              <input type="range" id="oee-q" min="40" max="100" value="99" />
+            </label>
+          </div>
+          <div class="oee-rating" id="oee-rating"></div>
+        </div>
+        <div class="oee-gauge">
+          <svg viewBox="0 0 200 200" width="200" height="200">
+            <circle cx="100" cy="100" r="85" fill="none" stroke="var(--line)" stroke-width="16" />
+            <circle id="oee-arc" cx="100" cy="100" r="85" fill="none" stroke="var(--accent)" stroke-width="16"
+              stroke-linecap="round" transform="rotate(-90 100 100)" stroke-dasharray="534" stroke-dashoffset="534" />
+            <text id="oee-num" x="100" y="98" text-anchor="middle" font-family="Space Grotesk" font-size="42" font-weight="700" fill="var(--ink)">85%</text>
+            <text x="100" y="124" text-anchor="middle" font-size="13" fill="var(--muted)">OEE</text>
+          </svg>
+        </div>
       </div>
     </div>
   </section>
@@ -1001,6 +1127,124 @@
     document.querySelectorAll('.reveal').forEach((el, i) => { el.style.transitionDelay = (i % 4 * 60) + 'ms'; io.observe(el); });
     // close mobile menu on link click
     document.querySelectorAll('#navlinks a').forEach(a => a.addEventListener('click', () => document.getElementById('navlinks').classList.remove('open')));
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* ---- Count-up stat numbers ---- */
+    (function () {
+      // Animate only tiles whose displayed value is a leading integer (e.g. "25+", "22").
+      // Preserve any accent-wrapped digits so "25" stays orange.
+      const prep = (el) => {
+        const m = el.textContent.trim().match(/^(\d+)(\D*)$/);
+        if (!m) return null; // e.g. "BI→AI" – leave untouched
+        const target = parseInt(m[1], 10), suffix = m[2];
+        const hasAccent = !!el.querySelector('.accent');
+        const set = (val) => {
+          el.innerHTML = hasAccent
+            ? '<span class="accent">' + val + '</span>' + suffix
+            : val + suffix;
+        };
+        return { target, set };
+      };
+      const run = (el) => {
+        const cfg = prep(el);
+        if (!cfg) return;
+        if (reduceMotion) { cfg.set(cfg.target); return; }
+        let start = null; const dur = 1100;
+        const step = (t) => {
+          if (!start) start = t;
+          const p = Math.min((t - start) / dur, 1);
+          cfg.set(Math.round((1 - Math.pow(1 - p, 3)) * cfg.target));
+          if (p < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      };
+      const so = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { e.target.querySelectorAll('.num').forEach(run); so.unobserve(e.target); }
+        });
+      }, { threshold: 0.5 });
+      document.querySelectorAll('.stats .stat').forEach(s => so.observe(s));
+    })();
+
+    /* ---- OEE interactive calculator ---- */
+    (function () {
+      const a = document.getElementById('oee-a'), p = document.getElementById('oee-p'), q = document.getElementById('oee-q');
+      if (!a) return;
+      const aV = document.getElementById('oee-a-val'), pV = document.getElementById('oee-p-val'), qV = document.getElementById('oee-q-val');
+      const arc = document.getElementById('oee-arc'), num = document.getElementById('oee-num'), rating = document.getElementById('oee-rating');
+      const C = 2 * Math.PI * 85; // circumference
+      arc.setAttribute('stroke-dasharray', C.toFixed(1));
+      const render = () => {
+        const av = +a.value, pv = +p.value, qv = +q.value;
+        aV.textContent = av + '%'; pV.textContent = pv + '%'; qV.textContent = qv + '%';
+        const oee = (av / 100) * (pv / 100) * (qv / 100);
+        const pct = Math.round(oee * 100);
+        num.textContent = pct + '%';
+        arc.setAttribute('stroke-dashoffset', (C * (1 - oee)).toFixed(1));
+        let label, color;
+        if (pct >= 85) { label = 'World Class'; color = '#22c55e'; }
+        else if (pct >= 60) { label = 'Typical'; color = '#f59e0b'; }
+        else { label = 'Improvement zone'; color = '#ef4444'; }
+        arc.setAttribute('stroke', color);
+        rating.innerHTML = 'Benchmark: <span class="pill" style="background:' + color + '22;color:' + color + '">' + label + '</span>';
+      };
+      [a, p, q].forEach(s => s.addEventListener('input', render));
+      render();
+    })();
+
+    /* ---- Hero node network ---- */
+    (function () {
+      const canvas = document.getElementById('node-net');
+      if (!canvas || reduceMotion) return;
+      const ctx = canvas.getContext('2d');
+      let w, h, nodes = [], raf;
+      const DPR = Math.min(window.devicePixelRatio || 1, 2);
+      const resize = () => {
+        const r = canvas.parentElement.getBoundingClientRect();
+        w = r.width; h = r.height;
+        canvas.width = w * DPR; canvas.height = h * DPR;
+        canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+        ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+        const count = Math.min(Math.round(w / 22), 60);
+        nodes = Array.from({ length: count }, () => ({
+          x: Math.random() * w, y: Math.random() * h,
+          vx: (Math.random() - 0.5) * 0.35, vy: (Math.random() - 0.5) * 0.35
+        }));
+      };
+      const draw = () => {
+        ctx.clearRect(0, 0, w, h);
+        for (const n of nodes) {
+          n.x += n.vx; n.y += n.vy;
+          if (n.x < 0 || n.x > w) n.vx *= -1;
+          if (n.y < 0 || n.y > h) n.vy *= -1;
+        }
+        for (let i = 0; i < nodes.length; i++) {
+          for (let j = i + 1; j < nodes.length; j++) {
+            const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y;
+            const d = Math.hypot(dx, dy);
+            if (d < 130) {
+              ctx.strokeStyle = 'rgba(255,107,53,' + (0.16 * (1 - d / 130)) + ')';
+              ctx.lineWidth = 1;
+              ctx.beginPath(); ctx.moveTo(nodes[i].x, nodes[i].y); ctx.lineTo(nodes[j].x, nodes[j].y); ctx.stroke();
+            }
+          }
+        }
+        for (const n of nodes) {
+          ctx.beginPath(); ctx.arc(n.x, n.y, 2.2, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(15,23,42,.35)'; ctx.fill();
+        }
+        raf = requestAnimationFrame(draw);
+      };
+      resize(); draw();
+      let rt; window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(resize, 150); });
+      // pause when hero off-screen
+      const hio = new IntersectionObserver((e) => {
+        if (e[0].isIntersecting) { if (!raf) draw(); }
+        else { cancelAnimationFrame(raf); raf = null; }
+      }, { threshold: 0 });
+      hio.observe(canvas.parentElement);
+    })();
   </script>
 </body>
 </html>
