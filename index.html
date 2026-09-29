@@ -217,6 +217,24 @@
     .cert-link a { font-size:.8rem; font-weight:600; color:var(--accent-ink); }
     .cert-link a:hover { text-decoration:underline; }
 
+    /* CASE STUDY */
+    .case-study {
+      background: var(--slate); border-radius: 22px; padding: 36px 40px; margin-bottom: 32px;
+      color: #fff; position: relative; overflow: hidden;
+    }
+    .case-study::before { content: ""; position: absolute; inset: 0; background: radial-gradient(500px 260px at 88% -20%, rgba(255,107,53,.20), transparent 60%); pointer-events: none; }
+    .cs-badge { position: relative; z-index: 1; display: inline-block; font-size: .74rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); background: rgba(255,107,53,.14); border: 1px solid rgba(255,107,53,.3); padding: 5px 14px; border-radius: 999px; margin-bottom: 16px; }
+    .cs-title { position: relative; z-index: 1; font-size: clamp(1.35rem, 2.6vw, 1.8rem); color: #fff; margin-bottom: 24px; max-width: 760px; }
+    .cs-cols { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+    .cs-label { font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+    .cs-col p { color: #cbd5e1; font-size: .92rem; line-height: 1.6; }
+    .cs-col strong { color: #fff; font-weight: 600; }
+    .cs-links { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .cs-links .btn-primary { background: var(--accent); }
+    .cs-links .btn-primary:hover { background: #ff7d4d; }
+    .cs-links .btn-ghost { background: rgba(255,255,255,.06); color: #fff; border-color: rgba(255,255,255,.18); }
+    .cs-links .btn-ghost:hover { border-color: var(--accent); }
+
     /* PROJECTS */
     .proj-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
     .card {
@@ -346,6 +364,8 @@
       .rec-grid { columns: 1; }
       .award-featured { flex-direction: column; }
       .award-img { width: 100%; height: 200px; }
+      .cs-cols { grid-template-columns: 1fr; gap: 20px; }
+      .case-study { padding: 28px 24px; }
       .oee-demo { grid-template-columns: 1fr; padding: 32px 24px; gap: 28px; }
       .oee-gauge { justify-self: center; }
       .nav-links { display: none; position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; background: var(--surface); border-bottom: 1px solid var(--line); padding: 8px; }
@@ -389,6 +409,7 @@
         <p class="lede">I design and build end-to-end data &amp; AI platforms – from Lakeflow ingestion and Unity Catalog governance to GenAI, Genie, and production Databricks Apps. 25 years bridging Business Intelligence, SAP, and the modern Lakehouse.</p>
         <div class="cta-row">
           <a class="btn btn-primary" href="#projects">View my work →</a>
+          <a class="btn btn-ghost" href="assets/Kurt-Holst-CV.pdf" target="_blank" rel="noopener">Download CV ↓</a>
           <a class="btn btn-ghost" href="#contact">Get in touch</a>
         </div>
         <div class="socials">
@@ -508,10 +529,10 @@
           <div class="tl-date">Jan 2005 – Jan 2009 · 4 yrs</div>
           <div class="tl-role">External Lecturer</div>
           <div class="tl-org">University of Southern Denmark · Odense</div>
-          <p>Taught "Data Warehouse &amp; Data Mining" alongside a full-time BI career, and advised bachelor's and master's projects.</p>
+          <p>For four years, every Friday, I taught "Data Mining &amp; Data Warehousing" at the University of Southern Denmark alongside a full-time BI career - developing the course materials and delivering lectures and practical exercises myself.</p>
           <ul>
-            <li>Developed teaching materials and practical exercises in data mining, BI, and data-warehouse modeling.</li>
-            <li>Mentored students on Business Intelligence, Balanced Scorecard, and Data Warehousing - many of whom credit this work in their recommendations below.</li>
+            <li>Taught data mining, data warehousing, and data-warehouse modeling, with hands-on exercises each week.</li>
+            <li>Counselled bachelor's and master's thesis students on Data Warehousing, Business Intelligence, and Balanced Scorecard - many of whom credit this work in their recommendations below.</li>
           </ul>
         </div>
         <div class="tl-item">
@@ -592,6 +613,32 @@
       <div class="reveal"><div class="eyebrow">Projects</div>
       <h2 class="section-title">Selected public work</h2>
       <p class="section-sub">A sample of open projects on GitHub – end-to-end Databricks prototypes and applied ML.</p></div>
+
+      <!-- Featured case study -->
+      <div class="case-study reveal">
+        <div class="cs-badge">Featured case study</div>
+        <h3 class="cs-title">An agentic AI system that boosts Overall Equipment Effectiveness</h3>
+        <div class="cs-cols">
+          <div class="cs-col">
+            <div class="cs-label">Problem</div>
+            <p>Manufacturers lose hidden capacity to downtime, speed loss, and defects - but OEE data is scattered across shifts and sites, and root-cause knowledge is locked in PDFs. Teams can't ask questions in plain language or get explained, actionable answers.</p>
+          </div>
+          <div class="cs-col">
+            <div class="cs-label">Approach</div>
+            <p>A multi-agent architecture on Databricks: <strong>Genie</strong> for governed conversational SQL over Delta OEE marts, an <strong>Agent Bricks Knowledge Assistant</strong> (RAG) over root-cause PDFs, an <strong>MCP</strong> web-search connector, and a <strong>Mosaic AI supervisor</strong> routing each question to the right tool - all traced with MLflow, surfaced in a Databricks App.</p>
+          </div>
+          <div class="cs-col">
+            <div class="cs-label">Outcome</div>
+            <p>Operators get consistent, cited OEE answers and "what-if" capacity estimates in seconds instead of chasing spreadsheets. Published as a reproducible reference architecture - and awarded <strong>2nd place</strong> at the Databricks Hackathon (Dec 2025).</p>
+          </div>
+        </div>
+        <div class="cs-links">
+          <a class="btn btn-primary" href="https://www.linkedin.com/pulse/building-ai-optimization-agent-databricks-boost-overall-kurt-holst-tvqwe" target="_blank" rel="noopener">Read the write-up →</a>
+          <a class="btn btn-ghost" href="https://github.com/kurtholst/blogpost-oee" target="_blank" rel="noopener">Reproducible repo →</a>
+          <a class="btn btn-ghost" href="#publications">Try the live OEE calculator →</a>
+        </div>
+      </div>
+
       <div class="proj-grid">
 
         <div class="card reveal">
@@ -1192,6 +1239,7 @@
         <h2>Let's build something.</h2>
         <p>Interested in Databricks, data &amp; AI solutions, or just want to connect? I'd love to hear from you.</p>
         <a class="btn btn-primary" href="mailto:kurtholst@hotmail.com">Say hello →</a>
+        <a class="btn btn-ghost" href="assets/Kurt-Holst-CV.pdf" target="_blank" rel="noopener" style="margin-left:10px">Download CV ↓</a>
         <div class="socials">
           <a href="https://github.com/kurtholst" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.8 18.3 5.1 18.3 5.1c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .4.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
