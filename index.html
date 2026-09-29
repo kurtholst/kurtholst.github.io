@@ -301,6 +301,9 @@
     }
     .oee-rating { margin-top: 18px; font-size: .9rem; font-weight: 600; position: relative; z-index: 1; }
     .oee-rating .pill { display: inline-block; padding: 4px 14px; border-radius: 999px; font-size: .82rem; margin-left: 8px; }
+    .oee-refs { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 20px; position: relative; z-index: 1; }
+    .oee-refs a { font-size: .86rem; font-weight: 600; color: var(--accent); }
+    .oee-refs a:hover { text-decoration: underline; }
     .oee-gauge { position: relative; z-index: 1; display: grid; place-items: center; }
     #oee-arc { transition: stroke-dashoffset .4s ease, stroke .4s ease; }
     #oee-num { transition: fill .3s; }
@@ -325,12 +328,16 @@
 
     /* AWARDS */
     .awards-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-    .award-featured { grid-column: 1 / -1; background: #2a4552; border-color: transparent; position: relative; overflow: hidden; padding: 0; gap: 0; align-items: stretch; }
+    .award.award-featured { grid-column: 1 / -1; background: #2a4552; border-color: transparent; position: relative; overflow: hidden; padding: 0; gap: 0; align-items: stretch; }
     .award-featured::after { content: ""; position: absolute; inset: 0; background: radial-gradient(400px 200px at 92% -20%, rgba(255,107,53,.18), transparent 60%); pointer-events: none; }
     .award-img { width: 300px; flex-shrink: 0; object-fit: cover; align-self: stretch; display: block; }
     .award-featured-body { display: flex; flex-direction: column; justify-content: center; padding: 24px 28px; position: relative; z-index: 1; }
     .award-featured .award-name { color: #fff; font-size: 1.3rem; font-family: 'Space Grotesk'; font-weight: 700; }
     .award-featured .award-meta { color: #cbd5e1; margin-top: 6px; }
+    .award-list { list-style: none; margin: 12px 0 0; padding: 0; }
+    .award-list li { color: #cbd5e1; font-size: .92rem; padding: 5px 0 5px 20px; position: relative; }
+    .award-list li::before { content: "★"; color: var(--accent); position: absolute; left: 0; font-size: .85rem; }
+    .award-list strong { color: #fff; font-weight: 600; }
     .award { display: flex; gap: 16px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 24px; box-shadow: var(--shadow); transition: transform .12s, box-shadow .15s; }
     .award:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
     .award .medal { font-size: 1.9rem; width: 52px; height: 52px; flex-shrink: 0; border-radius: 14px; background: linear-gradient(135deg, #fef3c7, #fde68a); display: grid; place-items: center; }
@@ -409,7 +416,7 @@
         <p class="lede">I design and build end-to-end data &amp; AI platforms – from Lakeflow ingestion and Unity Catalog governance to GenAI, Genie, and production Databricks Apps. 25 years bridging Business Intelligence, SAP, and the modern Lakehouse.</p>
         <div class="cta-row">
           <a class="btn btn-primary" href="#projects">View my work →</a>
-          <a class="btn btn-ghost" href="assets/Kurt-Holst-CV.pdf" target="_blank" rel="noopener">Download CV ↓</a>
+          <a class="btn btn-ghost" href="assets/Kurt-Holst-CV.pdf" download="Kurt-Holst-CV.pdf">Download CV ↓</a>
           <a class="btn btn-ghost" href="#contact">Get in touch</a>
         </div>
         <div class="socials">
@@ -449,6 +456,7 @@
         <div class="reveal">
           <p>I'm a Solutions Architect at <strong>Databricks</strong>, helping organizations turn ambitious data &amp; AI ideas into working, production-grade solutions on the Lakehouse. My focus is end-to-end: data ingestion and governance, machine learning and GenAI, natural-language analytics with Genie, and the apps that put it all in front of business users.</p>
           <p>My background runs deep - 25 years in data &amp; analytics, from building Business Intelligence and data warehouses in the late 1990s, through years as a Principal Consultant in <strong>SAP Predictive Analytics</strong> and <strong>SAP HANA</strong>, to data science with machine learning and geospatial analytics. That history lets me speak both the language of established enterprise systems and the modern Lakehouse. I like building the whole thing: from synthetic data generators and declarative pipelines to model-serving endpoints and full-stack Databricks Apps.</p>
+          <p>For four years I also taught as an <strong>external lecturer</strong> at the University of Southern Denmark - every Friday, delivering "Data Mining &amp; Data Warehousing" and counselling bachelor's and master's thesis students on Business Intelligence, Data Warehousing, and the Balanced Scorecard. Explaining complex ideas simply is still central to how I work: several former students credit that teaching in the recommendations below.</p>
           <p>Lately I've been shipping GenAI-powered prototypes – predictive-maintenance agents, maintenance control towers, and end-to-end industry data workbenches – often built entirely through natural-language prompts. I care about solutions that actually run, with the evidence to prove it.</p>
         </div>
         <div class="about-card reveal">
@@ -777,6 +785,11 @@
             </label>
           </div>
           <div class="oee-rating" id="oee-rating"></div>
+          <div class="oee-refs">
+            <a href="https://www.linkedin.com/pulse/building-ai-optimization-agent-databricks-boost-overall-kurt-holst-tvqwe" target="_blank" rel="noopener">Read the OEE article →</a>
+            <a href="https://github.com/kurtholst/blogpost-oee" target="_blank" rel="noopener">Reproducible repo →</a>
+            <a href="#projects">See the case study →</a>
+          </div>
         </div>
         <div class="oee-gauge">
           <svg viewBox="0 0 200 200" width="200" height="200">
@@ -1187,17 +1200,14 @@
       <p class="section-sub">Recognition across two decades of enterprise software and data &amp; AI.</p></div>
       <div class="awards-grid">
         <div class="award award-featured reveal">
-          <img class="award-img" src="assets/fe-excellence-award.png" alt="Annual FY26 Field Engineering Excellence Award presented to Kurt Holst" loading="lazy" />
+          <img class="award-img" src="assets/fe-excellence-award.png" alt="Databricks Field Engineering Excellence Award presented to Kurt Holst" loading="lazy" />
           <div class="award-featured-body">
-            <div class="award-name">FE Excellence Award · Annual</div>
-            <div class="award-meta">Annual FY26 recognition · Field Engineering, BeNo (Benelux &amp; Nordics) · Databricks</div>
-          </div>
-        </div>
-        <div class="award award-featured reveal">
-          <img class="award-img" src="assets/fe-excellence-award-june.png" alt="June FY26 Field Engineering Excellence Award presented to Kurt Holst" loading="lazy" />
-          <div class="award-featured-body">
-            <div class="award-name">FE Excellence Award · Monthly</div>
-            <div class="award-meta">Nordics Solutions Architect · June FY26 · Databricks</div>
+            <div class="award-name">Databricks Field Engineering Excellence Award</div>
+            <div class="award-meta">Recognized twice in FY26 for Field Engineering excellence at Databricks:</div>
+            <ul class="award-list">
+              <li><strong>Annual FY26</strong> · Field Engineering, BeNo (Benelux &amp; Nordics)</li>
+              <li><strong>Monthly · June FY26</strong> · Nordics Solutions Architect</li>
+            </ul>
           </div>
         </div>
         <div class="award reveal">
@@ -1218,7 +1228,7 @@
           <div class="medal">🚀</div>
           <div>
             <div class="award-name">SAP Internal Hackathon · 1st Place</div>
-            <div class="award-meta">Predictive maintenance on IoT sensor data (Texas Instruments CC2650 SensorTag) · SAP · 2015</div>
+            <div class="award-meta">Predictive maintenance on IoT sensor data (Texas Instruments CC2650 SensorTag), using a changepoint-detection algorithm to predict equipment failure · SAP · 2015</div>
           </div>
         </div>
         <div class="award reveal">
@@ -1239,7 +1249,7 @@
         <h2>Let's build something.</h2>
         <p>Interested in Databricks, data &amp; AI solutions, or just want to connect? I'd love to hear from you.</p>
         <a class="btn btn-primary" href="mailto:kurtholst@hotmail.com">Say hello →</a>
-        <a class="btn btn-ghost" href="assets/Kurt-Holst-CV.pdf" target="_blank" rel="noopener" style="margin-left:10px">Download CV ↓</a>
+        <a class="btn btn-ghost" href="assets/Kurt-Holst-CV.pdf" download="Kurt-Holst-CV.pdf" style="margin-left:10px">Download CV ↓</a>
         <div class="socials">
           <a href="https://github.com/kurtholst" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.8 18.3 5.1 18.3 5.1c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .4.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
