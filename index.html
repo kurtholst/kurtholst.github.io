@@ -359,6 +359,21 @@
     footer { padding: 40px 0 56px; text-align: center; color: var(--muted); font-size: .88rem; }
     footer a { color: var(--ink-2); font-weight: 600; }
 
+    /* scroll-spy active nav */
+    .nav-links a.active { background: var(--surface); color: var(--accent-ink); }
+
+    /* back to top */
+    #to-top {
+      position: fixed; bottom: 26px; right: 26px; z-index: 90;
+      width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--line);
+      background: var(--slate); color: #fff; cursor: pointer; box-shadow: var(--shadow-lg);
+      display: grid; place-items: center; font-size: 1.2rem; line-height: 1;
+      opacity: 0; visibility: hidden; transform: translateY(12px);
+      transition: opacity .25s, transform .25s, visibility .25s, background .15s;
+    }
+    #to-top.show { opacity: 1; visibility: visible; transform: none; }
+    #to-top:hover { background: var(--accent); }
+
     /* reveal animation */
     .reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
     .reveal.in { opacity: 1; transform: none; }
@@ -1271,7 +1286,10 @@
     </div>
   </footer>
 
+  <button id="to-top" aria-label="Back to top" title="Back to top">↑</button>
+
   <script>
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     document.getElementById('year').textContent = new Date().getFullYear();
     // scroll reveal
     const io = new IntersectionObserver((entries) => {
@@ -1281,7 +1299,30 @@
     // close mobile menu on link click
     document.querySelectorAll('#navlinks a').forEach(a => a.addEventListener('click', () => document.getElementById('navlinks').classList.remove('open')));
 
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    /* ---- Scroll-spy: highlight the current section in the nav ---- */
+    (function () {
+      const links = [...document.querySelectorAll('#navlinks a')];
+      const map = new Map();
+      links.forEach(a => { const id = a.getAttribute('href').slice(1); const s = document.getElementById(id); if (s) map.set(s, a); });
+      const spy = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            links.forEach(l => l.classList.remove('active'));
+            const a = map.get(e.target); if (a) a.classList.add('active');
+          }
+        });
+      }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+      map.forEach((_, s) => spy.observe(s));
+    })();
+
+    /* ---- Back to top ---- */
+    (function () {
+      const btn = document.getElementById('to-top');
+      const onScroll = () => btn.classList.toggle('show', window.scrollY > 600);
+      window.addEventListener('scroll', onScroll, { passive: true });
+      btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' }));
+      onScroll();
+    })();
 
     /* ---- Count-up stat numbers ---- */
     (function () {
