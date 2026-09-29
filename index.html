@@ -266,11 +266,12 @@
 
     /* AWARDS */
     .awards-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-    .award-featured { grid-column: 1 / -1; background: var(--slate); border-color: transparent; position: relative; overflow: hidden; }
-    .award-featured::after { content: ""; position: absolute; inset: 0; background: radial-gradient(400px 200px at 90% -20%, rgba(255,107,53,.25), transparent 60%); pointer-events: none; }
-    .award-featured .medal { background: linear-gradient(135deg, #ff8c5a, #ff6b35); position: relative; z-index: 1; }
-    .award-featured .award-name { color: #fff; position: relative; z-index: 1; font-size: 1.18rem; }
-    .award-featured .award-meta { color: #cbd5e1; position: relative; z-index: 1; }
+    .award-featured { grid-column: 1 / -1; background: #2a4552; border-color: transparent; position: relative; overflow: hidden; padding: 0; gap: 0; align-items: stretch; }
+    .award-featured::after { content: ""; position: absolute; inset: 0; background: radial-gradient(400px 200px at 92% -20%, rgba(255,107,53,.18), transparent 60%); pointer-events: none; }
+    .award-img { width: 300px; flex-shrink: 0; object-fit: cover; align-self: stretch; display: block; }
+    .award-featured-body { display: flex; flex-direction: column; justify-content: center; padding: 24px 28px; position: relative; z-index: 1; }
+    .award-featured .award-name { color: #fff; font-size: 1.3rem; font-family: 'Space Grotesk'; font-weight: 700; }
+    .award-featured .award-meta { color: #cbd5e1; margin-top: 6px; }
     .award { display: flex; gap: 16px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 24px; box-shadow: var(--shadow); transition: transform .12s, box-shadow .15s; }
     .award:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
     .award .medal { font-size: 1.9rem; width: 52px; height: 52px; flex-shrink: 0; border-radius: 14px; background: linear-gradient(135deg, #fef3c7, #fde68a); display: grid; place-items: center; }
@@ -302,6 +303,8 @@
       .stats { grid-template-columns: repeat(2, 1fr); }
       .skills-grid, .proj-grid, .cert-grid, .awards-grid { grid-template-columns: 1fr; }
       .rec-grid { columns: 1; }
+      .award-featured { flex-direction: column; }
+      .award-img { width: 100%; height: 200px; }
       .oee-demo { grid-template-columns: 1fr; padding: 32px 24px; gap: 28px; }
       .oee-gauge { justify-self: center; }
       .nav-links { display: none; position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; background: var(--surface); border-bottom: 1px solid var(--line); padding: 8px; }
@@ -1087,10 +1090,10 @@
       <p class="section-sub">Awards recognizing top performance across enterprise software careers.</p></div>
       <div class="awards-grid">
         <div class="award award-featured reveal">
-          <div class="medal">⭐</div>
-          <div>
-            <div class="award-name">Databricks Employee of the Year</div>
-            <div class="award-meta">Field Engineering, BeNo (Benelux &amp; Nordics) · Databricks · FY2026</div>
+          <img class="award-img" src="assets/fe-excellence-award.png" alt="FY26 Field Engineering Excellence Award presented to Kurt Holst" loading="lazy" />
+          <div class="award-featured-body">
+            <div class="award-name">Field Engineering Excellence Award</div>
+            <div class="award-meta">Annual FY26 recognition · Field Engineering, BeNo (Benelux &amp; Nordics) · Databricks</div>
           </div>
         </div>
         <div class="award reveal">
