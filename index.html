@@ -316,6 +316,30 @@
     #oee-arc { transition: stroke-dashoffset .4s ease, stroke .4s ease; }
     #oee-num { transition: fill .3s; }
 
+    /* FORECAST SIMULATION */
+    .fc-demo { margin-top: 24px; background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: 32px; box-shadow: var(--shadow); }
+    .fc-title { font-size: 1.4rem; margin-bottom: 8px; }
+    .fc-sub { color: var(--muted); font-size: .95rem; max-width: 760px; }
+    .fc-sub strong { color: var(--ink-2); font-weight: 600; }
+    .fc-body { display: grid; grid-template-columns: 1.6fr 1fr; gap: 28px; align-items: start; margin-top: 22px; }
+    #fc-chart { width: 100%; height: auto; background: var(--bg); border: 1px solid var(--line); border-radius: 14px; }
+    .fc-controls { display: flex; flex-direction: column; gap: 14px; }
+    .fc-controls label { display: grid; grid-template-columns: 1fr auto; align-items: center; font-size: .88rem; font-weight: 600; color: var(--ink-2); gap: 4px 12px; }
+    .fc-controls output { font-family: 'Space Grotesk'; color: var(--accent-ink); font-weight: 700; }
+    .fc-controls input[type=range] { grid-column: 1 / -1; -webkit-appearance: none; appearance: none; height: 6px; border-radius: 999px; background: var(--line); outline: none; }
+    .fc-controls input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--accent); cursor: pointer; border: 3px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,.25); }
+    .fc-controls input[type=range]::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--accent); cursor: pointer; border: 3px solid #fff; }
+    .fc-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 6px; }
+    .fc-stat { background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
+    .fc-stat .fc-k { display: block; font-size: .74rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; font-weight: 700; }
+    .fc-stat .fc-v { font-family: 'Space Grotesk'; font-size: 1.25rem; font-weight: 700; color: var(--ink); }
+    .fc-legend { display: flex; flex-wrap: wrap; gap: 12px 16px; margin-top: 8px; font-size: .8rem; color: var(--muted); }
+    .fc-legend span { display: inline-flex; align-items: center; gap: 6px; }
+    .fc-legend .sw { width: 16px; height: 3px; border-radius: 2px; display: inline-block; }
+    .sw-hist { background: var(--slate); } .sw-fc { background: var(--accent); }
+    .sw-band { background: rgba(255,107,53,.25); height: 10px; border-radius: 3px; }
+    .sw-rop { background: #22c55e; } .sw-ss { background: #3b82f6; border-top: 2px dashed #3b82f6; height: 0; }
+
     /* RECOMMENDATIONS */
     .rec-grid { columns: 3; column-gap: 20px; }
     .rec {
@@ -398,6 +422,8 @@
       .case-study { padding: 28px 24px; }
       .oee-demo { grid-template-columns: 1fr; padding: 32px 24px; gap: 28px; }
       .oee-gauge { justify-self: center; }
+      .fc-body { grid-template-columns: 1fr; }
+      .fc-demo { padding: 24px; }
       .nav-links { display: none; position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; background: var(--surface); border-bottom: 1px solid var(--line); padding: 8px; }
       .nav-links.open { display: flex; }
       .nav-links a { padding: 12px; }
@@ -891,6 +917,46 @@
           </svg>
         </div>
       </div>
+
+      <!-- Interactive ARIMA retail forecast simulation -->
+      <div class="fc-demo reveal">
+        <div class="fc-head">
+          <div>
+            <div class="eyebrow" style="color:var(--accent-ink)">Try it · interactive</div>
+            <h3 class="fc-title">Retail demand forecast, live</h3>
+            <p class="fc-sub">A simulated store-SKU demand series with an ARIMA-style forecast. It projects future demand, then derives the inventory policy: <strong>safety stock</strong> from demand variability and service level, and the <strong>reorder point</strong> = expected demand over lead time + safety stock. Tune the drivers and watch the plan respond.</p>
+          </div>
+        </div>
+        <div class="fc-body">
+          <svg id="fc-chart" viewBox="0 0 720 340" role="img" aria-label="Interactive retail demand forecast chart"></svg>
+          <div class="fc-controls">
+            <label>Service level <output id="fc-svc-val">95%</output>
+              <input type="range" id="fc-svc" min="80" max="99" value="95" />
+            </label>
+            <label>Lead time (weeks) <output id="fc-lt-val">2</output>
+              <input type="range" id="fc-lt" min="1" max="8" value="2" />
+            </label>
+            <label>Demand volatility <output id="fc-vol-val">Medium</output>
+              <input type="range" id="fc-vol" min="1" max="10" value="5" />
+            </label>
+            <label>Seasonality (Black Friday etc.) <output id="fc-seas-val">On</output>
+              <input type="range" id="fc-seas" min="0" max="10" value="6" />
+            </label>
+            <div class="fc-stats">
+              <div class="fc-stat"><span class="fc-k">Safety stock</span><span class="fc-v" id="fc-ss">–</span></div>
+              <div class="fc-stat"><span class="fc-k">Reorder point</span><span class="fc-v" id="fc-rop">–</span></div>
+              <div class="fc-stat"><span class="fc-k">Avg. weekly demand</span><span class="fc-v" id="fc-avg">–</span></div>
+            </div>
+            <div class="fc-legend">
+              <span><i class="sw sw-hist"></i>History</span>
+              <span><i class="sw sw-fc"></i>Forecast</span>
+              <span><i class="sw sw-band"></i>95% interval</span>
+              <span><i class="sw sw-rop"></i>Reorder point</span>
+              <span><i class="sw sw-ss"></i>Safety stock</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -915,6 +981,11 @@
           <h3><span class="ico">🛠️</span> Engineering</h3>
           <div class="tl-role" style="font-size:1.02rem">Degree in Engineering</div>
           <p style="color:var(--muted); font-size:.92rem; margin-top:6px">Focused on supply chain optimization, logistics, and manufacturing - the operations-and-optimization grounding that still shapes my work today, from OEE and predictive maintenance to logistics data platforms.</p>
+        </div>
+        <div class="skill-cat reveal">
+          <h3><span class="ico">📦</span> Professional Certification</h3>
+          <div class="tl-role" style="font-size:1.02rem">CPIM - Production &amp; Inventory Management</div>
+          <p style="color:var(--muted); font-size:.92rem; margin-top:6px">APICS / ASCM certification in demand forecasting, master planning &amp; S&amp;OP, MRP, and inventory management - reorder points, safety stock, EOQ, and service levels. The supply-chain backbone behind my forecasting and predictive-maintenance work.</p>
         </div>
       </div>
     </div>
@@ -1458,6 +1529,109 @@
         });
       }, { threshold: 0.5 });
       document.querySelectorAll('.stats .stat').forEach(s => so.observe(s));
+    })();
+
+    /* ---- Retail demand forecast simulation (ARIMA-style) ---- */
+    (function () {
+      const svg = document.getElementById('fc-chart');
+      if (!svg) return;
+      const svc = document.getElementById('fc-svc'), lt = document.getElementById('fc-lt'),
+            vol = document.getElementById('fc-vol'), seas = document.getElementById('fc-seas');
+      const svcV = document.getElementById('fc-svc-val'), ltV = document.getElementById('fc-lt-val'),
+            volV = document.getElementById('fc-vol-val'), seasV = document.getElementById('fc-seas-val');
+      const ssOut = document.getElementById('fc-ss'), ropOut = document.getElementById('fc-rop'), avgOut = document.getElementById('fc-avg');
+
+      const W = 720, H = 340, padL = 44, padR = 16, padT = 18, padB = 28;
+      const HIST = 40, FC = 12; // weeks
+      const NS = 'http://www.w3.org/2000/svg';
+
+      // z-score for a one-sided service level (approx inverse normal CDF, Acklam)
+      function zFor(pct) {
+        const p = pct / 100;
+        const a=[-3.969683028665376e+01,2.209460984245205e+02,-2.759285104469687e+02,1.383577518672690e+02,-3.066479806614716e+01,2.506628277459239e+00];
+        const b=[-5.447609879822406e+01,1.615858368580409e+02,-1.556989798598866e+02,6.680131188771972e+01,-1.328068155288572e+01];
+        const c=[-7.784894002430293e-03,-3.223964580411365e-01,-2.400758277161838e+00,-2.549732539343734e+00,4.374664141464968e+00,2.938163982698783e+00];
+        const d=[7.784695709041462e-03,3.224671290700398e-01,2.445134137142996e+00,3.754408661907416e+00];
+        const pl=0.02425;
+        let q,r;
+        if(p<pl){q=Math.sqrt(-2*Math.log(p));return (((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5])/((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1);}
+        if(p<=1-pl){q=p-0.5;r=q*q;return (((((a[0]*r+a[1])*r+a[2])*r+a[3])*r+a[4])*r+a[5])*q/(((((b[0]*r+b[1])*r+b[2])*r+b[3])*r+b[4])*r+1);}
+        q=Math.sqrt(-2*Math.log(1-p));return -(((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5])/((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1);
+      }
+      // deterministic pseudo-random so the history is stable across re-renders
+      let seed = 1337;
+      const rnd = () => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed / 0x7fffffff; };
+
+      function render() {
+        seed = 1337;
+        const volatility = +vol.value, seasAmp = +seas.value, z = zFor(+svc.value), leadTime = +lt.value;
+        svcV.textContent = svc.value + '%'; ltV.textContent = lt.value;
+        volV.textContent = volatility <= 3 ? 'Low' : volatility <= 6 ? 'Medium' : 'High';
+        seasV.textContent = seasAmp === 0 ? 'Off' : 'On';
+
+        // --- simulate a demand series: base + trend + seasonality + noise (AR(1)) ---
+        const base = 120, trend = 0.6, sigma = volatility * 2.4;
+        const hist = [];
+        let ar = 0;
+        for (let t = 0; t < HIST; t++) {
+          const season = seasAmp * 3 * Math.sin((t / 13) * 2 * Math.PI) + (t % 26 === 25 ? seasAmp * 6 : 0); // periodic + a "Black Friday" spike
+          ar = 0.5 * ar + (rnd() - 0.5) * 2 * sigma;
+          hist.push(Math.max(0, base + trend * t + season + ar));
+        }
+        // --- ARIMA-style forecast: level + trend + seasonal echo, flat mean projection ---
+        const recent = hist.slice(-8);
+        const mean = recent.reduce((s, v) => s + v, 0) / recent.length;
+        const slope = (hist[HIST - 1] - hist[HIST - 8]) / 8;
+        const fc = [], upper = [], lower = [];
+        for (let k = 1; k <= FC; k++) {
+          const season = seasAmp * 3 * Math.sin(((HIST + k) / 13) * 2 * Math.PI);
+          const yhat = Math.max(0, mean + slope * k + season);
+          fc.push(yhat);
+          const band = z * sigma * Math.sqrt(k); // widening interval
+          upper.push(yhat + band); lower.push(Math.max(0, yhat - band));
+        }
+        // --- inventory policy ---
+        const weeklyMean = mean;
+        const safetyStock = z * sigma * Math.sqrt(leadTime);
+        const reorderPoint = weeklyMean * leadTime + safetyStock;
+        ssOut.textContent = Math.round(safetyStock) + ' u';
+        ropOut.textContent = Math.round(reorderPoint) + ' u';
+        avgOut.textContent = Math.round(weeklyMean) + ' u';
+
+        // --- scales ---
+        const all = hist.concat(upper);
+        const yMax = Math.max(...all, reorderPoint) * 1.08, yMin = 0;
+        const N = HIST + FC;
+        const x = i => padL + (i / (N - 1)) * (W - padL - padR);
+        const y = v => padT + (1 - (v - yMin) / (yMax - yMin)) * (H - padT - padB);
+
+        const line = pts => pts.map((p, i) => (i ? 'L' : 'M') + x(p[0]).toFixed(1) + ',' + y(p[1]).toFixed(1)).join(' ');
+        let out = '';
+        // gridlines + y labels
+        for (let g = 0; g <= 4; g++) {
+          const val = yMin + (g / 4) * (yMax - yMin), yy = y(val);
+          out += `<line x1="${padL}" y1="${yy.toFixed(1)}" x2="${W - padR}" y2="${yy.toFixed(1)}" stroke="var(--line)" stroke-width="1"/>`;
+          out += `<text x="${padL - 6}" y="${(yy + 3).toFixed(1)}" text-anchor="end" font-size="9" fill="var(--muted)">${Math.round(val)}</text>`;
+        }
+        // forecast confidence band
+        const bandPts = upper.map((v, k) => [HIST + k, v]).concat(lower.map((v, k) => [HIST + FC - 1 - k, lower[FC - 1 - k]]));
+        out += `<path d="${line(bandPts)} Z" fill="rgba(255,107,53,.16)" stroke="none"/>`;
+        // safety stock + reorder point lines
+        out += `<line x1="${padL}" y1="${y(reorderPoint).toFixed(1)}" x2="${W - padR}" y2="${y(reorderPoint).toFixed(1)}" stroke="#22c55e" stroke-width="1.5"/>`;
+        out += `<text x="${W - padR}" y="${(y(reorderPoint) - 4).toFixed(1)}" text-anchor="end" font-size="9" fill="#16a34a" font-weight="700">Reorder point</text>`;
+        out += `<line x1="${padL}" y1="${y(safetyStock).toFixed(1)}" x2="${W - padR}" y2="${y(safetyStock).toFixed(1)}" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="4 3"/>`;
+        out += `<text x="${W - padR}" y="${(y(safetyStock) - 4).toFixed(1)}" text-anchor="end" font-size="9" fill="#2563eb" font-weight="700">Safety stock</text>`;
+        // divider between history and forecast
+        out += `<line x1="${x(HIST - 1).toFixed(1)}" y1="${padT}" x2="${x(HIST - 1).toFixed(1)}" y2="${H - padB}" stroke="var(--muted)" stroke-width="1" stroke-dasharray="2 3" opacity=".5"/>`;
+        // history line
+        out += `<path d="${line(hist.map((v, i) => [i, v]))}" fill="none" stroke="var(--slate)" stroke-width="2"/>`;
+        // forecast line (connect from last hist point)
+        const fcLine = [[HIST - 1, hist[HIST - 1]]].concat(fc.map((v, k) => [HIST + k, v]));
+        out += `<path d="${line(fcLine)}" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="1 0"/>`;
+        svg.innerHTML = out;
+      }
+      [svc, lt, vol, seas].forEach(s => s.addEventListener('input', render));
+      render();
     })();
 
     /* ---- OEE interactive calculator ---- */
