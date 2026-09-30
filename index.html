@@ -326,7 +326,26 @@
     .fc-panel { background: var(--bg); border: 1px solid var(--line); border-radius: 14px; padding: 14px; border-top: 3px solid var(--line); }
     .fc-panel-title { font-family: 'Space Grotesk'; font-weight: 700; font-size: .9rem; color: var(--ink); margin-bottom: 10px; display: block; }
     .fc-panel-title span { color: var(--muted); font-weight: 500; font-size: .8rem; }
-    .fc-toggle { display: flex; align-items: center; gap: 7px; cursor: pointer; }
+    .fc-toggle { display: flex; align-items: center; gap: 7px; cursor: pointer; justify-content: space-between; }
+    .fc-toggle > label { display: flex; align-items: center; gap: 7px; cursor: pointer; }
+    .fc-info-btn { background: none; border: 0; color: var(--muted); font-size: 1rem; cursor: pointer; padding: 0 2px; line-height: 1; transition: color .15s; }
+    .fc-info-btn:hover { color: var(--accent-ink); }
+    /* model detail modal */
+    .fc-modal { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; }
+    .fc-modal[hidden] { display: none; }
+    .fc-modal-backdrop { position: absolute; inset: 0; background: rgba(15,23,42,.55); backdrop-filter: blur(2px); }
+    .fc-modal-card { position: relative; background: var(--surface); border-radius: 18px; padding: 28px 30px; max-width: 620px; width: calc(100% - 40px); max-height: 85vh; overflow-y: auto; box-shadow: var(--shadow-lg); }
+    .fc-modal-card h3 { font-size: 1.3rem; margin-bottom: 16px; padding-right: 30px; }
+    .fc-modal-close { position: absolute; top: 16px; right: 18px; background: none; border: 0; font-size: 1.6rem; line-height: 1; color: var(--muted); cursor: pointer; }
+    .fc-modal-close:hover { color: var(--ink); }
+    .fc-modal-sec { margin-bottom: 16px; }
+    .fc-modal-sec h4 { font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; color: var(--accent-ink); margin-bottom: 8px; }
+    .fc-modal-sec p { color: var(--ink-2); font-size: .93rem; line-height: 1.6; }
+    .fc-modal-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .fc-pros, .fc-cons { list-style: none; padding: 0; margin: 0; }
+    .fc-pros li, .fc-cons li { font-size: .86rem; color: var(--ink-2); line-height: 1.45; padding: 4px 0 4px 22px; position: relative; }
+    .fc-pros li::before { content: "+"; position: absolute; left: 0; color: #16a34a; font-weight: 800; }
+    .fc-cons li::before { content: "–"; position: absolute; left: 0; color: #dc2626; font-weight: 800; }
     .fc-field { display: block; font-size: .78rem; font-weight: 600; color: var(--ink-2); margin-bottom: 10px; }
     .fc-field b { color: var(--accent-ink); font-family: 'Space Grotesk'; float: right; }
     .fc-field select, .fc-field input[type=range] { width: 100%; margin-top: 4px; }
@@ -491,6 +510,7 @@
       .fc-demo { padding: 24px; }
       .fc-config { grid-template-columns: 1fr; }
       .fc-summary { grid-template-columns: repeat(4, 1fr); }
+      .fc-modal-cols { grid-template-columns: 1fr; }
       .nav-links { display: none; position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; background: var(--surface); border-bottom: 1px solid var(--line); padding: 8px; }
       .nav-links.open { display: flex; }
       .nav-links a { padding: 12px; }
@@ -1002,7 +1022,7 @@
           </div>
 
           <div class="fc-panel" style="border-top-color:#6366f1">
-            <label class="fc-panel-title fc-toggle"><input type="checkbox" id="fc-arima-on" checked> ARIMA <span>(SARIMAX)</span></label>
+            <div class="fc-panel-title fc-toggle"><label><input type="checkbox" id="fc-arima-on" checked> ARIMA <span>(SARIMAX)</span></label><button class="fc-info-btn" data-info="arima" title="How it works" aria-label="ARIMA details">ⓘ</button></div>
             <div class="fc-params">
               <label>p<input type="number" id="fc-p" value="1" min="0" max="5"></label>
               <label>d<input type="number" id="fc-d" value="1" min="0" max="2"></label>
@@ -1015,7 +1035,7 @@
           </div>
 
           <div class="fc-panel" style="border-top-color:#0ea5e9">
-            <label class="fc-panel-title fc-toggle"><input type="checkbox" id="fc-tbats-on" checked> TBATS</label>
+            <div class="fc-panel-title fc-toggle"><label><input type="checkbox" id="fc-tbats-on" checked> TBATS</label><button class="fc-info-btn" data-info="tbats" title="How it works" aria-label="TBATS details">ⓘ</button></div>
             <div class="fc-params fc-params-col">
               <label class="fc-check"><input type="checkbox" id="fc-boxcox" checked> Box-Cox transform</label>
               <label class="fc-check"><input type="checkbox" id="fc-trend" checked> Trend</label>
@@ -1024,7 +1044,7 @@
           </div>
 
           <div class="fc-panel" style="border-top-color:#8b5cf6">
-            <label class="fc-panel-title fc-toggle"><input type="checkbox" id="fc-prophet-on" checked> Prophet</label>
+            <div class="fc-panel-title fc-toggle"><label><input type="checkbox" id="fc-prophet-on" checked> Prophet</label><button class="fc-info-btn" data-info="prophet" title="How it works" aria-label="Prophet details">ⓘ</button></div>
             <div class="fc-params fc-params-col">
               <label>Changepoint prior <b id="fc-cp-val">0.05</b>
                 <input type="range" id="fc-cp" min="0.001" max="0.5" step="0.001" value="0.05"></label>
@@ -1569,6 +1589,19 @@
   <button id="to-top" aria-label="Back to top" title="Back to top">↑</button>
   <div id="toast" role="status" aria-live="polite"></div>
 
+  <div id="fc-modal" class="fc-modal" hidden>
+    <div class="fc-modal-backdrop"></div>
+    <div class="fc-modal-card" role="dialog" aria-modal="true" aria-labelledby="fc-modal-title">
+      <button class="fc-modal-close" aria-label="Close">×</button>
+      <h3 id="fc-modal-title"></h3>
+      <div class="fc-modal-sec"><h4>How it works</h4><p id="fc-modal-how"></p></div>
+      <div class="fc-modal-cols">
+        <div class="fc-modal-sec"><h4>Strengths</h4><ul id="fc-modal-pros" class="fc-pros"></ul></div>
+        <div class="fc-modal-sec"><h4>Weaknesses</h4><ul id="fc-modal-cons" class="fc-cons"></ul></div>
+      </div>
+    </div>
+  </div>
+
   <script>
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     document.getElementById('year').textContent = new Date().getFullYear();
@@ -1718,12 +1751,21 @@
       const MODELS = {
         arima: { name: 'ARIMA (SARIMAX)', color: '#6366f1',
           desc: 'ARIMA / SARIMAX combines autoregressive terms, differencing, and moving-average terms, with a seasonal extension at lag m to capture weekly retail patterns. Confidence intervals are analytically derived and widen with the square root of the horizon.',
+          how: 'ARIMA models time series by combining autoregressive terms (past values), differencing (to achieve stationarity), and moving average terms (past forecast errors). The seasonal extension (SARIMAX) adds seasonal AR, differencing, and MA components at lag m, making it powerful for retail data with regular weekly patterns.',
+          pros: ['Well-understood statistical foundation with decades of research','Explicit parameter control allows domain-driven tuning','Confidence intervals are analytically derived, not simulated','Performs well on stationary or trend-stationary retail data','Low computational cost relative to ML approaches'],
+          cons: ['Requires manual parameter selection (p,d,q)(P,D,Q)m','Assumes linear relationships - cannot capture nonlinear dynamics','Sensitive to outliers which can distort parameter estimates','Struggles with multiple seasonal periods (e.g. weekly + yearly)','Forecast intervals widen quickly for long horizons'],
           code: `from statsmodels.tsa.statespace.sarimax import SARIMAX\n\nmodel = SARIMAX(train_data,\n                order=(P, D, Q),\n                seasonal_order=(sP, sD, sQ, m),\n                enforce_stationarity=False,\n                enforce_invertibility=False)\nfit = model.fit(disp=False)\nforecast = fit.get_forecast(steps=H)\npred = forecast.predicted_mean\nci = forecast.conf_int(alpha=0.05)` },
         tbats: { name: 'TBATS', color: '#0ea5e9',
           desc: 'TBATS models seasonality with trigonometric terms, an optional Box-Cox transform to stabilise variance, ARMA errors, and a trend - auto-selecting each feature by AIC. It projects the seasonal shape forward and keeps intervals tighter under the Box-Cox transform.',
+          how: 'TBATS uses trigonometric functions to model seasonality, an optional Box-Cox transformation to stabilise variance, ARMA errors for short-term autocorrelation, and a trend component. It automatically selects whether to use each feature via AIC comparison, making it effective for retail data with complex weekly and yearly seasonal patterns.',
+          pros: ['Handles multiple seasonal periods simultaneously (e.g. 7 + 365.25)','Automatic model selection via AIC - minimal manual tuning','Box-Cox transformation adapts to heteroscedastic data','Trigonometric seasonality requires fewer parameters than dummy variables','Robust to moderate amounts of missing data'],
+          cons: ['Slower fitting due to evaluating many candidate models','Less interpretable - harder to explain individual components','Limited community tooling compared to ARIMA or Prophet','Can overfit on short time series with complex configurations','Confidence intervals rely on Gaussian residual assumption'],
           code: `from tbats import TBATS\n\nestimator = TBATS(\n    seasonal_periods=[7],\n    use_box_cox=None,     # auto\n    use_trend=None,       # auto\n    use_arma_errors=None  # auto\n)\nfit = estimator.fit(train_data.values)\nforecast, ci = fit.forecast(\n    steps=H, confidence_level=0.95)` },
         prophet: { name: 'Prophet', color: '#8b5cf6',
           desc: 'Prophet (Meta) is an additive model: piecewise-linear trend with automatic changepoints, Fourier-series seasonality, and holiday effects. Robust to outliers and missing data; its uncertainty intervals are simulation-based and roughly symmetric.',
+          how: 'Prophet is an additive regression model developed by Meta that decomposes time series into trend, seasonality, and holiday effects. The trend uses piecewise linear or logistic growth with automatic changepoint detection. Seasonality is modelled via Fourier series. It handles weekly and yearly retail patterns well and is robust to missing data and outliers.',
+          pros: ['Intuitive decomposition: trend + seasonality + holidays','Robust to missing data and outliers out of the box','Automatic changepoint detection adapts to trend shifts','Easy to add custom seasonalities and holiday calendars','Human-readable parameters (priors) for business users'],
+          cons: ['Additive model struggles with multiplicative seasonality','Bayesian fitting (Stan) is slower than classical methods','Uncertainty intervals are simulation-based, not analytical','Less accurate than ARIMA on strongly autocorrelated data','Overfits when changepoint prior is too high on short series'],
           code: `from prophet import Prophet\n\ndf = train_data.reset_index()\ndf.columns = ['ds', 'y']\n\nmodel = Prophet(\n    changepoint_prior_scale=cp,\n    seasonality_prior_scale=sp,\n    yearly_seasonality=True,\n    weekly_seasonality=True)\nmodel.fit(df)\n\nfuture = model.make_future_dataframe(periods=H, freq='D')\nforecast = model.predict(future)` }
       };
 
@@ -1968,6 +2010,23 @@
       }
 
       runBtn.addEventListener('click', run);
+
+      // model detail modal
+      const modal = document.getElementById('fc-modal');
+      const openModal = (key) => {
+        const m = MODELS[key];
+        document.getElementById('fc-modal-title').textContent = m.name;
+        document.getElementById('fc-modal-how').textContent = m.how;
+        document.getElementById('fc-modal-pros').innerHTML = m.pros.map(x => '<li>' + x + '</li>').join('');
+        document.getElementById('fc-modal-cons').innerHTML = m.cons.map(x => '<li>' + x + '</li>').join('');
+        modal.hidden = false;
+      };
+      const closeModal = () => { modal.hidden = true; };
+      document.querySelectorAll('.fc-info-btn').forEach(btn =>
+        btn.addEventListener('click', (e) => { e.preventDefault(); openModal(btn.dataset.info); }));
+      modal.querySelector('.fc-modal-close').addEventListener('click', closeModal);
+      modal.querySelector('.fc-modal-backdrop').addEventListener('click', closeModal);
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !modal.hidden) closeModal(); });
     })();
 
     /* ---- OEE interactive calculator ---- */
