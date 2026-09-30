@@ -416,6 +416,8 @@
     }
     #toast.show { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
     #toast b { color: var(--accent); }
+    #toast a { color: #fff; text-decoration: underline; text-underline-offset: 2px; font-weight: 700; }
+    #toast a:hover { color: var(--accent); }
 
     /* reveal animation */
     .reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
@@ -718,7 +720,7 @@
         <div class="card reveal">
           <div class="thumb"><span class="emoji">📄</span><span class="lang">GenAI</span></div>
           <div class="body">
-            <h3>RFQ Intake AI</h3>
+            <h3>Request For Quotation (RFQ) Intake AI</h3>
             <p>An agentic intake app for a global logistics provider that turns inbound 3PL &amp; warehousing RFQs into structured, quotable data. Incoming PDFs are parsed with AI extraction, scored for completeness, classified by an agent, and priced into a quote with contribution-margin analysis - compressing a manual, error-prone process into a guided Databricks App workflow.</p>
             <div class="links"><span class="proj-note">Client engagement · confidential</span></div>
           </div>
@@ -1486,29 +1488,43 @@
       }, 3200);
     })();
 
-    /* ---- Say hello: copy email + toast, still opens mail client ---- */
+    /* ---- Say hello: copy email + toast with webmail fallbacks ---- */
     (function () {
       const btn = document.getElementById('say-hello');
       const toast = document.getElementById('toast');
       if (!btn || !toast) return;
       const EMAIL = 'kurtholst@hotmail.com';
+      const SUBJECT = 'Hello from your portfolio';
+      const BODY = 'Hi Kurt,\n\n';
+      const gmail = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent(EMAIL) +
+        '&su=' + encodeURIComponent(SUBJECT) + '&body=' + encodeURIComponent(BODY);
+      const outlook = 'https://outlook.office.com/mail/deeplink/compose?to=' + encodeURIComponent(EMAIL) +
+        '&subject=' + encodeURIComponent(SUBJECT) + '&body=' + encodeURIComponent(BODY);
       let toastTimer;
-      const showToast = (html) => {
+      const showToast = (html, ms) => {
         toast.innerHTML = html;
         toast.classList.add('show');
         clearTimeout(toastTimer);
-        toastTimer = setTimeout(() => toast.classList.remove('show'), 3500);
+        toastTimer = setTimeout(() => toast.classList.remove('show'), ms || 3500);
       };
-      btn.addEventListener('click', () => {
-        // Copy the address so it's useful even without a configured mail client.
+      // Don't rely on mailto: (does nothing without a configured mail client).
+      // Copy the address and offer webmail links that always work in a browser.
+      btn.setAttribute('href', 'mailto:' + EMAIL + '?subject=' + encodeURIComponent(SUBJECT) + '&body=' + encodeURIComponent(BODY));
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const copyMsg = (ok) => {
+          const lead = ok ? '<b>' + EMAIL + '</b> copied to clipboard.' : 'Email: <b>' + EMAIL + '</b>';
+          showToast(lead +
+            ' &nbsp;<a href="' + gmail + '" target="_blank" rel="noopener">Gmail</a>' +
+            ' &nbsp;·&nbsp; <a href="' + outlook + '" target="_blank" rel="noopener">Outlook</a>' +
+            ' &nbsp;·&nbsp; <a href="mailto:' + EMAIL + '?subject=' + encodeURIComponent(SUBJECT) + '">Mail app</a>',
+            8000);
+        };
         if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(EMAIL)
-            .then(() => showToast('Opening your mail app… address <b>' + EMAIL + '</b> copied too.'))
-            .catch(() => showToast('Email: <b>' + EMAIL + '</b>'));
+          navigator.clipboard.writeText(EMAIL).then(() => copyMsg(true)).catch(() => copyMsg(false));
         } else {
-          showToast('Email: <b>' + EMAIL + '</b>');
+          copyMsg(false);
         }
-        // The default mailto: navigation still fires for users with a mail client.
       });
     })();
 
