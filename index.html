@@ -321,7 +321,13 @@
     .fc-title { font-size: 1.4rem; margin-bottom: 8px; }
     .fc-sub { color: var(--muted); font-size: .95rem; max-width: 760px; }
     .fc-sub strong { color: var(--ink-2); font-weight: 600; }
-    .fc-body { display: grid; grid-template-columns: 1.6fr 1fr; gap: 28px; align-items: start; margin-top: 22px; }
+    .fc-models { display: flex; gap: 8px; margin-top: 18px; flex-wrap: wrap; }
+    .fc-model { font-family: 'Space Grotesk'; font-weight: 600; font-size: .9rem; color: var(--ink-2); background: var(--bg); border: 1px solid var(--line); padding: 8px 18px; border-radius: 999px; cursor: pointer; transition: all .15s; }
+    .fc-model span { color: var(--muted); font-weight: 500; font-size: .82rem; }
+    .fc-model:hover { border-color: #cbd5e1; }
+    .fc-model.active { background: var(--slate); color: #fff; border-color: var(--slate); }
+    .fc-model.active span { color: var(--accent); }
+    .fc-body { display: grid; grid-template-columns: 1.6fr 1fr; gap: 28px; align-items: start; margin-top: 18px; }
     #fc-chart { width: 100%; height: auto; background: var(--bg); border: 1px solid var(--line); border-radius: 14px; }
     .fc-controls { display: flex; flex-direction: column; gap: 14px; }
     .fc-controls label { display: grid; grid-template-columns: 1fr auto; align-items: center; font-size: .88rem; font-weight: 600; color: var(--ink-2); gap: 4px 12px; }
@@ -339,6 +345,11 @@
     .sw-hist { background: var(--slate); } .sw-fc { background: var(--accent); }
     .sw-band { background: rgba(255,107,53,.25); height: 10px; border-radius: 3px; }
     .sw-rop { background: #22c55e; } .sw-ss { background: #3b82f6; border-top: 2px dashed #3b82f6; height: 0; }
+    .fc-info { grid-column: 1 / -1; margin-top: 18px; border-top: 1px solid var(--line); padding-top: 18px; }
+    .fc-info p { color: var(--ink-2); font-size: .92rem; line-height: 1.6; margin-bottom: 12px; }
+    .fc-code summary { cursor: pointer; font-size: .85rem; font-weight: 600; color: var(--accent-ink); }
+    .fc-code pre { margin-top: 12px; background: var(--slate); color: #e2e8f0; border-radius: 12px; padding: 16px 18px; overflow-x: auto; font-size: .8rem; line-height: 1.55; }
+    .fc-code code { font-family: 'SF Mono', 'Roboto Mono', Menlo, monospace; white-space: pre; }
 
     /* RECOMMENDATIONS */
     .rec-grid { columns: 3; column-gap: 20px; }
@@ -437,6 +448,7 @@
       .oee-gauge { justify-self: center; }
       .fc-body { grid-template-columns: 1fr; }
       .fc-demo { padding: 24px; }
+      .fc-model { flex: 1; text-align: center; padding: 8px 10px; }
       .nav-links { display: none; position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; background: var(--surface); border-bottom: 1px solid var(--line); padding: 8px; }
       .nav-links.open { display: flex; }
       .nav-links a { padding: 12px; }
@@ -926,8 +938,13 @@
           <div>
             <div class="eyebrow" style="color:var(--accent-ink)">Try it · interactive</div>
             <h3 class="fc-title">Retail demand forecast, live</h3>
-            <p class="fc-sub">A simulated store-SKU demand series with an ARIMA-style forecast. It projects future demand, then derives the inventory policy: <strong>safety stock</strong> from demand variability and service level, and the <strong>reorder point</strong> = expected demand over lead time + safety stock. Tune the drivers and watch the plan respond.</p>
+            <p class="fc-sub">A client-side port of the Forecasting tab from my retail demand-forecasting app. Pick a model, project a simulated store-SKU demand series, then derive the inventory policy: <strong>safety stock</strong> from demand variability and service level, and the <strong>reorder point</strong> = expected demand over lead time + safety stock. Tune the drivers and watch the plan respond.</p>
           </div>
+        </div>
+        <div class="fc-models" role="tablist" aria-label="Forecast model">
+          <button class="fc-model active" data-model="arima" role="tab">ARIMA <span>(SARIMAX)</span></button>
+          <button class="fc-model" data-model="tbats" role="tab">TBATS</button>
+          <button class="fc-model" data-model="prophet" role="tab">Prophet</button>
         </div>
         <div class="fc-body">
           <svg id="fc-chart" viewBox="0 0 720 340" role="img" aria-label="Interactive retail demand forecast chart"></svg>
@@ -957,6 +974,13 @@
               <span><i class="sw sw-ss"></i>Safety stock</span>
             </div>
           </div>
+        </div>
+        <div class="fc-info">
+          <p id="fc-desc"></p>
+          <details class="fc-code">
+            <summary>How it's fitted in the real app</summary>
+            <pre><code id="fc-code"></code></pre>
+          </details>
         </div>
       </div>
     </div>
@@ -1605,6 +1629,57 @@
       let seed = 1337;
       const rnd = () => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed / 0x7fffffff; };
 
+      // --- model metadata (descriptions + real Python from the retail app) ---
+      const MODELS = {
+        arima: {
+          desc: 'ARIMA / SARIMAX combines autoregressive terms, differencing, and moving-average terms, with a seasonal extension at lag m to capture weekly retail patterns. Confidence intervals are analytically derived and widen with the square root of the horizon.',
+          code: `from statsmodels.tsa.statespace.sarimax import SARIMAX
+
+model = SARIMAX(train_data,
+                order=(1, 1, 1),
+                seasonal_order=(1, 1, 1, 7),
+                enforce_stationarity=False,
+                enforce_invertibility=False)
+fit = model.fit(disp=False)
+forecast = fit.get_forecast(steps=90)
+pred = forecast.predicted_mean
+ci = forecast.conf_int(alpha=0.05)`
+        },
+        tbats: {
+          desc: 'TBATS models seasonality with trigonometric terms, an optional Box-Cox transform to stabilise variance, ARMA errors, and a trend - auto-selecting each feature by AIC. It projects the seasonal shape forward and keeps intervals tighter under the Box-Cox transform.',
+          code: `from tbats import TBATS
+
+estimator = TBATS(
+    seasonal_periods=[7],
+    use_box_cox=None,     # auto
+    use_trend=None,       # auto
+    use_arma_errors=None  # auto
+)
+fit = estimator.fit(train_data.values)
+forecast, ci = fit.forecast(
+    steps=90, confidence_level=0.95)`
+        },
+        prophet: {
+          desc: 'Prophet (Meta) is an additive model: piecewise-linear trend with automatic changepoints, Fourier-series seasonality, and holiday effects. Robust to outliers and missing data; its uncertainty intervals are simulation-based and roughly symmetric.',
+          code: `from prophet import Prophet
+
+df = train_data.reset_index()
+df.columns = ['ds', 'y']
+
+model = Prophet(
+    changepoint_prior_scale=0.05,
+    seasonality_prior_scale=10.0,
+    yearly_seasonality=True,
+    weekly_seasonality=True)
+model.fit(df)
+
+future = model.make_future_dataframe(
+    periods=90, freq='D')
+forecast = model.predict(future)`
+        }
+      };
+      let model = 'arima';
+
       function render() {
         seed = 1337;
         const volatility = +vol.value, seasAmp = +seas.value, z = zFor(+svc.value), leadTime = +lt.value;
@@ -1621,16 +1696,31 @@
           ar = 0.5 * ar + (rnd() - 0.5) * 2 * sigma;
           hist.push(Math.max(0, base + trend * t + season + ar));
         }
-        // --- ARIMA-style forecast: level + trend + seasonal echo, flat mean projection ---
+        // --- forecast: shape depends on the selected model ---
         const recent = hist.slice(-8);
         const mean = recent.reduce((s, v) => s + v, 0) / recent.length;
         const slope = (hist[HIST - 1] - hist[HIST - 8]) / 8;
         const fc = [], upper = [], lower = [];
         for (let k = 1; k <= FC; k++) {
-          const season = seasAmp * 3 * Math.sin(((HIST + k) / 13) * 2 * Math.PI);
-          const yhat = Math.max(0, mean + slope * k + season);
+          const sinSeason = seasAmp * 3 * Math.sin(((HIST + k) / 13) * 2 * Math.PI);
+          let yhat, band;
+          if (model === 'arima') {
+            // linear trend + seasonal echo; intervals widen ~sqrt(horizon)
+            yhat = mean + slope * k + sinSeason;
+            band = z * sigma * Math.sqrt(k);
+          } else if (model === 'tbats') {
+            // keeps full seasonal shape incl. the periodic spike; damped trend; tighter (Box-Cox) band
+            const spike = ((HIST + k) % 26 === 25) ? seasAmp * 6 : 0;
+            yhat = mean + slope * k * 0.7 + sinSeason + spike;
+            band = z * sigma * Math.sqrt(k) * 0.8;
+          } else { // prophet
+            // piecewise trend (dampens after mid-horizon) + seasonality; simulation-style symmetric band
+            const damp = k <= FC / 2 ? k : FC / 2 + (k - FC / 2) * 0.5;
+            yhat = mean + slope * damp + sinSeason;
+            band = z * sigma * (0.9 + 0.12 * k);
+          }
+          yhat = Math.max(0, yhat);
           fc.push(yhat);
-          const band = z * sigma * Math.sqrt(k); // widening interval
           upper.push(yhat + band); lower.push(Math.max(0, yhat - band));
         }
         // --- inventory policy ---
@@ -1672,8 +1762,23 @@
         const fcLine = [[HIST - 1, hist[HIST - 1]]].concat(fc.map((v, k) => [HIST + k, v]));
         out += `<path d="${line(fcLine)}" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="1 0"/>`;
         svg.innerHTML = out;
+
+        // model info panel
+        const info = MODELS[model];
+        const desc = document.getElementById('fc-desc'), code = document.getElementById('fc-code');
+        if (desc) desc.textContent = info.desc;
+        if (code) code.textContent = info.code;
       }
       [svc, lt, vol, seas].forEach(s => s.addEventListener('input', render));
+      // model selector
+      document.querySelectorAll('.fc-model').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.fc-model').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          model = btn.dataset.model;
+          render();
+        });
+      });
       render();
     })();
 
