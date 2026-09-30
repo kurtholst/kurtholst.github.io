@@ -129,7 +129,11 @@
     .hero h1 .accent { color: var(--accent-ink); }
     .hero .role { font-size: clamp(1.05rem, 2.4vw, 1.4rem); color: var(--ink-2); font-weight: 600; margin-top: 16px; font-family: 'Space Grotesk'; }
     .hero p.lede { color: var(--muted); font-size: 1.05rem; margin-top: 18px; max-width: 560px; }
-    .cta-row { display: flex; gap: 12px; margin-top: 30px; flex-wrap: wrap; }
+    .proof { display: flex; align-items: center; gap: 10px; margin-top: 20px; font-size: .95rem; font-weight: 600; min-height: 24px; }
+    .proof-static { color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: .74rem; }
+    .proof-rotator { color: var(--accent-ink); transition: opacity .4s; }
+    .proof-rotator.fade { opacity: 0; }
+    .cta-row { display: flex; gap: 12px; margin-top: 26px; flex-wrap: wrap; }
     .btn {
       display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: .95rem;
       padding: 12px 22px; border-radius: 999px; border: 1px solid transparent; cursor: pointer;
@@ -267,6 +271,7 @@
     .pub:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); border-color: #cbd5e1; }
     .pub-type { font-size: .74rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent-ink); margin-bottom: 8px; }
     .pub h3 { font-size: 1.18rem; line-height: 1.3; margin-bottom: 6px; }
+    .pub-gloss { font-size: .92rem; color: var(--ink-2); font-style: italic; margin: -2px 0 6px; }
     .pub-meta { font-size: .86rem; color: var(--muted); font-weight: 600; margin-bottom: 12px; }
     .pub p { color: var(--ink-2); font-size: .95rem; }
     .pub-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
@@ -429,6 +434,10 @@
         <h1>Turning data &amp; AI into <span class="accent">working solutions.</span></h1>
         <div class="role">Solutions Architect @ Databricks · SAP &amp; ML background</div>
         <p class="lede">I design and build end-to-end data &amp; AI platforms – from Lakeflow ingestion and Unity Catalog governance to GenAI, Genie, and production Databricks Apps. 25 years bridging Business Intelligence, SAP, and the modern Lakehouse.</p>
+        <div class="proof" aria-live="polite">
+          <span class="proof-static">Proof:</span>
+          <span class="proof-rotator" id="proof-rotator"></span>
+        </div>
         <div class="cta-row">
           <a class="btn btn-primary" href="#projects">View my work →</a>
           <a class="btn btn-ghost" href="assets/Kurt-Holst-CV.pdf" download="Kurt-Holst-CV.pdf">Download CV ↓</a>
@@ -447,7 +456,7 @@
         </div>
       </div>
       <div class="hero-photo reveal">
-        <img src="assets/avatar.jpg" alt="Kurt Holst" />
+        <img src="assets/avatar.webp" alt="Kurt Holst" width="220" height="220" />
         <span class="badge">Building on <b>Databricks</b></span>
       </div>
     </div>
@@ -730,12 +739,13 @@
     <div class="wrap">
       <div class="reveal"><div class="eyebrow">Writing &amp; research</div>
       <h2 class="section-title">Publications &amp; articles</h2>
-      <p class="section-sub">Peer-reviewed research, applied engineering write-ups, and podcast appearances on AI, disinformation, and industrial optimization.</p></div>
+      <p class="section-sub">Research, applied engineering write-ups, and podcast appearances - in English and Danish - spanning GenAI, disinformation, and industrial optimization.</p></div>
 
       <div class="pub-list">
         <article class="pub reveal">
           <div class="pub-type">Master's thesis</div>
           <h3>Generativ AI som forsvar mod desinformation</h3>
+          <div class="pub-gloss">"Generative AI as a defense against disinformation"</div>
           <div class="pub-meta">Master in Intelligence &amp; Cyber Studies · University of Southern Denmark · 2024</div>
           <p>Investigates whether and how generative AI can identify and respond to disinformation in a Danish context. Built a Python prototype ("AI-Panoptikon") and argues for a Human-in-the-Loop approach - pairing AI scale with human oversight to counter model hallucinations - alongside the ethical, legal, and AI Act considerations of deploying such systems.</p>
           <div class="pub-tags"><span class="tag">Generative AI</span><span class="tag">Disinformation</span><span class="tag">Human-in-the-Loop</span><span class="tag">AI Act</span></div>
@@ -745,6 +755,7 @@
         <article class="pub reveal">
           <div class="pub-type">Master's thesis</div>
           <h3>Udvikling af målstyringskoncept for Energinet</h3>
+          <div class="pub-gloss">"Developing a performance-management concept for Energinet"</div>
           <div class="pub-meta">Master in IT, Kommunikation &amp; Organisation (MITKO) · University of Southern Denmark</div>
           <p>Develops a performance-management ("målstyring") concept for Energinet - bridging strategy, organization, and IT to translate corporate goals into measurable KPIs and a governance model. Applied foundation for the enterprise BI, Balanced Scorecard, and SAP Strategy Management work delivered at Energinet.</p>
           <div class="pub-tags"><span class="tag">Performance management</span><span class="tag">Balanced Scorecard</span><span class="tag">BI strategy</span><span class="tag">Organization &amp; IT</span></div>
@@ -766,7 +777,8 @@
         <article class="pub reveal">
           <div class="pub-type">Applied research</div>
           <h3>Kunstig intelligens til kortlægning af særlig værdifuld skov</h3>
-          <div class="pub-meta">AI for mapping particularly valuable forest (§25) · Danish EPA</div>
+          <div class="pub-gloss">"AI for mapping particularly valuable forest (§25)"</div>
+          <div class="pub-meta">Danish Environmental Protection Agency</div>
           <p>A supervised CatBoost classifier that predicts where naturally valuable forest occurs in private woodland, so costly field surveys can be targeted. Fuses LiDAR point clouds, Sentinel-2 optical bands, orthophotos, soil/terrain maps, and local weather into a 10×10 m probability map - trained and scaled on Databricks with stratified cluster sampling to avoid geographic bias.</p>
           <div class="pub-tags"><span class="tag">Geospatial ML</span><span class="tag">CatBoost</span><span class="tag">LiDAR + Sentinel-2</span><span class="tag">Environmental AI</span></div>
           <div class="pub-links"><a href="https://dk.linkedin.com/pulse/kunstig-intelligens-til-kortl%C3%A6gning-af-s%C3%A6rlig-v%C3%A6rdifuld-kurt-holst" target="_blank" rel="noopener">Read article →</a></div>
@@ -1215,7 +1227,7 @@
       <p class="section-sub">Recognition across two decades of enterprise software and data &amp; AI.</p></div>
       <div class="awards-grid">
         <div class="award award-featured reveal">
-          <img class="award-img" src="assets/fe-excellence-award.png" alt="Databricks Field Engineering Excellence Award presented to Kurt Holst" loading="lazy" />
+          <img class="award-img" src="assets/fe-excellence-award.webp" alt="Databricks Field Engineering Excellence Award presented to Kurt Holst" loading="lazy" />
           <div class="award-featured-body">
             <div class="award-name">Databricks Field Engineering Excellence Award</div>
             <div class="award-meta">Recognized twice in FY26 for Field Engineering excellence at Databricks:</div>
@@ -1313,6 +1325,30 @@
         });
       }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
       map.forEach((_, s) => spy.observe(s));
+    })();
+
+    /* ---- Hero proof-point rotator ---- */
+    (function () {
+      const el = document.getElementById('proof-rotator');
+      if (!el) return;
+      const items = [
+        "Databricks Employee of the Year FY26",
+        "22 Databricks certifications & accreditations",
+        "Agentic GenAI running in production",
+        "SAP HANA to the Lakehouse, end to end",
+        "15 recommendations over two decades"
+      ];
+      let i = 0;
+      el.textContent = items[0];
+      if (reduceMotion) return; // static: show the first, don't cycle
+      setInterval(() => {
+        el.classList.add('fade');
+        setTimeout(() => {
+          i = (i + 1) % items.length;
+          el.textContent = items[i];
+          el.classList.remove('fade');
+        }, 400);
+      }, 3200);
     })();
 
     /* ---- Back to top ---- */
