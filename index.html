@@ -1045,6 +1045,10 @@
               <input type="range" id="fc-svc" min="80" max="99" value="95"></label>
             <label class="fc-field">Lead time (days) <b id="fc-lt-val">7</b>
               <input type="range" id="fc-lt" min="1" max="30" value="7"></label>
+            <label class="fc-field">Cost per purchase order <b id="fc-po-val">$75</b>
+              <input type="range" id="fc-po" min="10" max="500" value="75" step="5"></label>
+            <label class="fc-field">Unit holding cost / yr <b id="fc-hc-val">$4.00</b>
+              <input type="range" id="fc-hc" min="0.5" max="20" value="4" step="0.5"></label>
             <button id="fc-run" class="btn btn-primary fc-run">▶ Run Forecast</button>
             <div class="fc-timer" id="fc-timer"></div>
           </div>
@@ -1068,6 +1072,8 @@
                 <div class="fc-stat"><span class="fc-k">Reorder point</span><span class="fc-v" id="fc-rop">–</span></div>
                 <div class="fc-stat"><span class="fc-k">Avg. daily demand</span><span class="fc-v" id="fc-avg">–</span></div>
                 <div class="fc-stat"><span class="fc-k">Best model</span><span class="fc-v" id="fc-best">–</span></div>
+                <div class="fc-stat"><span class="fc-k">Order qty (EOQ)</span><span class="fc-v" id="fc-eoq">–</span></div>
+                <div class="fc-stat"><span class="fc-k">Annual order cost</span><span class="fc-v" id="fc-oc">–</span></div>
               </div>
               <div class="fc-legend" id="fc-legend"></div>
             </div>
@@ -1734,6 +1740,8 @@
       bind('fc-lt', 'fc-lt-val', v => v);
       bind('fc-cp', 'fc-cp-val', v => (+v).toFixed(3));
       bind('fc-sp', 'fc-sp-val', v => (+v).toFixed(1));
+      bind('fc-po', 'fc-po-val', v => '$' + v);
+      bind('fc-hc', 'fc-hc-val', v => '$' + (+v).toFixed(2));
 
       // z-score (Acklam inverse normal)
       function zFor(pct) {
@@ -1841,6 +1849,7 @@
         const item = itemSel.value ? +itemSel.value : null;
         const h = +$('fc-days').value;
         const cfg = { svc:+$('fc-svc').value, lt:+$('fc-lt').value, holidays:$('fc-holidays').checked, boxcox:$('fc-boxcox').checked,
+          po:+$('fc-po').value, hc:+$('fc-hc').value,
           p:+$('fc-p').value, q:+$('fc-q').value, P:+$('fc-P').value, Q:+$('fc-Q').value };
         const enabled = [];
         if ($('fc-arima-on').checked) enabled.push('arima');
@@ -1893,22 +1902,27 @@
         }).join('');
 
         // inventory policy from the best model's forecast horizon
-        const bestFc = R.results[R.best].fc;
         const dailyMean = st.mean;
         const z = zFor(R.cfg.svc);
         const ss = z * st.std * Math.sqrt(R.cfg.lt);
-        const rop = dailyMean * R.cfg.lt + ss;
+        const rop = dailyMean * R.cfg.lt + ss;                  // demand over lead time + safety buffer
+        const annualDemand = dailyMean * 365;
+        const eoq = Math.sqrt((2 * annualDemand * R.cfg.po) / R.cfg.hc);  // Economic Order Quantity
+        const ordersPerYear = annualDemand / eoq;
+        const annualOrderCost = ordersPerYear * R.cfg.po;       // total yearly PO cost at EOQ
         $('fc-ss').textContent = Math.round(ss) + ' u';
         $('fc-rop').textContent = Math.round(rop) + ' u';
-        $('fc-avg').textContent = Math.round(dailyMean) + ' u';
+        $('fc-avg').textContent = Math.round(dailyMean) + ' u/day';
         $('fc-best').textContent = MODELS[R.best].name.replace(' (SARIMAX)','');
+        $('fc-eoq').textContent = Math.round(eoq) + ' u';
+        $('fc-oc').textContent = '$' + Math.round(annualOrderCost).toLocaleString() + '/yr';
 
-        drawChart(R, ss, rop);
+        drawChart(R, ss);
 
         // legend
         const legHtml = ['<span><i class="sw sw-hist"></i>History</span>']
           .concat(R.enabled.map(k=>`<span><i class="sw" style="background:${MODELS[k].color}"></i>${MODELS[k].name.replace(' (SARIMAX)','')}</span>`))
-          .concat(['<span><i class="sw sw-band"></i>95% interval (best)</span>','<span><i class="sw sw-rop"></i>Reorder point</span>','<span><i class="sw sw-ss"></i>Safety stock</span>']);
+          .concat(['<span><i class="sw sw-band"></i>95% interval (best)</span>','<span><i class="sw sw-ss"></i>Safety stock</span>']);
         $('fc-legend').innerHTML = legHtml.join('');
 
         // comparison table
@@ -1924,10 +1938,11 @@
         $('fc-code').textContent = MODELS[R.best].code;
       }
 
-      function drawChart(R, ss, rop) {
+      function drawChart(R, ss) {
         const svg = $('fc-chart'); const n = R.hist.length, h = R.h; const N = n + h;
         const best = R.results[R.best];
-        const yMax = Math.max(Math.max(...R.hist), Math.max(...best.upper), rop) * 1.08;
+        // scale to the demand data (daily units) - ROP is a cumulative stock level, so it lives in a KPI tile, not this daily-demand axis
+        const yMax = Math.max(Math.max(...R.hist), Math.max(...best.upper)) * 1.08;
         const x = i => padL + (i/(N-1))*(W-padL-padR);
         const y = v => padT + (1-v/yMax)*(H-padT-padB);
         const line = pts => pts.map((p,i)=>(i?'L':'M')+x(p[0]).toFixed(1)+','+y(p[1]).toFixed(1)).join(' ');
@@ -1938,9 +1953,10 @@
         // best-model CI band
         const bandPts = best.upper.map((v,k)=>[n+k,v]).concat(best.lower.map((v,k)=>[n+h-1-k, best.lower[h-1-k]]));
         out += `<path d="${line(bandPts)} Z" fill="${MODELS[R.best].color}22" stroke="none"/>`;
-        // policy lines
-        out += `<line x1="${padL}" y1="${y(rop).toFixed(1)}" x2="${W-padR}" y2="${y(rop).toFixed(1)}" stroke="#22c55e" stroke-width="1.5"/><text x="${W-padR}" y="${(y(rop)-4).toFixed(1)}" text-anchor="end" font-size="9" fill="#16a34a" font-weight="700">Reorder point</text>`;
-        out += `<line x1="${padL}" y1="${y(ss).toFixed(1)}" x2="${W-padR}" y2="${y(ss).toFixed(1)}" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="4 3"/><text x="${W-padR}" y="${(y(ss)-4).toFixed(1)}" text-anchor="end" font-size="9" fill="#2563eb" font-weight="700">Safety stock</text>`;
+        // safety-stock line (comparable to daily demand); ROP is shown as a KPI tile instead
+        if (ss <= yMax) {
+          out += `<line x1="${padL}" y1="${y(ss).toFixed(1)}" x2="${W-padR}" y2="${y(ss).toFixed(1)}" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="4 3"/><text x="${W-padR}" y="${(y(ss)-4).toFixed(1)}" text-anchor="end" font-size="9" fill="#2563eb" font-weight="700">Safety stock</text>`;
+        }
         // history/forecast divider
         out += `<line x1="${x(n-1).toFixed(1)}" y1="${padT}" x2="${x(n-1).toFixed(1)}" y2="${H-padB}" stroke="var(--muted)" stroke-dasharray="2 3" opacity=".5"/>`;
         // history
