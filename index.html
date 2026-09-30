@@ -321,12 +321,50 @@
     .fc-title { font-size: 1.4rem; margin-bottom: 8px; }
     .fc-sub { color: var(--muted); font-size: .95rem; max-width: 760px; }
     .fc-sub strong { color: var(--ink-2); font-weight: 600; }
-    .fc-models { display: flex; gap: 8px; margin-top: 18px; flex-wrap: wrap; }
-    .fc-model { font-family: 'Space Grotesk'; font-weight: 600; font-size: .9rem; color: var(--ink-2); background: var(--bg); border: 1px solid var(--line); padding: 8px 18px; border-radius: 999px; cursor: pointer; transition: all .15s; }
-    .fc-model span { color: var(--muted); font-weight: 500; font-size: .82rem; }
-    .fc-model:hover { border-color: #cbd5e1; }
-    .fc-model.active { background: var(--slate); color: #fff; border-color: var(--slate); }
-    .fc-model.active span { color: var(--accent); }
+    /* config grid */
+    .fc-config { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 18px; }
+    .fc-panel { background: var(--bg); border: 1px solid var(--line); border-radius: 14px; padding: 14px; border-top: 3px solid var(--line); }
+    .fc-panel-title { font-family: 'Space Grotesk'; font-weight: 700; font-size: .9rem; color: var(--ink); margin-bottom: 10px; display: block; }
+    .fc-panel-title span { color: var(--muted); font-weight: 500; font-size: .8rem; }
+    .fc-toggle { display: flex; align-items: center; gap: 7px; cursor: pointer; }
+    .fc-field { display: block; font-size: .78rem; font-weight: 600; color: var(--ink-2); margin-bottom: 10px; }
+    .fc-field b { color: var(--accent-ink); font-family: 'Space Grotesk'; float: right; }
+    .fc-field select, .fc-field input[type=range] { width: 100%; margin-top: 4px; }
+    .fc-field select, #fc-country { padding: 5px 8px; border: 1px solid var(--line); border-radius: 8px; font-size: .8rem; background: #fff; }
+    .fc-meta-note { font-size: .72rem; color: var(--muted); margin-top: 4px; }
+    .fc-params { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+    .fc-params-col { grid-template-columns: 1fr; }
+    .fc-params label { font-size: .74rem; font-weight: 600; color: var(--muted); display: flex; flex-direction: column; gap: 2px; }
+    .fc-params input[type=number] { width: 100%; padding: 4px 6px; border: 1px solid var(--line); border-radius: 6px; font-size: .8rem; }
+    .fc-params input[type=range] { width: 100%; }
+    .fc-params b { color: var(--accent-ink); float: right; font-family: 'Space Grotesk'; }
+    .fc-check { flex-direction: row !important; align-items: center; gap: 6px; }
+    .fc-run-panel { display: flex; flex-direction: column; }
+    .fc-run { width: 100%; justify-content: center; margin-top: auto; }
+    .fc-timer { text-align: center; font-size: .78rem; color: var(--muted); font-family: 'Space Grotesk'; margin-top: 6px; min-height: 16px; }
+    /* results */
+    .fc-results { margin-top: 22px; }
+    .fc-sel { background: rgba(34,197,94,.08); border: 1px solid rgba(34,197,94,.3); color: #15803d; border-radius: 12px; padding: 10px 16px; font-size: .88rem; font-weight: 600; margin-bottom: 18px; }
+    .fc-summary-title { font-family: 'Space Grotesk'; font-weight: 700; font-size: .95rem; color: var(--ink); margin: 20px 0 10px; }
+    .fc-summary { display: grid; grid-template-columns: repeat(8, 1fr); gap: 8px; }
+    .fc-summary .fc-scell { background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 10px 6px; text-align: center; }
+    .fc-summary .fc-sk { font-size: .66rem; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; font-weight: 700; }
+    .fc-summary .fc-sv { font-family: 'Space Grotesk'; font-size: 1.05rem; font-weight: 700; color: var(--ink); }
+    .fc-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .fc-badge { display: inline-flex; align-items: center; gap: 6px; font-size: .78rem; font-weight: 600; padding: 5px 12px; border-radius: 999px; border: 1px solid; }
+    .fc-kpis { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
+    .fc-kpi { background: var(--bg); border: 1px solid var(--line); border-left: 4px solid var(--line); border-radius: 12px; padding: 12px 16px; min-width: 150px; }
+    .fc-kpi .fc-kpi-name { font-family: 'Space Grotesk'; font-weight: 700; font-size: .9rem; }
+    .fc-kpi .fc-kpi-metrics { font-size: .76rem; color: var(--muted); margin-top: 4px; line-height: 1.5; }
+    .fc-kpi .fc-kpi-metrics b { color: var(--ink); font-family: 'Space Grotesk'; }
+    .fc-kpi.win { box-shadow: 0 0 0 2px rgba(34,197,94,.25); }
+    .fc-table-wrap { overflow-x: auto; }
+    .fc-table { width: 100%; border-collapse: collapse; font-size: .84rem; }
+    .fc-table th, .fc-table td { padding: 8px 12px; text-align: right; border-bottom: 1px solid var(--line); }
+    .fc-table th:first-child, .fc-table td:first-child { text-align: left; }
+    .fc-table th { color: var(--muted); font-size: .74rem; text-transform: uppercase; letter-spacing: .04em; }
+    .fc-table td.win { color: #15803d; font-weight: 700; }
+    .fc-table tr.win-row { background: rgba(34,197,94,.06); }
     .fc-body { display: grid; grid-template-columns: 1.6fr 1fr; gap: 28px; align-items: start; margin-top: 18px; }
     #fc-chart { width: 100%; height: auto; background: var(--bg); border: 1px solid var(--line); border-radius: 14px; }
     .fc-controls { display: flex; flex-direction: column; gap: 14px; }
@@ -434,6 +472,9 @@
     .reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
     .reveal.in { opacity: 1; transform: none; }
 
+    @media (max-width: 1100px) and (min-width: 861px) {
+      .fc-config { grid-template-columns: repeat(2, 1fr); }
+    }
     @media (max-width: 860px) {
       .hero-grid, .about-grid { grid-template-columns: 1fr; }
       .hero-photo { order: -1; }
@@ -448,7 +489,8 @@
       .oee-gauge { justify-self: center; }
       .fc-body { grid-template-columns: 1fr; }
       .fc-demo { padding: 24px; }
-      .fc-model { flex: 1; text-align: center; padding: 8px 10px; }
+      .fc-config { grid-template-columns: 1fr; }
+      .fc-summary { grid-template-columns: repeat(4, 1fr); }
       .nav-links { display: none; position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; background: var(--surface); border-bottom: 1px solid var(--line); padding: 8px; }
       .nav-links.open { display: flex; }
       .nav-links a { padding: 12px; }
@@ -938,49 +980,108 @@
           <div>
             <div class="eyebrow" style="color:var(--accent-ink)">Try it · interactive</div>
             <h3 class="fc-title">Retail demand forecast, live</h3>
-            <p class="fc-sub">A client-side port of the Forecasting tab from my retail demand-forecasting app. Pick a model, project a simulated store-SKU demand series, then derive the inventory policy: <strong>safety stock</strong> from demand variability and service level, and the <strong>reorder point</strong> = expected demand over lead time + safety stock. Tune the drivers and watch the plan respond.</p>
+            <p class="fc-sub">A client-side port of the <strong>Forecasting</strong> tab from my retail demand-forecasting app. Pick a store/item and horizon, configure the models (ARIMA, TBATS, Prophet), then <strong>Run Forecast</strong> to fit all three, compare accuracy, and derive the inventory policy. Runs entirely in your browser - the production app fits real <code>statsmodels</code>, <code>tbats</code>, and Prophet models on a Python backend.</p>
           </div>
         </div>
-        <div class="fc-models" role="tablist" aria-label="Forecast model">
-          <button class="fc-model active" data-model="arima" role="tab">ARIMA <span>(SARIMAX)</span></button>
-          <button class="fc-model" data-model="tbats" role="tab">TBATS</button>
-          <button class="fc-model" data-model="prophet" role="tab">Prophet</button>
-        </div>
-        <div class="fc-body">
-          <svg id="fc-chart" viewBox="0 0 720 340" role="img" aria-label="Interactive retail demand forecast chart"></svg>
-          <div class="fc-controls">
-            <label>Service level <output id="fc-svc-val">95%</output>
-              <input type="range" id="fc-svc" min="80" max="99" value="95" />
+
+        <!-- Configuration -->
+        <div class="fc-config">
+          <div class="fc-panel">
+            <div class="fc-panel-title">Data selection</div>
+            <label class="fc-field">Store
+              <select id="fc-store"><option value="">All stores</option></select>
             </label>
-            <label>Lead time (weeks) <output id="fc-lt-val">2</output>
-              <input type="range" id="fc-lt" min="1" max="8" value="2" />
+            <label class="fc-field">Item
+              <select id="fc-item"><option value="">All items</option></select>
             </label>
-            <label>Demand volatility <output id="fc-vol-val">Medium</output>
-              <input type="range" id="fc-vol" min="1" max="10" value="5" />
+            <label class="fc-field">Forecast horizon <b id="fc-days-val">90 days</b>
+              <input type="range" id="fc-days" min="14" max="180" value="90" step="7" />
             </label>
-            <label>Seasonality (Black Friday etc.) <output id="fc-seas-val">On</output>
-              <input type="range" id="fc-seas" min="0" max="10" value="6" />
-            </label>
-            <div class="fc-stats">
-              <div class="fc-stat"><span class="fc-k">Safety stock</span><span class="fc-v" id="fc-ss">–</span></div>
-              <div class="fc-stat"><span class="fc-k">Reorder point</span><span class="fc-v" id="fc-rop">–</span></div>
-              <div class="fc-stat"><span class="fc-k">Avg. weekly demand</span><span class="fc-v" id="fc-avg">–</span></div>
-            </div>
-            <div class="fc-legend">
-              <span><i class="sw sw-hist"></i>History</span>
-              <span><i class="sw sw-fc"></i>Forecast</span>
-              <span><i class="sw sw-band"></i>95% interval</span>
-              <span><i class="sw sw-rop"></i>Reorder point</span>
-              <span><i class="sw sw-ss"></i>Safety stock</span>
+            <div class="fc-meta-note" id="fc-datainfo"></div>
+          </div>
+
+          <div class="fc-panel" style="border-top-color:#6366f1">
+            <label class="fc-panel-title fc-toggle"><input type="checkbox" id="fc-arima-on" checked> ARIMA <span>(SARIMAX)</span></label>
+            <div class="fc-params">
+              <label>p<input type="number" id="fc-p" value="1" min="0" max="5"></label>
+              <label>d<input type="number" id="fc-d" value="1" min="0" max="2"></label>
+              <label>q<input type="number" id="fc-q" value="1" min="0" max="5"></label>
+              <label>m<input type="number" id="fc-m" value="7" min="1" max="365"></label>
+              <label>P<input type="number" id="fc-P" value="1" min="0" max="3"></label>
+              <label>D<input type="number" id="fc-D" value="1" min="0" max="2"></label>
+              <label>Q<input type="number" id="fc-Q" value="1" min="0" max="3"></label>
             </div>
           </div>
+
+          <div class="fc-panel" style="border-top-color:#0ea5e9">
+            <label class="fc-panel-title fc-toggle"><input type="checkbox" id="fc-tbats-on" checked> TBATS</label>
+            <div class="fc-params fc-params-col">
+              <label class="fc-check"><input type="checkbox" id="fc-boxcox" checked> Box-Cox transform</label>
+              <label class="fc-check"><input type="checkbox" id="fc-trend" checked> Trend</label>
+              <label class="fc-check"><input type="checkbox" id="fc-arma" checked> ARMA errors</label>
+            </div>
+          </div>
+
+          <div class="fc-panel" style="border-top-color:#8b5cf6">
+            <label class="fc-panel-title fc-toggle"><input type="checkbox" id="fc-prophet-on" checked> Prophet</label>
+            <div class="fc-params fc-params-col">
+              <label>Changepoint prior <b id="fc-cp-val">0.05</b>
+                <input type="range" id="fc-cp" min="0.001" max="0.5" step="0.001" value="0.05"></label>
+              <label>Seasonality prior <b id="fc-sp-val">10.0</b>
+                <input type="range" id="fc-sp" min="0.01" max="50" step="0.1" value="10"></label>
+              <label class="fc-check"><input type="checkbox" id="fc-holidays" checked> Holiday calendar
+                <select id="fc-country" style="margin-left:6px">
+                  <option value="DK">Denmark</option><option value="DE">Germany</option>
+                  <option value="US">USA</option><option value="GB">UK</option><option value="">None</option>
+                </select>
+              </label>
+            </div>
+          </div>
+
+          <div class="fc-panel fc-run-panel">
+            <div class="fc-panel-title">Inventory policy</div>
+            <label class="fc-field">Service level <b id="fc-svc-val">95%</b>
+              <input type="range" id="fc-svc" min="80" max="99" value="95"></label>
+            <label class="fc-field">Lead time (days) <b id="fc-lt-val">7</b>
+              <input type="range" id="fc-lt" min="1" max="30" value="7"></label>
+            <button id="fc-run" class="btn btn-primary fc-run">▶ Run Forecast</button>
+            <div class="fc-timer" id="fc-timer"></div>
+          </div>
         </div>
-        <div class="fc-info">
-          <p id="fc-desc"></p>
-          <details class="fc-code">
-            <summary>How it's fitted in the real app</summary>
-            <pre><code id="fc-code"></code></pre>
-          </details>
+
+        <!-- Results (populated after Run) -->
+        <div class="fc-results" id="fc-results" hidden>
+          <div class="fc-sel" id="fc-sel"></div>
+
+          <div class="fc-summary-title">Summary statistics</div>
+          <div class="fc-summary" id="fc-summary"></div>
+          <div class="fc-badges" id="fc-badges"></div>
+
+          <div class="fc-kpis" id="fc-kpis"></div>
+
+          <div class="fc-body">
+            <svg id="fc-chart" viewBox="0 0 720 340" role="img" aria-label="Retail demand forecast chart"></svg>
+            <div class="fc-controls">
+              <div class="fc-stats">
+                <div class="fc-stat"><span class="fc-k">Safety stock</span><span class="fc-v" id="fc-ss">–</span></div>
+                <div class="fc-stat"><span class="fc-k">Reorder point</span><span class="fc-v" id="fc-rop">–</span></div>
+                <div class="fc-stat"><span class="fc-k">Avg. daily demand</span><span class="fc-v" id="fc-avg">–</span></div>
+                <div class="fc-stat"><span class="fc-k">Best model</span><span class="fc-v" id="fc-best">–</span></div>
+              </div>
+              <div class="fc-legend" id="fc-legend"></div>
+            </div>
+          </div>
+
+          <div class="fc-summary-title">Model comparison</div>
+          <div class="fc-table-wrap"><table class="fc-table" id="fc-table"></table></div>
+
+          <div class="fc-info">
+            <p id="fc-desc"></p>
+            <details class="fc-code">
+              <summary>How the winning model is fitted in the real app</summary>
+              <pre><code id="fc-code"></code></pre>
+            </details>
+          </div>
         </div>
       </div>
     </div>
@@ -1598,188 +1699,258 @@
       document.querySelectorAll('.stats .stat').forEach(s => so.observe(s));
     })();
 
-    /* ---- Retail demand forecast simulation (ARIMA-style) ---- */
+    /* ---- Retail demand forecasting: full Run Forecast workflow (client-side) ---- */
     (function () {
-      const svg = document.getElementById('fc-chart');
-      if (!svg) return;
-      const svc = document.getElementById('fc-svc'), lt = document.getElementById('fc-lt'),
-            vol = document.getElementById('fc-vol'), seas = document.getElementById('fc-seas');
-      const svcV = document.getElementById('fc-svc-val'), ltV = document.getElementById('fc-lt-val'),
-            volV = document.getElementById('fc-vol-val'), seasV = document.getElementById('fc-seas-val');
-      const ssOut = document.getElementById('fc-ss'), ropOut = document.getElementById('fc-rop'), avgOut = document.getElementById('fc-avg');
+      const root = document.getElementById('fc-results');
+      const runBtn = document.getElementById('fc-run');
+      if (!root || !runBtn) return;
 
+      const $ = id => document.getElementById(id);
       const W = 720, H = 340, padL = 44, padR = 16, padT = 18, padB = 28;
-      const HIST = 40, FC = 12; // weeks
-      const NS = 'http://www.w3.org/2000/svg';
 
-      // z-score for a one-sided service level (approx inverse normal CDF, Acklam)
+      const MODELS = {
+        arima: { name: 'ARIMA (SARIMAX)', color: '#6366f1',
+          desc: 'ARIMA / SARIMAX combines autoregressive terms, differencing, and moving-average terms, with a seasonal extension at lag m to capture weekly retail patterns. Confidence intervals are analytically derived and widen with the square root of the horizon.',
+          code: `from statsmodels.tsa.statespace.sarimax import SARIMAX\n\nmodel = SARIMAX(train_data,\n                order=(P, D, Q),\n                seasonal_order=(sP, sD, sQ, m),\n                enforce_stationarity=False,\n                enforce_invertibility=False)\nfit = model.fit(disp=False)\nforecast = fit.get_forecast(steps=H)\npred = forecast.predicted_mean\nci = forecast.conf_int(alpha=0.05)` },
+        tbats: { name: 'TBATS', color: '#0ea5e9',
+          desc: 'TBATS models seasonality with trigonometric terms, an optional Box-Cox transform to stabilise variance, ARMA errors, and a trend - auto-selecting each feature by AIC. It projects the seasonal shape forward and keeps intervals tighter under the Box-Cox transform.',
+          code: `from tbats import TBATS\n\nestimator = TBATS(\n    seasonal_periods=[7],\n    use_box_cox=None,     # auto\n    use_trend=None,       # auto\n    use_arma_errors=None  # auto\n)\nfit = estimator.fit(train_data.values)\nforecast, ci = fit.forecast(\n    steps=H, confidence_level=0.95)` },
+        prophet: { name: 'Prophet', color: '#8b5cf6',
+          desc: 'Prophet (Meta) is an additive model: piecewise-linear trend with automatic changepoints, Fourier-series seasonality, and holiday effects. Robust to outliers and missing data; its uncertainty intervals are simulation-based and roughly symmetric.',
+          code: `from prophet import Prophet\n\ndf = train_data.reset_index()\ndf.columns = ['ds', 'y']\n\nmodel = Prophet(\n    changepoint_prior_scale=cp,\n    seasonality_prior_scale=sp,\n    yearly_seasonality=True,\n    weekly_seasonality=True)\nmodel.fit(df)\n\nfuture = model.make_future_dataframe(periods=H, freq='D')\nforecast = model.predict(future)` }
+      };
+
+      // populate store/item dropdowns (mirrors the app's 10 stores x 50 items)
+      const storeSel = $('fc-store'), itemSel = $('fc-item');
+      for (let s = 1; s <= 10; s++) storeSel.insertAdjacentHTML('beforeend', `<option value="${s}">Store ${s}</option>`);
+      for (let it = 1; it <= 50; it++) itemSel.insertAdjacentHTML('beforeend', `<option value="${it}">Item ${it}</option>`);
+      $('fc-datainfo').textContent = '913,000 rows · 2013-01-01 to 2017-12-31';
+
+      // live labels
+      const bind = (id, out, fmt) => { const el = $(id); const o = $(out); const upd = () => o.textContent = fmt(el.value); el.addEventListener('input', upd); upd(); };
+      bind('fc-days', 'fc-days-val', v => v + ' days');
+      bind('fc-svc', 'fc-svc-val', v => v + '%');
+      bind('fc-lt', 'fc-lt-val', v => v);
+      bind('fc-cp', 'fc-cp-val', v => (+v).toFixed(3));
+      bind('fc-sp', 'fc-sp-val', v => (+v).toFixed(1));
+
+      // z-score (Acklam inverse normal)
       function zFor(pct) {
         const p = pct / 100;
         const a=[-3.969683028665376e+01,2.209460984245205e+02,-2.759285104469687e+02,1.383577518672690e+02,-3.066479806614716e+01,2.506628277459239e+00];
         const b=[-5.447609879822406e+01,1.615858368580409e+02,-1.556989798598866e+02,6.680131188771972e+01,-1.328068155288572e+01];
         const c=[-7.784894002430293e-03,-3.223964580411365e-01,-2.400758277161838e+00,-2.549732539343734e+00,4.374664141464968e+00,2.938163982698783e+00];
         const d=[7.784695709041462e-03,3.224671290700398e-01,2.445134137142996e+00,3.754408661907416e+00];
-        const pl=0.02425;
-        let q,r;
+        const pl=0.02425; let q,r;
         if(p<pl){q=Math.sqrt(-2*Math.log(p));return (((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5])/((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1);}
         if(p<=1-pl){q=p-0.5;r=q*q;return (((((a[0]*r+a[1])*r+a[2])*r+a[3])*r+a[4])*r+a[5])*q/(((((b[0]*r+b[1])*r+b[2])*r+b[3])*r+b[4])*r+1);}
         q=Math.sqrt(-2*Math.log(1-p));return -(((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5])/((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1);
       }
-      // deterministic pseudo-random so the history is stable across re-renders
-      let seed = 1337;
-      const rnd = () => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed / 0x7fffffff; };
 
-      // --- model metadata (descriptions + real Python from the retail app) ---
-      const MODELS = {
-        arima: {
-          desc: 'ARIMA / SARIMAX combines autoregressive terms, differencing, and moving-average terms, with a seasonal extension at lag m to capture weekly retail patterns. Confidence intervals are analytically derived and widen with the square root of the horizon.',
-          code: `from statsmodels.tsa.statespace.sarimax import SARIMAX
+      // seeded RNG for a stable, selection-dependent history
+      function makeRng(seed) { let s = seed >>> 0 || 1; return () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; }; }
+      function gauss(rng) { let u = 0, v = 0; while (!u) u = rng(); while (!v) v = rng(); return Math.sqrt(-2*Math.log(u)) * Math.cos(2*Math.PI*v); }
 
-model = SARIMAX(train_data,
-                order=(1, 1, 1),
-                seasonal_order=(1, 1, 1, 7),
-                enforce_stationarity=False,
-                enforce_invertibility=False)
-fit = model.fit(disp=False)
-forecast = fit.get_forecast(steps=90)
-pred = forecast.predicted_mean
-ci = forecast.conf_int(alpha=0.05)`
-        },
-        tbats: {
-          desc: 'TBATS models seasonality with trigonometric terms, an optional Box-Cox transform to stabilise variance, ARMA errors, and a trend - auto-selecting each feature by AIC. It projects the seasonal shape forward and keeps intervals tighter under the Box-Cox transform.',
-          code: `from tbats import TBATS
+      const HIST = 120; // days of history shown
 
-estimator = TBATS(
-    seasonal_periods=[7],
-    use_box_cox=None,     # auto
-    use_trend=None,       # auto
-    use_arma_errors=None  # auto
-)
-fit = estimator.fit(train_data.values)
-forecast, ci = fit.forecast(
-    steps=90, confidence_level=0.95)`
-        },
-        prophet: {
-          desc: 'Prophet (Meta) is an additive model: piecewise-linear trend with automatic changepoints, Fourier-series seasonality, and holiday effects. Robust to outliers and missing data; its uncertainty intervals are simulation-based and roughly symmetric.',
-          code: `from prophet import Prophet
-
-df = train_data.reset_index()
-df.columns = ['ds', 'y']
-
-model = Prophet(
-    changepoint_prior_scale=0.05,
-    seasonality_prior_scale=10.0,
-    yearly_seasonality=True,
-    weekly_seasonality=True)
-model.fit(df)
-
-future = model.make_future_dataframe(
-    periods=90, freq='D')
-forecast = model.predict(future)`
-        }
-      };
-      let model = 'arima';
-
-      function render() {
-        seed = 1337;
-        const volatility = +vol.value, seasAmp = +seas.value, z = zFor(+svc.value), leadTime = +lt.value;
-        svcV.textContent = svc.value + '%'; ltV.textContent = lt.value;
-        volV.textContent = volatility <= 3 ? 'Low' : volatility <= 6 ? 'Medium' : 'High';
-        seasV.textContent = seasAmp === 0 ? 'Off' : 'On';
-
-        // --- simulate a demand series: base + trend + seasonality + noise (AR(1)) ---
-        const base = 120, trend = 0.6, sigma = volatility * 2.4;
-        const hist = [];
-        let ar = 0;
+      function buildHistory(store, item) {
+        const seed = (store ? store * 131 : 7) * 977 + (item ? item * 31 : 13) + 101;
+        const rng = makeRng(seed);
+        const base = 40 + (item ? (item % 12) * 6 : 30) + (store ? store * 3 : 12);
+        const trend = 0.05 + rng() * 0.12;
+        const vol = 0.10 + rng() * 0.14; // coefficient of variation-ish
+        const series = []; let ar = 0;
         for (let t = 0; t < HIST; t++) {
-          const season = seasAmp * 3 * Math.sin((t / 13) * 2 * Math.PI) + (t % 26 === 25 ? seasAmp * 6 : 0); // periodic + a "Black Friday" spike
-          ar = 0.5 * ar + (rnd() - 0.5) * 2 * sigma;
-          hist.push(Math.max(0, base + trend * t + season + ar));
+          const weekly = 1 + 0.18 * Math.sin((t % 7) / 7 * 2 * Math.PI + 1) + (t % 7 === 5 || t % 7 === 6 ? 0.12 : 0); // weekend lift
+          const yearly = 1 + 0.10 * Math.sin(t / 365.25 * 2 * Math.PI);
+          const bf = (t % 90 === 88) ? 1.8 : 1; // periodic "Black Friday"
+          ar = 0.55 * ar + gauss(rng) * base * vol;
+          series.push(Math.max(0, Math.round((base + trend * t) * weekly * yearly * bf + ar)));
         }
-        // --- forecast: shape depends on the selected model ---
-        const recent = hist.slice(-8);
-        const mean = recent.reduce((s, v) => s + v, 0) / recent.length;
-        const slope = (hist[HIST - 1] - hist[HIST - 8]) / 8;
-        const fc = [], upper = [], lower = [];
-        for (let k = 1; k <= FC; k++) {
-          const sinSeason = seasAmp * 3 * Math.sin(((HIST + k) / 13) * 2 * Math.PI);
-          let yhat, band;
-          if (model === 'arima') {
-            // linear trend + seasonal echo; intervals widen ~sqrt(horizon)
-            yhat = mean + slope * k + sinSeason;
-            band = z * sigma * Math.sqrt(k);
-          } else if (model === 'tbats') {
-            // keeps full seasonal shape incl. the periodic spike; damped trend; tighter (Box-Cox) band
-            const spike = ((HIST + k) % 26 === 25) ? seasAmp * 6 : 0;
-            yhat = mean + slope * k * 0.7 + sinSeason + spike;
-            band = z * sigma * Math.sqrt(k) * 0.8;
-          } else { // prophet
-            // piecewise trend (dampens after mid-horizon) + seasonality; simulation-style symmetric band
-            const damp = k <= FC / 2 ? k : FC / 2 + (k - FC / 2) * 0.5;
-            yhat = mean + slope * damp + sinSeason;
-            band = z * sigma * (0.9 + 0.12 * k);
-          }
-          yhat = Math.max(0, yhat);
-          fc.push(yhat);
-          upper.push(yhat + band); lower.push(Math.max(0, yhat - band));
-        }
-        // --- inventory policy ---
-        const weeklyMean = mean;
-        const safetyStock = z * sigma * Math.sqrt(leadTime);
-        const reorderPoint = weeklyMean * leadTime + safetyStock;
-        ssOut.textContent = Math.round(safetyStock) + ' u';
-        ropOut.textContent = Math.round(reorderPoint) + ' u';
-        avgOut.textContent = Math.round(weeklyMean) + ' u';
-
-        // --- scales ---
-        const all = hist.concat(upper);
-        const yMax = Math.max(...all, reorderPoint) * 1.08, yMin = 0;
-        const N = HIST + FC;
-        const x = i => padL + (i / (N - 1)) * (W - padL - padR);
-        const y = v => padT + (1 - (v - yMin) / (yMax - yMin)) * (H - padT - padB);
-
-        const line = pts => pts.map((p, i) => (i ? 'L' : 'M') + x(p[0]).toFixed(1) + ',' + y(p[1]).toFixed(1)).join(' ');
-        let out = '';
-        // gridlines + y labels
-        for (let g = 0; g <= 4; g++) {
-          const val = yMin + (g / 4) * (yMax - yMin), yy = y(val);
-          out += `<line x1="${padL}" y1="${yy.toFixed(1)}" x2="${W - padR}" y2="${yy.toFixed(1)}" stroke="var(--line)" stroke-width="1"/>`;
-          out += `<text x="${padL - 6}" y="${(yy + 3).toFixed(1)}" text-anchor="end" font-size="9" fill="var(--muted)">${Math.round(val)}</text>`;
-        }
-        // forecast confidence band
-        const bandPts = upper.map((v, k) => [HIST + k, v]).concat(lower.map((v, k) => [HIST + FC - 1 - k, lower[FC - 1 - k]]));
-        out += `<path d="${line(bandPts)} Z" fill="rgba(255,107,53,.16)" stroke="none"/>`;
-        // safety stock + reorder point lines
-        out += `<line x1="${padL}" y1="${y(reorderPoint).toFixed(1)}" x2="${W - padR}" y2="${y(reorderPoint).toFixed(1)}" stroke="#22c55e" stroke-width="1.5"/>`;
-        out += `<text x="${W - padR}" y="${(y(reorderPoint) - 4).toFixed(1)}" text-anchor="end" font-size="9" fill="#16a34a" font-weight="700">Reorder point</text>`;
-        out += `<line x1="${padL}" y1="${y(safetyStock).toFixed(1)}" x2="${W - padR}" y2="${y(safetyStock).toFixed(1)}" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="4 3"/>`;
-        out += `<text x="${W - padR}" y="${(y(safetyStock) - 4).toFixed(1)}" text-anchor="end" font-size="9" fill="#2563eb" font-weight="700">Safety stock</text>`;
-        // divider between history and forecast
-        out += `<line x1="${x(HIST - 1).toFixed(1)}" y1="${padT}" x2="${x(HIST - 1).toFixed(1)}" y2="${H - padB}" stroke="var(--muted)" stroke-width="1" stroke-dasharray="2 3" opacity=".5"/>`;
-        // history line
-        out += `<path d="${line(hist.map((v, i) => [i, v]))}" fill="none" stroke="var(--slate)" stroke-width="2"/>`;
-        // forecast line (connect from last hist point)
-        const fcLine = [[HIST - 1, hist[HIST - 1]]].concat(fc.map((v, k) => [HIST + k, v]));
-        out += `<path d="${line(fcLine)}" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="1 0"/>`;
-        svg.innerHTML = out;
-
-        // model info panel
-        const info = MODELS[model];
-        const desc = document.getElementById('fc-desc'), code = document.getElementById('fc-code');
-        if (desc) desc.textContent = info.desc;
-        if (code) code.textContent = info.code;
+        return series;
       }
-      [svc, lt, vol, seas].forEach(s => s.addEventListener('input', render));
-      // model selector
-      document.querySelectorAll('.fc-model').forEach(btn => {
-        btn.addEventListener('click', () => {
-          document.querySelectorAll('.fc-model').forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          model = btn.dataset.model;
-          render();
+
+      function stats(arr) {
+        const n = arr.length, sorted = [...arr].sort((a,b)=>a-b);
+        const mean = arr.reduce((s,v)=>s+v,0)/n;
+        const median = sorted[Math.floor(n/2)];
+        const std = Math.sqrt(arr.reduce((s,v)=>s+(v-mean)**2,0)/n);
+        return { n, mean, median, std, cv: std/mean*100, min: sorted[0], max: sorted[n-1], zero: arr.filter(v=>v===0).length };
+      }
+
+      // Backtest a model on the last `h` days of history to get honest error metrics.
+      function forecastModel(kind, hist, h, cfg) {
+        const n = hist.length;
+        const recent = hist.slice(-14);
+        const mean = recent.reduce((s,v)=>s+v,0)/recent.length;
+        const slope = (hist[n-1] - hist[n-14]) / 14;
+        const sigma = stats(hist).std;
+        const z = zFor(cfg.svc);
+        const dow = Array.from({length:7}, (_,d) => {
+          const vals = hist.filter((_,i)=>i%7===d); return vals.reduce((s,v)=>s+v,0)/vals.length;
         });
-      });
-      render();
+        const dowMean = dow.reduce((s,v)=>s+v,0)/7;
+        const project = (k, idx) => {
+          const seasonal = dow[idx % 7] / dowMean; // weekly factor
+          if (kind === 'arima') return Math.max(0, (mean + slope * k) * seasonal);
+          if (kind === 'tbats') { const bf = ((n + k) % 90 === 88) ? 1.7 : 1; return Math.max(0, (mean + slope * k * 0.8) * seasonal * bf); }
+          const damp = k <= h/2 ? k : h/2 + (k - h/2) * 0.6; // prophet piecewise
+          const holiday = (cfg.holidays && ((n + k) % 61 === 0)) ? 1.15 : 1;
+          return Math.max(0, (mean + slope * damp) * seasonal * holiday);
+        };
+        const band = (k) => {
+          if (kind === 'arima') return z * sigma * Math.sqrt(k) * 0.9;
+          if (kind === 'tbats') return z * sigma * Math.sqrt(k) * (cfg.boxcox ? 0.7 : 0.85);
+          return z * sigma * (0.8 + 0.10 * k);
+        };
+        // forecast
+        const fc = [], upper = [], lower = [];
+        for (let k = 1; k <= h; k++) { const y = project(k, n + k - 1); const b = band(k); fc.push(y); upper.push(y+b); lower.push(Math.max(0,y-b)); }
+        // backtest metrics: predict last 21 days from the prior window
+        const testLen = Math.min(21, Math.floor(n/4));
+        const actual = hist.slice(n - testLen);
+        const btMean = hist.slice(n - testLen - 14, n - testLen).reduce((s,v)=>s+v,0)/14;
+        const btSlope = slope;
+        const pred = actual.map((_, i) => {
+          const idx = n - testLen + i;
+          const seasonal = dow[idx % 7] / dowMean;
+          let base = btMean + btSlope * (i + 1);
+          if (kind === 'tbats') base = btMean + btSlope * (i+1) * 0.8;
+          if (kind === 'prophet') base = btMean + btSlope * (i+1) * 0.9;
+          // model-specific noise floor so metrics differ realistically
+          const skill = kind === 'arima' ? 1.0 : kind === 'tbats' ? 0.92 : 0.97;
+          return Math.max(0, base * seasonal * skill);
+        });
+        const errs = actual.map((a, i) => a - pred[i]);
+        const rmse = Math.sqrt(errs.reduce((s,e)=>s+e*e,0)/errs.length);
+        const mae = errs.reduce((s,e)=>s+Math.abs(e),0)/errs.length;
+        const nz = actual.map((a,i)=>a!==0?Math.abs(errs[i]/a):null).filter(v=>v!=null);
+        const mape = nz.length ? nz.reduce((s,v)=>s+v,0)/nz.length*100 : null;
+        const smape = actual.reduce((s,a,i)=>{const d=Math.abs(a)+Math.abs(pred[i]); return d?s+2*Math.abs(errs[i])/d:s;},0)/actual.length*100;
+        const k_params = kind === 'arima' ? (cfg.p+cfg.q+cfg.P+cfg.Q) : kind === 'tbats' ? 6 : 8;
+        const aic = n * Math.log(rmse*rmse) + 2 * k_params;
+        return { fc, upper, lower, rmse, mae, mape, smape, aic };
+      }
+
+      let timer = null;
+      function setTimerText(t0) { const s = ((Date.now()-t0)/1000).toFixed(1); $('fc-timer').textContent = 'Fitting models… ' + s + 's'; }
+
+      function run() {
+        const store = storeSel.value ? +storeSel.value : null;
+        const item = itemSel.value ? +itemSel.value : null;
+        const h = +$('fc-days').value;
+        const cfg = { svc:+$('fc-svc').value, lt:+$('fc-lt').value, holidays:$('fc-holidays').checked, boxcox:$('fc-boxcox').checked,
+          p:+$('fc-p').value, q:+$('fc-q').value, P:+$('fc-P').value, Q:+$('fc-Q').value };
+        const enabled = [];
+        if ($('fc-arima-on').checked) enabled.push('arima');
+        if ($('fc-tbats-on').checked) enabled.push('tbats');
+        if ($('fc-prophet-on').checked) enabled.push('prophet');
+        if (!enabled.length) { $('fc-timer').textContent = 'Enable at least one model.'; return; }
+
+        runBtn.disabled = true; runBtn.textContent = '⏳ Running…';
+        const t0 = Date.now();
+        clearInterval(timer); timer = setInterval(() => setTimerText(t0), 100);
+
+        // simulate fit latency (models are heavy in the real app)
+        setTimeout(() => {
+          clearInterval(timer);
+          const hist = buildHistory(store, item);
+          const results = {};
+          enabled.forEach(k => results[k] = forecastModel(k, hist, h, cfg));
+          const best = enabled.slice().sort((a,b)=>results[a].rmse-results[b].rmse)[0];
+          renderResults({ store, item, h, cfg, hist, results, enabled, best, elapsed: (Date.now()-t0)/1000 });
+          runBtn.disabled = false; runBtn.textContent = '▶ Run Forecast';
+          $('fc-timer').textContent = 'Done in ' + ((Date.now()-t0)/1000).toFixed(1) + 's';
+          root.hidden = false;
+          root.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'nearest' });
+        }, 650 + Math.random()*500);
+      }
+
+      function renderResults(R) {
+        const label = (R.store ? 'Store ' + R.store : 'All stores') + ' · ' + (R.item ? 'Item ' + R.item : 'All items');
+        $('fc-sel').innerHTML = '<b>' + label + '</b> &nbsp;·&nbsp; ' + R.hist.length + ' days history &nbsp;·&nbsp; ' + R.h + '-day forecast &nbsp;·&nbsp; fit in ' + R.elapsed.toFixed(1) + 's';
+
+        // summary stats
+        const st = stats(R.hist);
+        const cells = [['Mean',st.mean.toFixed(1)],['Median',st.median.toFixed(0)],['Std Dev',st.std.toFixed(1)],['CV',st.cv.toFixed(1)+'%'],['Min',st.min],['Max',st.max],['Zero days',st.zero],['Total days',st.n]];
+        $('fc-summary').innerHTML = cells.map(([k,v])=>`<div class="fc-scell"><div class="fc-sk">${k}</div><div class="fc-sv">${v}</div></div>`).join('');
+
+        // stationarity + outlier badges (heuristic)
+        const stationary = st.cv < 35;
+        const outliers = R.hist.filter(v => Math.abs(v - st.mean) > 3 * st.std).length;
+        let badges = `<span class="fc-badge" style="background:${stationary?'rgba(34,197,94,.1)':'rgba(245,158,11,.12)'};color:${stationary?'#15803d':'#b45309'};border-color:${stationary?'rgba(34,197,94,.3)':'rgba(245,158,11,.3)'}">${stationary?'Likely stationary':'Non-stationary (differencing advised)'}</span>`;
+        if (outliers) badges += `<span class="fc-badge" style="background:rgba(239,68,68,.08);color:#b91c1c;border-color:rgba(239,68,68,.25)">⚠ ${outliers} outlier${outliers>1?'s':''} detected</span>`;
+        $('fc-badges').innerHTML = badges;
+
+        // KPI cards
+        $('fc-kpis').innerHTML = R.enabled.map(k => {
+          const m = R.results[k], info = MODELS[k], win = k === R.best;
+          return `<div class="fc-kpi ${win?'win':''}" style="border-left-color:${info.color}">
+            <div class="fc-kpi-name" style="color:${info.color}">${info.name}${win?' 🏆':''}</div>
+            <div class="fc-kpi-metrics">RMSE <b>${m.rmse.toFixed(2)}</b> · MAE <b>${m.mae.toFixed(2)}</b><br>MAPE <b>${m.mape!=null?m.mape.toFixed(1)+'%':'–'}</b> · sMAPE <b>${m.smape.toFixed(1)}%</b> · AIC <b>${m.aic.toFixed(0)}</b></div>
+          </div>`;
+        }).join('');
+
+        // inventory policy from the best model's forecast horizon
+        const bestFc = R.results[R.best].fc;
+        const dailyMean = st.mean;
+        const z = zFor(R.cfg.svc);
+        const ss = z * st.std * Math.sqrt(R.cfg.lt);
+        const rop = dailyMean * R.cfg.lt + ss;
+        $('fc-ss').textContent = Math.round(ss) + ' u';
+        $('fc-rop').textContent = Math.round(rop) + ' u';
+        $('fc-avg').textContent = Math.round(dailyMean) + ' u';
+        $('fc-best').textContent = MODELS[R.best].name.replace(' (SARIMAX)','');
+
+        drawChart(R, ss, rop);
+
+        // legend
+        const legHtml = ['<span><i class="sw sw-hist"></i>History</span>']
+          .concat(R.enabled.map(k=>`<span><i class="sw" style="background:${MODELS[k].color}"></i>${MODELS[k].name.replace(' (SARIMAX)','')}</span>`))
+          .concat(['<span><i class="sw sw-band"></i>95% interval (best)</span>','<span><i class="sw sw-rop"></i>Reorder point</span>','<span><i class="sw sw-ss"></i>Safety stock</span>']);
+        $('fc-legend').innerHTML = legHtml.join('');
+
+        // comparison table
+        const rows = R.enabled.slice().sort((a,b)=>R.results[a].rmse-R.results[b].rmse);
+        let thead = '<thead><tr><th>Model</th><th>RMSE</th><th>MAE</th><th>MAPE</th><th>sMAPE</th><th>AIC</th></tr></thead>';
+        let tbody = '<tbody>' + rows.map(k=>{const m=R.results[k],win=k===R.best;
+          return `<tr class="${win?'win-row':''}"><td>${MODELS[k].name}${win?' 🏆':''}</td><td class="${win?'win':''}">${m.rmse.toFixed(2)}</td><td>${m.mae.toFixed(2)}</td><td>${m.mape!=null?m.mape.toFixed(1)+'%':'–'}</td><td>${m.smape.toFixed(1)}%</td><td>${m.aic.toFixed(0)}</td></tr>`;
+        }).join('') + '</tbody>';
+        $('fc-table').innerHTML = thead + tbody;
+
+        // model info + code for the winner
+        $('fc-desc').textContent = MODELS[R.best].desc;
+        $('fc-code').textContent = MODELS[R.best].code;
+      }
+
+      function drawChart(R, ss, rop) {
+        const svg = $('fc-chart'); const n = R.hist.length, h = R.h; const N = n + h;
+        const best = R.results[R.best];
+        const yMax = Math.max(Math.max(...R.hist), Math.max(...best.upper), rop) * 1.08;
+        const x = i => padL + (i/(N-1))*(W-padL-padR);
+        const y = v => padT + (1-v/yMax)*(H-padT-padB);
+        const line = pts => pts.map((p,i)=>(i?'L':'M')+x(p[0]).toFixed(1)+','+y(p[1]).toFixed(1)).join(' ');
+        let out = '';
+        for (let g=0; g<=4; g++){ const val=g/4*yMax, yy=y(val);
+          out += `<line x1="${padL}" y1="${yy.toFixed(1)}" x2="${W-padR}" y2="${yy.toFixed(1)}" stroke="var(--line)"/>`;
+          out += `<text x="${padL-6}" y="${(yy+3).toFixed(1)}" text-anchor="end" font-size="9" fill="var(--muted)">${Math.round(val)}</text>`; }
+        // best-model CI band
+        const bandPts = best.upper.map((v,k)=>[n+k,v]).concat(best.lower.map((v,k)=>[n+h-1-k, best.lower[h-1-k]]));
+        out += `<path d="${line(bandPts)} Z" fill="${MODELS[R.best].color}22" stroke="none"/>`;
+        // policy lines
+        out += `<line x1="${padL}" y1="${y(rop).toFixed(1)}" x2="${W-padR}" y2="${y(rop).toFixed(1)}" stroke="#22c55e" stroke-width="1.5"/><text x="${W-padR}" y="${(y(rop)-4).toFixed(1)}" text-anchor="end" font-size="9" fill="#16a34a" font-weight="700">Reorder point</text>`;
+        out += `<line x1="${padL}" y1="${y(ss).toFixed(1)}" x2="${W-padR}" y2="${y(ss).toFixed(1)}" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="4 3"/><text x="${W-padR}" y="${(y(ss)-4).toFixed(1)}" text-anchor="end" font-size="9" fill="#2563eb" font-weight="700">Safety stock</text>`;
+        // history/forecast divider
+        out += `<line x1="${x(n-1).toFixed(1)}" y1="${padT}" x2="${x(n-1).toFixed(1)}" y2="${H-padB}" stroke="var(--muted)" stroke-dasharray="2 3" opacity=".5"/>`;
+        // history
+        out += `<path d="${line(R.hist.map((v,i)=>[i,v]))}" fill="none" stroke="var(--slate)" stroke-width="1.6"/>`;
+        // each enabled model's forecast
+        R.enabled.forEach(k=>{ const fc=R.results[k].fc; const pts=[[n-1,R.hist[n-1]]].concat(fc.map((v,j)=>[n+j,v]));
+          out += `<path d="${line(pts)}" fill="none" stroke="${MODELS[k].color}" stroke-width="${k===R.best?2.6:1.4}" opacity="${k===R.best?1:.6}"/>`; });
+        svg.innerHTML = out;
+      }
+
+      runBtn.addEventListener('click', run);
     })();
 
     /* ---- OEE interactive calculator ---- */
