@@ -407,6 +407,16 @@
     #to-top.show { opacity: 1; visibility: visible; transform: none; }
     #to-top:hover { background: var(--accent); }
 
+    /* toast */
+    #toast {
+      position: fixed; bottom: 26px; left: 50%; transform: translate(-50%, 20px); z-index: 120;
+      background: var(--slate); color: #fff; font-size: .9rem; font-weight: 600;
+      padding: 12px 20px; border-radius: 999px; box-shadow: var(--shadow-lg);
+      opacity: 0; visibility: hidden; transition: opacity .25s, transform .25s, visibility .25s; max-width: 90vw;
+    }
+    #toast.show { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+    #toast b { color: var(--accent); }
+
     /* reveal animation */
     .reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
     .reveal.in { opacity: 1; transform: none; }
@@ -1399,7 +1409,7 @@
       <div class="contact">
         <h2>Let's build something.</h2>
         <p>Interested in Databricks, data &amp; AI solutions, or just want to connect? I'd love to hear from you.</p>
-        <a class="btn btn-primary" href="mailto:kurtholst@hotmail.com">Say hello →</a>
+        <a class="btn btn-primary" id="say-hello" href="mailto:kurtholst@hotmail.com?subject=Hello%20from%20your%20portfolio&amp;body=Hi%20Kurt%2C%0A%0A">Say hello →</a>
         <a class="btn btn-ghost" href="assets/Kurt-Holst-CV.pdf" download="Kurt-Holst-CV.pdf" style="margin-left:10px">Download CV ↓</a>
         <div class="socials">
           <a href="https://github.com/kurtholst" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
@@ -1423,6 +1433,7 @@
   </footer>
 
   <button id="to-top" aria-label="Back to top" title="Back to top">↑</button>
+  <div id="toast" role="status" aria-live="polite"></div>
 
   <script>
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1473,6 +1484,32 @@
           el.classList.remove('fade');
         }, 400);
       }, 3200);
+    })();
+
+    /* ---- Say hello: copy email + toast, still opens mail client ---- */
+    (function () {
+      const btn = document.getElementById('say-hello');
+      const toast = document.getElementById('toast');
+      if (!btn || !toast) return;
+      const EMAIL = 'kurtholst@hotmail.com';
+      let toastTimer;
+      const showToast = (html) => {
+        toast.innerHTML = html;
+        toast.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove('show'), 3500);
+      };
+      btn.addEventListener('click', () => {
+        // Copy the address so it's useful even without a configured mail client.
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(EMAIL)
+            .then(() => showToast('Opening your mail app… address <b>' + EMAIL + '</b> copied too.'))
+            .catch(() => showToast('Email: <b>' + EMAIL + '</b>'));
+        } else {
+          showToast('Email: <b>' + EMAIL + '</b>');
+        }
+        // The default mailto: navigation still fires for users with a mail client.
+      });
     })();
 
     /* ---- Back to top ---- */
