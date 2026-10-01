@@ -220,6 +220,17 @@
     .cert-meta { font-size:.8rem; color:var(--muted); margin-top:4px; }
     .cert-link a { font-size:.8rem; font-weight:600; color:var(--accent-ink); }
     .cert-link a:hover { text-decoration:underline; }
+    /* compact badge chips */
+    .cert-chips { display:flex; flex-wrap:wrap; gap:10px; }
+    .cert-chip {
+      display:inline-flex; align-items:center; gap:8px; background:var(--bg);
+      border:1px solid var(--line); border-radius:999px; padding:7px 14px;
+      font-size:.84rem; font-weight:600; color:var(--ink-2);
+      transition:border-color .15s, color .15s, transform .12s;
+    }
+    .cert-chip:hover { border-color:var(--accent); color:var(--accent-ink); transform:translateY(-2px); }
+    .cert-chip .chip-ico { font-size:.9rem; }
+    .cert-chip .chip-meta { color:var(--muted); font-weight:500; font-size:.76rem; }
 
     /* CASE STUDY */
     .case-study {
@@ -581,7 +592,7 @@
       <div class="stats">
         <div class="stat reveal"><div class="num"><span class="accent">25</span>+</div><div class="lbl">Years in data &amp; analytics</div></div>
         <div class="stat reveal"><div class="num">22</div><div class="lbl">Databricks certifications &amp; badges</div></div>
-        <div class="stat reveal"><div class="num">15</div><div class="lbl">Recommendations received</div></div>
+        <div class="stat reveal"><div class="num"><span class="accent">2</span>×</div><div class="lbl">FY26 Field Engineering Excellence Awards</div></div>
         <div class="stat reveal"><div class="num">BI<span class="accent">→</span>AI</div><div class="lbl">From data warehousing to GenAI</div></div>
       </div>
     </div>
@@ -595,10 +606,8 @@
       <div class="about-grid" style="margin-top:32px">
         <div class="reveal">
           <p>I'm a Solutions Architect at <strong>Databricks</strong>, helping organizations turn ambitious data &amp; AI ideas into working, production-grade solutions on the Lakehouse. My focus is end-to-end: data ingestion and governance, machine learning and GenAI, natural-language analytics with Genie, and the apps that put it all in front of business users.</p>
-          <p>My background runs deep - 25 years in data &amp; analytics, from building Business Intelligence and data warehouses in the late 1990s, through years as a Principal Consultant in <strong>SAP Predictive Analytics</strong> and <strong>SAP HANA</strong>, to data science with machine learning and geospatial analytics. That history lets me speak both the language of established enterprise systems and the modern Lakehouse. I like building the whole thing: from synthetic data generators and declarative pipelines to model-serving endpoints and full-stack Databricks Apps.</p>
-          <p>For four years I also taught as an <strong>external lecturer</strong> at the University of Southern Denmark - every Friday, delivering "Data Mining &amp; Data Warehousing" and counselling bachelor's and master's thesis students on Business Intelligence, Data Warehousing, and the Balanced Scorecard. Explaining complex ideas simply is still central to how I work: several former students credit that teaching in the recommendations below.</p>
-          <p>Lately I've been shipping GenAI-powered prototypes – predictive-maintenance agents, maintenance control towers, and end-to-end industry data workbenches – often built entirely through natural-language prompts. I care about solutions that actually run, with the evidence to prove it.</p>
-          <p>Above all I bring an <strong>AI-first, builder, tech-first mindset</strong>: I reach for the newest AI and platform capabilities early, and I'd rather prove an idea by building a working prototype than debate it in slides. I stay hands-on with the tech - writing the code, wiring the pipelines, and shipping the app - so that recommendations are grounded in what actually works, not just what sounds good.</p>
+          <p>My background runs deep - 25 years in data &amp; analytics, from building Business Intelligence and data warehouses in the late 1990s, through years as a Principal Consultant in <strong>SAP Predictive Analytics</strong> and <strong>SAP HANA</strong>, to data science with machine learning and geospatial analytics. For four years I also taught "Data Mining &amp; Data Warehousing" as an <strong>external lecturer</strong> at the University of Southern Denmark - and explaining complex ideas simply is still central to how I work. That history lets me speak both the language of established enterprise systems and the modern Lakehouse.</p>
+          <p>Above all I bring an <strong>AI-first, builder mindset</strong>: lately I've been shipping GenAI-powered prototypes - predictive-maintenance agents, maintenance control towers, and end-to-end industry data workbenches - often built entirely through natural-language prompts. I reach for the newest platform capabilities early and would rather prove an idea by building a working prototype than debate it in slides. I stay hands-on - writing the code, wiring the pipelines, shipping the app - so my recommendations are grounded in what actually works.</p>
         </div>
         <div class="about-card reveal">
           <h3>At a glance</h3>
@@ -743,13 +752,13 @@
   <!-- GROWTH -->
   <section id="growth" style="background:var(--surface); border-top:1px solid var(--line);">
     <div class="wrap">
-      <div class="reveal"><div class="eyebrow">Growing</div>
-      <h2 class="section-title">Skills I'm actively sharpening</h2>
-      <p class="section-sub">Staying deliberately in learning mode - deepening how I communicate, architect, and build so the technical depth lands with impact.</p></div>
+      <div class="reveal"><div class="eyebrow">Where I'm pushing</div>
+      <h2 class="section-title">Sharpening the edge</h2>
+      <p class="section-sub">Deep technical work only matters if it lands. These are the areas I actively invest in so the engineering translates into impact.</p></div>
       <div class="skills-grid">
         <div class="skill-cat reveal">
-          <h3><span class="ico">🎤</span> Demo2Win presales storytelling</h3>
-          <p style="color:var(--muted); font-size:.92rem; margin-top:6px">Applying the <strong>Demo2Win</strong> method in my presales interactions - leading with "Tell-Show-Tell", great openings, and outcome-first demos so the value lands before the deep dive, not after it.</p>
+          <h3><span class="ico">🎤</span> Presales storytelling</h3>
+          <p style="color:var(--muted); font-size:.92rem; margin-top:6px">Trained in <strong>Demo2Win</strong> (a presales storytelling method) - leading with "Tell-Show-Tell" and outcome-first demos so the value lands before the deep dive, not after it.</p>
         </div>
         <div class="skill-cat reveal">
           <h3><span class="ico">🧩</span> Executive &amp; business framing</h3>
@@ -757,7 +766,7 @@
         </div>
         <div class="skill-cat reveal">
           <h3><span class="ico">🤖</span> Agentic AI &amp; the frontier</h3>
-          <p style="color:var(--muted); font-size:.92rem; margin-top:6px">Continuously learning the newest agentic patterns, GenAI tooling, and Databricks capabilities - and pressure-testing them by building real prototypes.</p>
+          <p style="color:var(--muted); font-size:.92rem; margin-top:6px">Working at the edge of agentic patterns, GenAI tooling, and new Databricks capabilities - and pressure-testing each one by shipping real prototypes.</p>
         </div>
       </div>
     </div>
@@ -768,7 +777,7 @@
     <div class="wrap">
       <div class="reveal"><div class="eyebrow">Projects</div>
       <h2 class="section-title">Selected public work</h2>
-      <p class="section-sub">A sample of client engagements and open GitHub projects – end-to-end Databricks solutions and applied ML.</p></div>
+      <p class="section-sub">A sample of client engagements and open GitHub projects - end-to-end Databricks solutions and applied ML. <a href="#publications" style="color:var(--accent-ink); font-weight:600; white-space:nowrap">Try my models live ↓</a></p></div>
 
       <!-- Featured case study -->
       <div class="case-study reveal">
@@ -866,32 +875,6 @@
             <h3>SAP HANA Machine Learning from R</h3>
             <p>Machine learning against SAP HANA driven from R – bridging enterprise data with open-source data science tooling.</p>
             <div class="links"><a href="https://github.com/kurtholst/HANA_R_ML" target="_blank" rel="noopener">View repo →</a></div>
-          </div>
-        </div>
-
-        <div class="card reveal">
-          <div class="thumb"><span class="emoji">🛰️</span><span class="lang">Geospatial ML</span></div>
-          <div class="body">
-            <h3>Environmental Classification at Scale</h3>
-            <p>Applied Databricks, machine learning, and geospatial analytics to environmental challenges, with a focus on environmental classification.</p>
-            <ul class="card-list">
-              <li>Led AI/ML proofs of concept for environmental surveillance, building nationwide geospatial maps.</li>
-              <li>Established scalable data infrastructure for ML training across satellite imagery, aerial photos, and geospatial data.</li>
-              <li>Drove innovation in a project team focused on mockups and early adoption of emerging technologies.</li>
-            </ul>
-            <div class="links"><span class="proj-note">Public-sector engagement</span></div>
-          </div>
-        </div>
-
-        <div class="card reveal">
-          <div class="thumb"><span class="emoji">⚙️</span><span class="lang">Data</span></div>
-          <div class="body">
-            <h3>OEE Blogpost &amp; Data</h3>
-            <p>Reproducible data and materials behind a blog post on Overall Equipment Effectiveness (OEE) – a core manufacturing performance metric.</p>
-            <div class="links">
-              <a href="https://www.linkedin.com/pulse/building-ai-optimization-agent-databricks-boost-overall-kurt-holst-tvqwe" target="_blank" rel="noopener">Read article →</a>
-              <a href="https://github.com/kurtholst/blogpost-oee" target="_blank" rel="noopener">View repo →</a>
-            </div>
           </div>
         </div>
 
@@ -1254,111 +1237,20 @@
         </div>
       </div>
       <h3 class="cert-group-title">Accreditations &amp; Badges</h3>
-      <div class="cert-grid">
-        <div class="cert reveal">
-          <div class="cert-badge">📜</div>
-          <div class="cert-body">
-            <div class="cert-name">Building RAG Agents with Agent Bricks</div>
-            <div class="cert-meta">Databricks · Aug 2026</div>
-            <div class="cert-link"><a href="https://credentials.databricks.com/ead27c8e-f704-48cc-9371-a8693a079152" target="_blank" rel="noopener">Verify →</a></div>
-          </div>
-        </div>
-        <div class="cert reveal">
-          <div class="cert-badge">📜</div>
-          <div class="cert-body">
-            <div class="cert-name">Lakehouse with Delta Sales Enablement</div>
-            <div class="cert-meta">Databricks · Jul 2026 · valid to Jul 2027</div>
-            <div class="cert-link"><a href="https://credentials.databricks.com/a759d4d8-5b03-448b-8e80-f72d53cb4297" target="_blank" rel="noopener">Verify →</a></div>
-          </div>
-        </div>
-        <div class="cert reveal">
-          <div class="cert-badge">📜</div>
-          <div class="cert-body">
-            <div class="cert-name">Lakehouse with Delta Technical Enablement</div>
-            <div class="cert-meta">Databricks · Jul 2026 · valid to Jul 2027</div>
-            <div class="cert-link"><a href="https://credentials.databricks.com/4344f23d-3f6e-4840-913c-dc11a6dc8b7b" target="_blank" rel="noopener">Verify →</a></div>
-          </div>
-        </div>
-        <div class="cert reveal">
-          <div class="cert-badge">📜</div>
-          <div class="cert-body">
-            <div class="cert-name">AI Security Fundamentals</div>
-            <div class="cert-meta">Databricks · Jul 2026</div>
-            <div class="cert-link"><a href="https://credentials.databricks.com/f24ca9c2-bd27-4794-a751-5323766cee29" target="_blank" rel="noopener">Verify →</a></div>
-          </div>
-        </div>
-        <div class="cert reveal">
-          <div class="cert-badge">📜</div>
-          <div class="cert-body">
-            <div class="cert-name">Data Governance Fundamentals</div>
-            <div class="cert-meta">Databricks · Jul 2026</div>
-            <div class="cert-link"><a href="https://credentials.databricks.com/e8dfa647-c99e-442f-899c-c33158d72d50" target="_blank" rel="noopener">Verify →</a></div>
-          </div>
-        </div>
-        <div class="cert reveal">
-          <div class="cert-badge">📜</div>
-          <div class="cert-body">
-            <div class="cert-name">Analytics Fundamentals</div>
-            <div class="cert-meta">Databricks · Jul 2026</div>
-            <div class="cert-link"><a href="https://credentials.databricks.com/ea1c9bc7-ccf9-4735-9599-b585a95feb13" target="_blank" rel="noopener">Verify →</a></div>
-          </div>
-        </div>
-        <div class="cert reveal">
-          <div class="cert-badge">📜</div>
-          <div class="cert-body">
-            <div class="cert-name">Azure Databricks Platform Architect</div>
-            <div class="cert-meta">Databricks · Jun 2026</div>
-            <div class="cert-link"><a href="https://credentials.databricks.com/c83852dd-d912-4644-8182-e006a2747412" target="_blank" rel="noopener">Verify →</a></div>
-          </div>
-        </div>
-        <div class="cert reveal">
-          <div class="cert-badge">📜</div>
-          <div class="cert-body">
-            <div class="cert-name">AI Agent Fundamentals</div>
-            <div class="cert-meta">Databricks · Nov 2025</div>
-            <div class="cert-link"><a href="https://credentials.databricks.com/d676443a-a463-4d4d-aa26-421d57d8f930" target="_blank" rel="noopener">Verify →</a></div>
-          </div>
-        </div>
-        <div class="cert reveal">
-          <div class="cert-badge">📜</div>
-          <div class="cert-body">
-            <div class="cert-name">Platform Administrator</div>
-            <div class="cert-meta">Databricks · Oct 2025</div>
-            <div class="cert-link"><a href="https://credentials.databricks.com/ae9ff0eb-7bcd-4b29-9efc-343d59c45fe0" target="_blank" rel="noopener">Verify →</a></div>
-          </div>
-        </div>
-        <div class="cert reveal">
-          <div class="cert-badge">📜</div>
-          <div class="cert-body">
-            <div class="cert-name">Databricks Fundamentals</div>
-            <div class="cert-meta">Databricks · Oct 2025</div>
-            <div class="cert-link"><a href="https://credentials.databricks.com/81c63451-f782-4a3c-8707-4824e082eba7" target="_blank" rel="noopener">Verify →</a></div>
-          </div>
-        </div>
-        <div class="cert reveal">
-          <div class="cert-badge">📜</div>
-          <div class="cert-body">
-            <div class="cert-name">Generative AI Fundamentals</div>
-            <div class="cert-meta">Databricks · Aug 2025</div>
-            <div class="cert-link"><a href="https://credentials.databricks.com/689640d4-797e-4b69-b9b9-ac9226853fff" target="_blank" rel="noopener">Verify →</a></div>
-          </div>
-        </div>
-        <div class="cert reveal">
-          <div class="cert-badge">📜</div>
-          <div class="cert-body">
-            <div class="cert-name">DAIS FE Accreditation 2025</div>
-            <div class="cert-meta">Databricks · Jul 2025</div>
-            <div class="cert-link"><a href="https://credentials.fieldandsalesenablement.databricks.com/a451e3d1-1211-458d-90f1-482e78d1bf6f" target="_blank" rel="noopener">Verify →</a></div>
-          </div>
-        </div>
-        <div class="cert reveal">
-          <div class="cert-badge">📜</div>
-          <div class="cert-body">
-            <div class="cert-name">Databricks Lakehouse Fundamentals</div>
-            <div class="cert-meta">Databricks · Jun 2024</div>
-            <div class="cert-link"><a href="https://credentials.databricks.com/e89bb712-cacc-437c-93d2-90ae3907f8a3" target="_blank" rel="noopener">Verify →</a></div>
-          </div>
-        </div>
+      <div class="cert-chips">
+        <a class="cert-chip reveal" href="https://credentials.databricks.com/ead27c8e-f704-48cc-9371-a8693a079152" target="_blank" rel="noopener"><span class="chip-ico">📜</span> Building RAG Agents with Agent Bricks <span class="chip-meta">Aug 2026</span></a>
+        <a class="cert-chip reveal" href="https://credentials.databricks.com/a759d4d8-5b03-448b-8e80-f72d53cb4297" target="_blank" rel="noopener"><span class="chip-ico">📜</span> Lakehouse with Delta Sales Enablement <span class="chip-meta">Jul 2026</span></a>
+        <a class="cert-chip reveal" href="https://credentials.databricks.com/4344f23d-3f6e-4840-913c-dc11a6dc8b7b" target="_blank" rel="noopener"><span class="chip-ico">📜</span> Lakehouse with Delta Technical Enablement <span class="chip-meta">Jul 2026</span></a>
+        <a class="cert-chip reveal" href="https://credentials.databricks.com/f24ca9c2-bd27-4794-a751-5323766cee29" target="_blank" rel="noopener"><span class="chip-ico">📜</span> AI Security Fundamentals <span class="chip-meta">Jul 2026</span></a>
+        <a class="cert-chip reveal" href="https://credentials.databricks.com/e8dfa647-c99e-442f-899c-c33158d72d50" target="_blank" rel="noopener"><span class="chip-ico">📜</span> Data Governance Fundamentals <span class="chip-meta">Jul 2026</span></a>
+        <a class="cert-chip reveal" href="https://credentials.databricks.com/ea1c9bc7-ccf9-4735-9599-b585a95feb13" target="_blank" rel="noopener"><span class="chip-ico">📜</span> Analytics Fundamentals <span class="chip-meta">Jul 2026</span></a>
+        <a class="cert-chip reveal" href="https://credentials.databricks.com/c83852dd-d912-4644-8182-e006a2747412" target="_blank" rel="noopener"><span class="chip-ico">📜</span> Azure Databricks Platform Architect <span class="chip-meta">Jun 2026</span></a>
+        <a class="cert-chip reveal" href="https://credentials.databricks.com/d676443a-a463-4d4d-aa26-421d57d8f930" target="_blank" rel="noopener"><span class="chip-ico">📜</span> AI Agent Fundamentals <span class="chip-meta">Nov 2025</span></a>
+        <a class="cert-chip reveal" href="https://credentials.databricks.com/ae9ff0eb-7bcd-4b29-9efc-343d59c45fe0" target="_blank" rel="noopener"><span class="chip-ico">📜</span> Platform Administrator <span class="chip-meta">Oct 2025</span></a>
+        <a class="cert-chip reveal" href="https://credentials.databricks.com/81c63451-f782-4a3c-8707-4824e082eba7" target="_blank" rel="noopener"><span class="chip-ico">📜</span> Databricks Fundamentals <span class="chip-meta">Oct 2025</span></a>
+        <a class="cert-chip reveal" href="https://credentials.databricks.com/689640d4-797e-4b69-b9b9-ac9226853fff" target="_blank" rel="noopener"><span class="chip-ico">📜</span> Generative AI Fundamentals <span class="chip-meta">Aug 2025</span></a>
+        <a class="cert-chip reveal" href="https://credentials.fieldandsalesenablement.databricks.com/a451e3d1-1211-458d-90f1-482e78d1bf6f" target="_blank" rel="noopener"><span class="chip-ico">📜</span> DAIS FE Accreditation 2025 <span class="chip-meta">Jul 2025</span></a>
+        <a class="cert-chip reveal" href="https://credentials.databricks.com/e89bb712-cacc-437c-93d2-90ae3907f8a3" target="_blank" rel="noopener"><span class="chip-ico">📜</span> Databricks Lakehouse Fundamentals <span class="chip-meta">Jun 2024</span></a>
       </div>
       </div>
     </div>
