@@ -124,7 +124,7 @@
       color: var(--ink-2); background: var(--surface); border: 1px solid var(--line);
       padding: 6px 14px; border-radius: 999px; box-shadow: var(--shadow); margin-bottom: 22px;
     }
-    .avail .dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 0 3px rgba(34,197,94,.2); }
+    .avail .mark-dot { color: var(--accent); font-size: .7rem; line-height: 1; }
     .hero h1 { font-size: clamp(2.4rem, 6vw, 3.8rem); line-height: 1.05; font-weight: 700; }
     .hero h1 .accent { color: var(--accent-ink); }
     .hero .role { font-size: clamp(1.05rem, 2.4vw, 1.4rem); color: var(--ink-2); font-weight: 600; margin-top: 16px; font-family: 'Space Grotesk'; }
@@ -205,6 +205,15 @@
     .tag-list { display: flex; flex-wrap: wrap; gap: 8px; }
     .tag { font-size: .82rem; font-weight: 500; color: var(--ink-2); background: var(--bg); border: 1px solid var(--line); padding: 5px 12px; border-radius: 999px; }
 
+    /* HOW I WORK - principles */
+    .principles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .principle { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px 28px; box-shadow: var(--shadow); position: relative; transition: transform .12s, box-shadow .15s, border-color .15s; }
+    .principle:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); border-color: #cbd5e1; }
+    .principle .pr-num { font-family: 'Space Grotesk'; font-weight: 700; font-size: .9rem; color: var(--accent-ink); background: rgba(255,107,53,.1); border-radius: 8px; width: 30px; height: 30px; display: grid; place-items: center; margin-bottom: 14px; }
+    .principle h3 { font-size: 1.08rem; margin-bottom: 8px; }
+    .principle p { color: var(--muted); font-size: .93rem; line-height: 1.6; }
+    .principle p strong { color: var(--ink-2); font-weight: 600; }
+
     /* CERTIFICATIONS */
     .cert-group-title { font-family:'Space Grotesk'; font-size:1.02rem; font-weight:700; margin:30px 0 16px; color:var(--ink); }
     .cert-group-title:first-of-type { margin-top:8px; }
@@ -276,7 +285,33 @@
     .card .links a:hover { text-decoration: underline; }
 
     /* PUBLICATIONS */
+    /* latest / freshness strip */
+    .latest {
+      display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+      background: var(--slate); color: #fff; border-radius: var(--radius);
+      padding: 16px 22px; margin-bottom: 28px; box-shadow: var(--shadow);
+    }
+    .latest .latest-badge {
+      font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--accent); background: rgba(255,107,53,.14); border: 1px solid rgba(255,107,53,.3);
+      padding: 5px 12px; border-radius: 999px; white-space: nowrap; display: inline-flex; align-items: center; gap: 7px;
+    }
+    .latest .latest-badge .pulse { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px rgba(255,107,53,.25); }
+    .latest .latest-text { flex: 1; min-width: 200px; font-size: .95rem; color: #e2e8f0; }
+    .latest .latest-text b { color: #fff; font-weight: 600; }
+    .latest .latest-link { font-size: .88rem; font-weight: 600; color: var(--accent); white-space: nowrap; }
+    .latest .latest-link:hover { text-decoration: underline; }
     .pub-list { display: flex; flex-direction: column; gap: 18px; }
+    /* speaking & community */
+    .speak-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .speak { display: flex; gap: 16px; align-items: flex-start; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 24px; box-shadow: var(--shadow); transition: transform .12s, box-shadow .15s, border-color .15s; }
+    .speak:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); border-color: #cbd5e1; }
+    .speak .speak-ico { font-size: 1.3rem; width: 44px; height: 44px; flex-shrink: 0; border-radius: 12px; background: rgba(255,107,53,.12); display: grid; place-items: center; }
+    .speak .speak-kind { font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent-ink); }
+    .speak h3 { font-size: 1.02rem; margin: 3px 0 4px; }
+    .speak p { color: var(--muted); font-size: .9rem; line-height: 1.55; }
+    .speak .speak-link { font-size: .84rem; font-weight: 600; color: var(--accent-ink); margin-top: 8px; display: inline-block; }
+    .speak .speak-link:hover { text-decoration: underline; }
     .pub {
       position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
       padding: 26px 28px 26px 32px; box-shadow: var(--shadow); overflow: hidden;
@@ -327,6 +362,35 @@
     .oee-gauge { position: relative; z-index: 1; display: grid; place-items: center; }
     #oee-arc { transition: stroke-dashoffset .4s ease, stroke .4s ease; }
     #oee-num { transition: fill .3s; }
+
+    /* GENIE NL-TO-SQL DEMO */
+    .genie-demo { margin-top: 24px; background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: 32px; box-shadow: var(--shadow); }
+    .genie-title { font-size: 1.4rem; margin-bottom: 8px; }
+    .genie-sub { color: var(--muted); font-size: .95rem; max-width: 760px; }
+    .genie-sub strong { color: var(--ink-2); font-weight: 600; }
+    .genie-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0; }
+    .genie-chip { font-size: .82rem; font-weight: 500; color: var(--ink-2); background: var(--bg); border: 1px solid var(--line); padding: 7px 14px; border-radius: 999px; cursor: pointer; transition: border-color .15s, color .15s, background .15s; }
+    .genie-chip:hover { border-color: var(--accent); color: var(--accent-ink); }
+    .genie-inputrow { display: flex; gap: 10px; flex-wrap: wrap; }
+    .genie-inputrow input { flex: 1; min-width: 220px; padding: 12px 16px; border: 1px solid var(--line); border-radius: 12px; font-size: .95rem; font-family: inherit; background: var(--bg); }
+    .genie-inputrow input:focus { outline: none; border-color: var(--accent); }
+    .genie-ask { white-space: nowrap; }
+    .genie-schema { font-size: .78rem; color: var(--muted); margin-top: 10px; }
+    .genie-schema code { font-family: 'SF Mono','Roboto Mono',Menlo,monospace; background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 2px 6px; }
+    .genie-result { margin-top: 20px; }
+    .genie-result[hidden] { display: none; }
+    .genie-sql { background: var(--slate); color: #e2e8f0; border-radius: 12px; padding: 16px 18px; overflow-x: auto; font-size: .82rem; line-height: 1.55; font-family: 'SF Mono','Roboto Mono',Menlo,monospace; white-space: pre; }
+    .genie-sql .kw { color: #ff8c5f; font-weight: 600; }
+    .genie-sql .fn { color: #7dd3fc; }
+    .genie-sql .str { color: #86efac; }
+    .genie-answer { background: rgba(34,197,94,.08); border: 1px solid rgba(34,197,94,.3); color: #15803d; border-radius: 12px; padding: 12px 16px; font-size: .92rem; font-weight: 600; margin-top: 14px; }
+    .genie-table-wrap { overflow-x: auto; margin-top: 14px; }
+    .genie-table { width: 100%; border-collapse: collapse; font-size: .86rem; }
+    .genie-table th, .genie-table td { padding: 8px 12px; text-align: right; border-bottom: 1px solid var(--line); }
+    .genie-table th:first-child, .genie-table td:first-child { text-align: left; }
+    .genie-table th { color: var(--muted); font-size: .74rem; text-transform: uppercase; letter-spacing: .04em; }
+    .genie-table tbody tr:hover { background: var(--bg); }
+    .genie-note { font-size: .76rem; color: var(--muted); margin-top: 12px; font-style: italic; }
 
     /* FORECAST SIMULATION */
     .fc-demo { margin-top: 24px; background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: 32px; box-shadow: var(--shadow); }
@@ -510,7 +574,7 @@
       .hero-grid, .about-grid { grid-template-columns: 1fr; }
       .hero-photo { order: -1; }
       .stats { grid-template-columns: repeat(2, 1fr); }
-      .skills-grid, .proj-grid, .cert-grid, .awards-grid { grid-template-columns: 1fr; }
+      .skills-grid, .proj-grid, .cert-grid, .awards-grid, .principles, .speak-grid { grid-template-columns: 1fr; }
       .rec-grid { columns: 1; }
       .award-featured { flex-direction: column; }
       .award-img { width: 100%; height: 200px; }
@@ -544,6 +608,7 @@
         <a href="#experience">Experience</a>
         <a href="#skills">Skills</a>
         <a href="#projects">Projects</a>
+        <a href="#interactive">Demos</a>
         <a href="#publications">Writing</a>
         <a href="#education">Education</a>
         <a href="#certifications">Certifications</a>
@@ -558,7 +623,7 @@
     <canvas id="node-net" aria-hidden="true"></canvas>
     <div class="wrap hero-grid">
       <div class="reveal">
-        <span class="avail"><span class="dot"></span> Solutions Architect · Databricks</span>
+        <span class="avail"><span class="mark-dot">◆</span> Solutions Architect · Databricks</span>
         <h1>Turning data &amp; AI into <span class="accent">working solutions.</span></h1>
         <div class="role">Solutions Architect @ Databricks · SAP &amp; ML background</div>
         <p class="lede">I design and build end-to-end data &amp; AI platforms – from Lakeflow ingestion and Unity Catalog governance to GenAI, Genie, and production Databricks Apps. 25 years bridging Business Intelligence, SAP, and the modern Lakehouse.</p>
@@ -568,8 +633,8 @@
         </div>
         <div class="cta-row">
           <a class="btn btn-primary" href="#projects">View my work →</a>
-          <a class="btn btn-ghost" href="assets/Kurt-Holst-CV.pdf" download="Kurt-Holst-CV.pdf">Download CV ↓</a>
-          <a class="btn btn-ghost" href="#contact">Get in touch</a>
+          <a class="btn btn-ghost" href="#interactive">Try live ML demos ↓</a>
+          <a class="btn btn-ghost" href="#publications">Read my writing →</a>
         </div>
         <div class="socials">
           <a href="https://github.com/kurtholst" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
@@ -714,7 +779,8 @@
         <div class="skill-cat reveal">
           <h3><span class="ico">🤖</span> AI &amp; Machine Learning</h3>
           <div class="tag-list">
-            <span class="tag">GenAI &amp; LLMs</span><span class="tag">AI Agents</span><span class="tag">Predictive ML</span>
+            <span class="tag">GenAI &amp; LLMs</span><span class="tag">AI Agents</span><span class="tag">Agent Bricks</span>
+            <span class="tag">Genie Agents</span><span class="tag">Genie Code</span><span class="tag">Predictive ML</span>
             <span class="tag">Forecasting</span><span class="tag">Supervised Learning</span><span class="tag">Bayesian Optimization</span>
             <span class="tag">Vector Search</span>
           </div>
@@ -722,8 +788,9 @@
         <div class="skill-cat reveal">
           <h3><span class="ico">💻</span> Engineering</h3>
           <div class="tag-list">
-            <span class="tag">Python</span><span class="tag">TypeScript</span><span class="tag">R</span>
+            <span class="tag">Python</span><span class="tag">R</span>
             <span class="tag">SQL</span><span class="tag">FastAPI</span><span class="tag">React</span>
+            <span class="tag">Streaming data</span>
           </div>
         </div>
         <div class="skill-cat reveal">
@@ -775,12 +842,43 @@
     </div>
   </section>
 
+  <!-- HOW I WORK -->
+  <section id="approach">
+    <div class="wrap">
+      <div class="reveal"><div class="eyebrow">How I work</div>
+      <h2 class="section-title">A point of view, not just a toolkit</h2>
+      <p class="section-sub">Twenty-five years in has left me with a few strong opinions about how to turn data &amp; AI ambition into something that actually runs.</p></div>
+      <div class="principles">
+        <div class="principle reveal">
+          <div class="pr-num">01</div>
+          <h3>Build it, don't slide it</h3>
+          <p>I'd rather prove an idea with a <strong>working prototype</strong> than argue it in a deck. A clickable mock-up on real data collapses weeks of debate into a single "oh, I get it now" - so I lead with the build and let the demo carry the conversation.</p>
+        </div>
+        <div class="principle reveal">
+          <div class="pr-num">02</div>
+          <h3>Start from the business pain</h3>
+          <p>Architecture is a means, not the goal. I open with <strong>discovery</strong> - what hurts, what it costs, what "better" looks like in numbers - then work backwards to the simplest platform design that moves that metric. Technology chosen for its own sake is waste.</p>
+        </div>
+        <div class="principle reveal">
+          <div class="pr-num">03</div>
+          <h3>Prototype at the speed of thought</h3>
+          <p>I build end to end - pipelines, governance, models, agents, and the app - often <strong>entirely through natural-language prompts</strong>. Working AI-first lets me ship a credible proof in days, not quarters, and iterate live in front of the people who'll use it.</p>
+        </div>
+        <div class="principle reveal">
+          <div class="pr-num">04</div>
+          <h3>Make it land for every audience</h3>
+          <p>The same solution has to make sense to an engineer and to a CFO. I <strong>tell the story twice</strong> - the architecture for the builders, the outcome and ROI for the executives - so the value is clear before the deep dive, not buried after it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- PROJECTS -->
   <section id="projects" style="background:var(--surface); border-top:1px solid var(--line); border-bottom:1px solid var(--line)">
     <div class="wrap">
       <div class="reveal"><div class="eyebrow">Projects</div>
       <h2 class="section-title">Selected public work</h2>
-      <p class="section-sub">A sample of client engagements and open GitHub projects - end-to-end Databricks solutions and applied ML. <a href="#publications" style="color:var(--accent-ink); font-weight:600; white-space:nowrap">Try my models live ↓</a></p></div>
+      <p class="section-sub">A sample of client engagements and open GitHub projects - end-to-end Databricks solutions and applied ML. <a href="#interactive" style="color:var(--accent-ink); font-weight:600; white-space:nowrap">Try my models live ↓</a></p></div>
 
       <!-- Featured case study -->
       <div class="case-study reveal">
@@ -803,7 +901,7 @@
         <div class="cs-links">
           <a class="btn btn-primary" href="https://www.linkedin.com/pulse/building-ai-optimization-agent-databricks-boost-overall-kurt-holst-tvqwe" target="_blank" rel="noopener">Read the write-up →</a>
           <a class="btn btn-ghost" href="https://github.com/kurtholst/blogpost-oee" target="_blank" rel="noopener">Reproducible repo →</a>
-          <a class="btn btn-ghost" href="#publications">Try the live OEE calculator →</a>
+          <a class="btn btn-ghost" href="#interactive">Try the live OEE calculator →</a>
         </div>
       </div>
 
@@ -813,7 +911,7 @@
           <div class="thumb"><span class="emoji">💧</span><span class="lang">Client work</span></div>
           <div class="body">
             <h3>Hydropower Predictive Maintenance</h3>
-            <p>As external consultant to a major hydropower operator, built predictive models across multiple power plants to plan maintenance ahead of failure. Detecting very rare failure events before they occur cut over-maintenance and costly acute repairs, and lifted productivity - with models learning from historical failures across the fleet.</p>
+            <p>As external consultant to a major hydropower operator, built predictive models across multiple power plants to plan maintenance ahead of failure. Detecting very rare failure events before they occur cut over-maintenance and costly acute repairs, and lifted productivity - with models learning from historical failures across the fleet. In one case the models showed equipment was not at risk of imminent failure, letting the operator postpone a <strong>100M NOK investment</strong>.</p>
             <div class="links"><span class="proj-note">Client engagement · confidential</span></div>
           </div>
         </div>
@@ -907,6 +1005,12 @@
       <h2 class="section-title">Publications &amp; articles</h2>
       <p class="section-sub">Research, applied engineering write-ups, and podcast appearances - in English and Danish - spanning GenAI, disinformation, and industrial optimization.</p></div>
 
+      <div class="latest reveal">
+        <span class="latest-badge"><span class="pulse"></span> Latest</span>
+        <span class="latest-text"><b>Building an AI Optimization Agent on Databricks to Boost OEE</b> - a low-code multi-agent architecture (Genie + Agent Bricks + Mosaic AI), written up with the reproducible repo.</span>
+        <a class="latest-link" href="https://www.linkedin.com/pulse/building-ai-optimization-agent-databricks-boost-overall-kurt-holst-tvqwe" target="_blank" rel="noopener">Read it →</a>
+      </div>
+
       <div class="pub-list">
         <article class="pub reveal">
           <div class="pub-type">Master's thesis</div>
@@ -972,154 +1076,48 @@
         </article>
       </div>
 
-      <!-- Interactive OEE calculator tied to the OEE article -->
-      <div class="oee-demo reveal">
-        <div class="oee-intro">
-          <div class="eyebrow">Try it · interactive</div>
-          <h3>Overall Equipment Effectiveness, live</h3>
-          <p>OEE = Availability × Performance × Quality. Drag the sliders to see how each loss compounds into the single number that manufacturers use to unlock hidden capacity - the metric behind my Databricks OEE agent.</p>
-          <div class="oee-sliders">
-            <label>Availability <output id="oee-a-val">90%</output>
-              <input type="range" id="oee-a" min="40" max="100" value="90" />
-            </label>
-            <label>Performance <output id="oee-p-val">95%</output>
-              <input type="range" id="oee-p" min="40" max="100" value="95" />
-            </label>
-            <label>Quality <output id="oee-q-val">99%</output>
-              <input type="range" id="oee-q" min="40" max="100" value="99" />
-            </label>
-          </div>
-          <div class="oee-rating" id="oee-rating"></div>
-          <div class="oee-refs">
-            <a href="https://www.linkedin.com/pulse/building-ai-optimization-agent-databricks-boost-overall-kurt-holst-tvqwe" target="_blank" rel="noopener">Read the OEE article →</a>
-            <a href="https://github.com/kurtholst/blogpost-oee" target="_blank" rel="noopener">Reproducible repo →</a>
-            <a href="#projects">See the case study →</a>
-          </div>
-        </div>
-        <div class="oee-gauge">
-          <svg viewBox="0 0 200 200" width="200" height="200">
-            <circle cx="100" cy="100" r="85" fill="none" stroke="var(--line)" stroke-width="16" />
-            <circle id="oee-arc" cx="100" cy="100" r="85" fill="none" stroke="var(--accent)" stroke-width="16"
-              stroke-linecap="round" transform="rotate(-90 100 100)" stroke-dasharray="534" stroke-dashoffset="534" />
-            <text id="oee-num" x="100" y="98" text-anchor="middle" font-family="Space Grotesk" font-size="42" font-weight="700" fill="var(--ink)">85%</text>
-            <text x="100" y="124" text-anchor="middle" font-size="13" fill="var(--muted)">OEE</text>
-          </svg>
-        </div>
-      </div>
+    </div>
+  </section>
 
-      <!-- Interactive ARIMA retail forecast simulation -->
-      <div class="fc-demo reveal">
-        <div class="fc-head">
+  <!-- SPEAKING & COMMUNITY -->
+  <section id="speaking" style="background:var(--surface); border-top:1px solid var(--line); border-bottom:1px solid var(--line)">
+    <div class="wrap">
+      <div class="reveal"><div class="eyebrow">Speaking &amp; community</div>
+      <h2 class="section-title">Sharing the work</h2>
+      <p class="section-sub">A lot of the job is helping others level up - through workshops, meetups, the podcast circuit, and years in the classroom.</p></div>
+      <div class="speak-grid">
+        <div class="speak reveal">
+          <div class="speak-ico">🎙️</div>
           <div>
-            <div class="eyebrow" style="color:var(--accent-ink)">Try it · interactive</div>
-            <h3 class="fc-title">Retail demand forecast, live</h3>
-            <p class="fc-sub">A client-side port of the <strong>Forecasting</strong> tab from my retail demand-forecasting app. Pick a store/item and horizon, configure the models (ARIMA, TBATS, Prophet), then <strong>Run Forecast</strong> to fit all three, compare accuracy, and derive the inventory policy. Runs entirely in your browser - the production app fits real <code>statsmodels</code>, <code>tbats</code>, and Prophet models on a Python backend.</p>
+            <div class="speak-kind">Podcast · guest</div>
+            <h3>Data Lab Dialogues</h3>
+            <p>Guest on the SAP Business Technology podcast, unpacking the Databricks × SAP zero-copy Delta Sharing story with host Thomas Madsen.</p>
+            <a class="speak-link" href="https://podcasts.apple.com/us/podcast/data-lab-dialogues/id1534848494" target="_blank" rel="noopener">Listen →</a>
           </div>
         </div>
-
-        <!-- Configuration -->
-        <div class="fc-config">
-          <div class="fc-panel">
-            <div class="fc-panel-title">Data selection</div>
-            <label class="fc-field">Store
-              <select id="fc-store"><option value="">All stores</option></select>
-            </label>
-            <label class="fc-field">Item
-              <select id="fc-item"><option value="">All items</option></select>
-            </label>
-            <label class="fc-field">Forecast horizon <b id="fc-days-val">90 days</b>
-              <input type="range" id="fc-days" min="14" max="180" value="90" step="7" />
-            </label>
-            <div class="fc-meta-note" id="fc-datainfo"></div>
-          </div>
-
-          <div class="fc-panel" style="border-top-color:#6366f1">
-            <div class="fc-panel-title fc-toggle"><label><input type="checkbox" id="fc-arima-on" checked> ARIMA <span>(SARIMAX)</span></label><button class="fc-info-btn" data-info="arima" title="How it works" aria-label="ARIMA details">ⓘ</button></div>
-            <div class="fc-params">
-              <label>p<input type="number" id="fc-p" value="1" min="0" max="5"></label>
-              <label>d<input type="number" id="fc-d" value="1" min="0" max="2"></label>
-              <label>q<input type="number" id="fc-q" value="1" min="0" max="5"></label>
-              <label>m<input type="number" id="fc-m" value="7" min="1" max="365"></label>
-              <label>P<input type="number" id="fc-P" value="1" min="0" max="3"></label>
-              <label>D<input type="number" id="fc-D" value="1" min="0" max="2"></label>
-              <label>Q<input type="number" id="fc-Q" value="1" min="0" max="3"></label>
-            </div>
-          </div>
-
-          <div class="fc-panel" style="border-top-color:#0ea5e9">
-            <div class="fc-panel-title fc-toggle"><label><input type="checkbox" id="fc-tbats-on" checked> TBATS</label><button class="fc-info-btn" data-info="tbats" title="How it works" aria-label="TBATS details">ⓘ</button></div>
-            <div class="fc-params fc-params-col">
-              <label class="fc-check"><input type="checkbox" id="fc-boxcox" checked> Box-Cox transform</label>
-              <label class="fc-check"><input type="checkbox" id="fc-trend" checked> Trend</label>
-              <label class="fc-check"><input type="checkbox" id="fc-arma" checked> ARMA errors</label>
-            </div>
-          </div>
-
-          <div class="fc-panel" style="border-top-color:#8b5cf6">
-            <div class="fc-panel-title fc-toggle"><label><input type="checkbox" id="fc-prophet-on" checked> Prophet</label><button class="fc-info-btn" data-info="prophet" title="How it works" aria-label="Prophet details">ⓘ</button></div>
-            <div class="fc-params fc-params-col">
-              <label>Changepoint prior <b id="fc-cp-val">0.05</b>
-                <input type="range" id="fc-cp" min="0.001" max="0.5" step="0.001" value="0.05"></label>
-              <label>Seasonality prior <b id="fc-sp-val">10.0</b>
-                <input type="range" id="fc-sp" min="0.01" max="50" step="0.1" value="10"></label>
-              <label class="fc-check"><input type="checkbox" id="fc-holidays" checked> Holiday calendar
-                <select id="fc-country" style="margin-left:6px">
-                  <option value="DK">Denmark</option><option value="DE">Germany</option>
-                  <option value="US">USA</option><option value="GB">UK</option><option value="">None</option>
-                </select>
-              </label>
-            </div>
-          </div>
-
-          <div class="fc-panel fc-run-panel">
-            <div class="fc-panel-title">Inventory policy</div>
-            <label class="fc-field">Service level <b id="fc-svc-val">95%</b>
-              <input type="range" id="fc-svc" min="80" max="99" value="95"></label>
-            <label class="fc-field">Lead time (days) <b id="fc-lt-val">7</b>
-              <input type="range" id="fc-lt" min="1" max="30" value="7"></label>
-            <label class="fc-field">Cost per purchase order <b id="fc-po-val">$75</b>
-              <input type="range" id="fc-po" min="10" max="500" value="75" step="5"></label>
-            <label class="fc-field">Unit holding cost / yr <b id="fc-hc-val">$4.00</b>
-              <input type="range" id="fc-hc" min="0.5" max="20" value="4" step="0.5"></label>
-            <button id="fc-run" class="btn btn-primary fc-run">▶ Run Forecast</button>
-            <div class="fc-timer" id="fc-timer"></div>
+        <div class="speak reveal">
+          <div class="speak-ico">🧑‍🏫</div>
+          <div>
+            <div class="speak-kind">Workshops · Databricks</div>
+            <h3>Technical community engagement</h3>
+            <p>Regularly run hands-on workshops, seminars, and meetups for the Databricks technical community - from Lakehouse fundamentals to agentic GenAI.</p>
           </div>
         </div>
-
-        <!-- Results (populated after Run) -->
-        <div class="fc-results" id="fc-results" hidden>
-          <div class="fc-sel" id="fc-sel"></div>
-
-          <div class="fc-summary-title">Summary statistics</div>
-          <div class="fc-summary" id="fc-summary"></div>
-          <div class="fc-badges" id="fc-badges"></div>
-
-          <div class="fc-kpis" id="fc-kpis"></div>
-
-          <div class="fc-body">
-            <svg id="fc-chart" viewBox="0 0 720 340" role="img" aria-label="Retail demand forecast chart"></svg>
-            <div class="fc-controls">
-              <div class="fc-stats">
-                <div class="fc-stat"><span class="fc-k">Safety stock</span><span class="fc-v" id="fc-ss">–</span></div>
-                <div class="fc-stat"><span class="fc-k">Reorder point</span><span class="fc-v" id="fc-rop">–</span></div>
-                <div class="fc-stat"><span class="fc-k">Avg. daily demand</span><span class="fc-v" id="fc-avg">–</span></div>
-                <div class="fc-stat"><span class="fc-k">Best model</span><span class="fc-v" id="fc-best">–</span></div>
-                <div class="fc-stat"><span class="fc-k">Order qty (EOQ)</span><span class="fc-v" id="fc-eoq">–</span></div>
-                <div class="fc-stat"><span class="fc-k">Annual order cost</span><span class="fc-v" id="fc-oc">–</span></div>
-              </div>
-              <div class="fc-legend" id="fc-legend"></div>
-            </div>
+        <div class="speak reveal">
+          <div class="speak-ico">🎓</div>
+          <div>
+            <div class="speak-kind">Instructor-led · SAP</div>
+            <h3>Forecasting &amp; data science training</h3>
+            <p>Designed and delivered full-day, hands-on training at SAP in Walldorf - teaching practitioners time-series forecasting (TBATS, ARIMA, ARIMAX) and applied data science.</p>
           </div>
-
-          <div class="fc-summary-title">Model comparison</div>
-          <div class="fc-table-wrap"><table class="fc-table" id="fc-table"></table></div>
-
-          <div class="fc-info">
-            <p id="fc-desc"></p>
-            <details class="fc-code">
-              <summary>How the winning model is fitted in the real app</summary>
-              <pre><code id="fc-code"></code></pre>
-            </details>
+        </div>
+        <div class="speak reveal">
+          <div class="speak-ico">📚</div>
+          <div>
+            <div class="speak-kind">University · external lecturer</div>
+            <h3>Data Mining &amp; Data Warehousing</h3>
+            <p>Four years teaching at the University of Southern Denmark - weekly lectures plus bachelor's and master's thesis supervision. Several former students still credit it (see recommendations).</p>
+            <a class="speak-link" href="#recommendations">See recommendations →</a>
           </div>
         </div>
       </div>
@@ -1140,8 +1138,8 @@
         </div>
         <div class="skill-cat reveal">
           <h3><span class="ico">🎓</span> Master's Degree</h3>
-          <div class="tl-role" style="font-size:1.02rem">Master in Information Technology</div>
-          <p style="color:var(--muted); font-size:.92rem; margin-top:6px">Graduate study in information technology - systems, data, and enterprise software.</p>
+          <div class="tl-role" style="font-size:1.02rem">Master in IT, Communication &amp; Organization (MITKO)</div>
+          <p style="color:var(--muted); font-size:.92rem; margin-top:6px">Graduate study bridging IT, communication, and organization - how technology, people, and strategy combine to deliver business value. Thesis developed a performance-management concept for Energinet.</p>
         </div>
         <div class="skill-cat reveal">
           <h3><span class="ico">🛠️</span> Engineering</h3>
@@ -1478,14 +1476,194 @@
     </div>
   </section>
 
+  <!-- INTERACTIVE DEMOS -->
+  <section id="interactive">
+    <div class="wrap">
+      <div class="reveal"><div class="eyebrow">Try it · interactive</div>
+      <h2 class="section-title">Play with my work</h2>
+      <p class="section-sub">Three live, in-browser demos - ask questions of data in plain English (Genie-style), explore the OEE metric behind my Databricks agent, and run a client-side port of my retail demand-forecasting models.</p></div>
+
+      <!-- Genie-style natural-language-to-SQL demo -->
+      <div class="genie-demo reveal">
+        <div class="eyebrow" style="color:var(--accent-ink)">Try it · interactive</div>
+        <h3 class="genie-title">Ask your data a question</h3>
+        <p class="genie-sub">This is how <strong>Databricks Genie</strong> feels: type a business question in plain English and it writes the SQL and answers from a governed table. This toy runs entirely in your browser over a small sample <code>sales</code> table - the real thing runs Genie over Unity Catalog. Try a sample question or write your own.</p>
+        <div class="genie-chips" id="genie-chips"></div>
+        <div class="genie-inputrow">
+          <input type="text" id="genie-q" placeholder="e.g. total revenue by region" aria-label="Ask a question about the data" />
+          <button class="btn btn-primary genie-ask" id="genie-ask">Ask →</button>
+        </div>
+        <div class="genie-schema">Table <code>sales</code>: <code>region</code>, <code>product</code>, <code>quarter</code>, <code>units</code>, <code>revenue</code> · 48 rows</div>
+        <div class="genie-result" id="genie-result" hidden>
+          <div class="genie-answer" id="genie-answer"></div>
+          <pre class="genie-sql" id="genie-sql"></pre>
+          <div class="genie-table-wrap"><table class="genie-table" id="genie-table"></table></div>
+          <div class="genie-note">Pattern-matched client-side for the demo. Databricks Genie uses an LLM over your catalog's metadata and semantics - with governance, lineage, and far richer language understanding.</div>
+        </div>
+      </div>
+
+      <!-- Interactive OEE calculator tied to the OEE article -->
+      <div class="oee-demo reveal">
+        <div class="oee-intro">
+          <div class="eyebrow">Try it · interactive</div>
+          <h3>Overall Equipment Effectiveness, live</h3>
+          <p>OEE = Availability × Performance × Quality. Drag the sliders to see how each loss compounds into the single number that manufacturers use to unlock hidden capacity - the metric behind my Databricks OEE agent.</p>
+          <div class="oee-sliders">
+            <label>Availability <output id="oee-a-val">90%</output>
+              <input type="range" id="oee-a" min="40" max="100" value="90" />
+            </label>
+            <label>Performance <output id="oee-p-val">95%</output>
+              <input type="range" id="oee-p" min="40" max="100" value="95" />
+            </label>
+            <label>Quality <output id="oee-q-val">99%</output>
+              <input type="range" id="oee-q" min="40" max="100" value="99" />
+            </label>
+          </div>
+          <div class="oee-rating" id="oee-rating"></div>
+          <div class="oee-refs">
+            <a href="https://www.linkedin.com/pulse/building-ai-optimization-agent-databricks-boost-overall-kurt-holst-tvqwe" target="_blank" rel="noopener">Read the OEE article →</a>
+            <a href="https://github.com/kurtholst/blogpost-oee" target="_blank" rel="noopener">Reproducible repo →</a>
+            <a href="#projects">See the case study →</a>
+          </div>
+        </div>
+        <div class="oee-gauge">
+          <svg viewBox="0 0 200 200" width="200" height="200">
+            <circle cx="100" cy="100" r="85" fill="none" stroke="var(--line)" stroke-width="16" />
+            <circle id="oee-arc" cx="100" cy="100" r="85" fill="none" stroke="var(--accent)" stroke-width="16"
+              stroke-linecap="round" transform="rotate(-90 100 100)" stroke-dasharray="534" stroke-dashoffset="534" />
+            <text id="oee-num" x="100" y="98" text-anchor="middle" font-family="Space Grotesk" font-size="42" font-weight="700" fill="var(--ink)">85%</text>
+            <text x="100" y="124" text-anchor="middle" font-size="13" fill="var(--muted)">OEE</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Interactive ARIMA retail forecast simulation -->
+      <div class="fc-demo reveal">
+        <div class="fc-head">
+          <div>
+            <div class="eyebrow" style="color:var(--accent-ink)">Try it · interactive</div>
+            <h3 class="fc-title">Retail demand forecast, live</h3>
+            <p class="fc-sub">A client-side port of the <strong>Forecasting</strong> tab from my retail demand-forecasting app. Pick a store/item and horizon, configure the models (ARIMA, TBATS, Prophet), then <strong>Run Forecast</strong> to fit all three, compare accuracy, and derive the inventory policy. Runs entirely in your browser - the production app fits real <code>statsmodels</code>, <code>tbats</code>, and Prophet models on a Python backend.</p>
+          </div>
+        </div>
+
+        <!-- Configuration -->
+        <div class="fc-config">
+          <div class="fc-panel">
+            <div class="fc-panel-title">Data selection</div>
+            <label class="fc-field">Store
+              <select id="fc-store"><option value="">All stores</option></select>
+            </label>
+            <label class="fc-field">Item
+              <select id="fc-item"><option value="">All items</option></select>
+            </label>
+            <label class="fc-field">Forecast horizon <b id="fc-days-val">90 days</b>
+              <input type="range" id="fc-days" min="14" max="180" value="90" step="7" />
+            </label>
+            <div class="fc-meta-note" id="fc-datainfo"></div>
+          </div>
+
+          <div class="fc-panel" style="border-top-color:#6366f1">
+            <div class="fc-panel-title fc-toggle"><label><input type="checkbox" id="fc-arima-on" checked> ARIMA <span>(SARIMAX)</span></label><button class="fc-info-btn" data-info="arima" title="How it works" aria-label="ARIMA details">ⓘ</button></div>
+            <div class="fc-params">
+              <label>p<input type="number" id="fc-p" value="1" min="0" max="5"></label>
+              <label>d<input type="number" id="fc-d" value="1" min="0" max="2"></label>
+              <label>q<input type="number" id="fc-q" value="1" min="0" max="5"></label>
+              <label>m<input type="number" id="fc-m" value="7" min="1" max="365"></label>
+              <label>P<input type="number" id="fc-P" value="1" min="0" max="3"></label>
+              <label>D<input type="number" id="fc-D" value="1" min="0" max="2"></label>
+              <label>Q<input type="number" id="fc-Q" value="1" min="0" max="3"></label>
+            </div>
+          </div>
+
+          <div class="fc-panel" style="border-top-color:#0ea5e9">
+            <div class="fc-panel-title fc-toggle"><label><input type="checkbox" id="fc-tbats-on" checked> TBATS</label><button class="fc-info-btn" data-info="tbats" title="How it works" aria-label="TBATS details">ⓘ</button></div>
+            <div class="fc-params fc-params-col">
+              <label class="fc-check"><input type="checkbox" id="fc-boxcox" checked> Box-Cox transform</label>
+              <label class="fc-check"><input type="checkbox" id="fc-trend" checked> Trend</label>
+              <label class="fc-check"><input type="checkbox" id="fc-arma" checked> ARMA errors</label>
+            </div>
+          </div>
+
+          <div class="fc-panel" style="border-top-color:#8b5cf6">
+            <div class="fc-panel-title fc-toggle"><label><input type="checkbox" id="fc-prophet-on" checked> Prophet</label><button class="fc-info-btn" data-info="prophet" title="How it works" aria-label="Prophet details">ⓘ</button></div>
+            <div class="fc-params fc-params-col">
+              <label>Changepoint prior <b id="fc-cp-val">0.05</b>
+                <input type="range" id="fc-cp" min="0.001" max="0.5" step="0.001" value="0.05"></label>
+              <label>Seasonality prior <b id="fc-sp-val">10.0</b>
+                <input type="range" id="fc-sp" min="0.01" max="50" step="0.1" value="10"></label>
+              <label class="fc-check"><input type="checkbox" id="fc-holidays" checked> Holiday calendar
+                <select id="fc-country" style="margin-left:6px">
+                  <option value="DK">Denmark</option><option value="DE">Germany</option>
+                  <option value="US">USA</option><option value="GB">UK</option><option value="">None</option>
+                </select>
+              </label>
+            </div>
+          </div>
+
+          <div class="fc-panel fc-run-panel">
+            <div class="fc-panel-title">Inventory policy</div>
+            <label class="fc-field">Service level <b id="fc-svc-val">95%</b>
+              <input type="range" id="fc-svc" min="80" max="99" value="95"></label>
+            <label class="fc-field">Lead time (days) <b id="fc-lt-val">7</b>
+              <input type="range" id="fc-lt" min="1" max="30" value="7"></label>
+            <label class="fc-field">Cost per purchase order <b id="fc-po-val">$75</b>
+              <input type="range" id="fc-po" min="10" max="500" value="75" step="5"></label>
+            <label class="fc-field">Unit holding cost / yr <b id="fc-hc-val">$4.00</b>
+              <input type="range" id="fc-hc" min="0.5" max="20" value="4" step="0.5"></label>
+            <button id="fc-run" class="btn btn-primary fc-run">▶ Run Forecast</button>
+            <div class="fc-timer" id="fc-timer"></div>
+          </div>
+        </div>
+
+        <!-- Results (populated after Run) -->
+        <div class="fc-results" id="fc-results" hidden>
+          <div class="fc-sel" id="fc-sel"></div>
+
+          <div class="fc-summary-title">Summary statistics</div>
+          <div class="fc-summary" id="fc-summary"></div>
+          <div class="fc-badges" id="fc-badges"></div>
+
+          <div class="fc-kpis" id="fc-kpis"></div>
+
+          <div class="fc-body">
+            <svg id="fc-chart" viewBox="0 0 720 340" role="img" aria-label="Retail demand forecast chart"></svg>
+            <div class="fc-controls">
+              <div class="fc-stats">
+                <div class="fc-stat"><span class="fc-k">Safety stock</span><span class="fc-v" id="fc-ss">–</span></div>
+                <div class="fc-stat"><span class="fc-k">Reorder point</span><span class="fc-v" id="fc-rop">–</span></div>
+                <div class="fc-stat"><span class="fc-k">Avg. daily demand</span><span class="fc-v" id="fc-avg">–</span></div>
+                <div class="fc-stat"><span class="fc-k">Best model</span><span class="fc-v" id="fc-best">–</span></div>
+                <div class="fc-stat"><span class="fc-k">Order qty (EOQ)</span><span class="fc-v" id="fc-eoq">–</span></div>
+                <div class="fc-stat"><span class="fc-k">Annual order cost</span><span class="fc-v" id="fc-oc">–</span></div>
+              </div>
+              <div class="fc-legend" id="fc-legend"></div>
+            </div>
+          </div>
+
+          <div class="fc-summary-title">Model comparison</div>
+          <div class="fc-table-wrap"><table class="fc-table" id="fc-table"></table></div>
+
+          <div class="fc-info">
+            <p id="fc-desc"></p>
+            <details class="fc-code">
+              <summary>How the winning model is fitted in the real app</summary>
+              <pre><code id="fc-code"></code></pre>
+            </details>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- CONTACT -->
   <section id="contact">
     <div class="wrap reveal">
       <div class="contact">
-        <h2>Let's build something.</h2>
-        <p>Interested in Databricks, data &amp; AI solutions, or just want to connect? I'd love to hear from you.</p>
+        <h2>Let's talk data &amp; AI.</h2>
+        <p>Talking Databricks, the SAP-to-Lakehouse journey, OEE, or agentic AI? Comparing notes with fellow builders and the community is my favourite part of the job - reach out or connect on LinkedIn.</p>
         <a class="btn btn-primary" id="say-hello" href="mailto:kurtholst@hotmail.com?subject=Hello%20from%20your%20portfolio&amp;body=Hi%20Kurt%2C%0A%0A">Say hello →</a>
-        <a class="btn btn-ghost" href="assets/Kurt-Holst-CV.pdf" download="Kurt-Holst-CV.pdf" style="margin-left:10px">Download CV ↓</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/kurtholst" target="_blank" rel="noopener" style="margin-left:10px">Connect on LinkedIn →</a>
         <div class="socials">
           <a href="https://github.com/kurtholst" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.8 18.3 5.1 18.3 5.1c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .4.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
@@ -1503,7 +1681,7 @@
 
   <footer>
     <div class="wrap">
-      © <span id="year"></span> Kurt Holst · Solutions Architect @ Databricks · Built with ❤ &amp; hosted on <a href="https://github.com/kurtholst/kurtholst.github.io" target="_blank" rel="noopener">GitHub Pages</a>
+      © <span id="year"></span> Kurt Holst · Solutions Architect @ Databricks · <a href="assets/Kurt-Holst-CV.pdf" download="Kurt-Holst-CV.pdf">Download CV</a> · Built with ❤ &amp; hosted on <a href="https://github.com/kurtholst/kurtholst.github.io" target="_blank" rel="noopener">GitHub Pages</a>
     </div>
   </footer>
 
@@ -1555,11 +1733,10 @@
       const el = document.getElementById('proof-rotator');
       if (!el) return;
       const items = [
-        "Databricks Employee of the Year FY26",
+        "2× Databricks FE Excellence Award, FY26",
         "22 Databricks certifications & accreditations",
         "Agentic GenAI running in production",
-        "SAP HANA to the Lakehouse, end to end",
-        "15 recommendations over two decades"
+        "SAP HANA to the Lakehouse, end to end"
       ];
       let i = 0;
       el.textContent = items[0];
@@ -2027,6 +2204,135 @@
         else { cancelAnimationFrame(raf); raf = null; }
       }, { threshold: 0 });
       hio.observe(canvas.parentElement);
+    })();
+
+    /* ---- Genie-style natural-language-to-SQL demo (client-side) ---- */
+    (function () {
+      const askBtn = document.getElementById('genie-ask');
+      const input = document.getElementById('genie-q');
+      const chipsEl = document.getElementById('genie-chips');
+      const resultEl = document.getElementById('genie-result');
+      if (!askBtn || !input || !resultEl) return;
+
+      // Sample governed "sales" table (48 rows)
+      const regions = ['Nordics', 'DACH', 'UK&I', 'France'];
+      const products = ['Platform', 'Support', 'Training'];
+      const quarters = ['Q1', 'Q2', 'Q3', 'Q4'];
+      const rows = [];
+      let seed = 42; const rng = () => (seed = (seed * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
+      regions.forEach((region, ri) => products.forEach((product, pi) => quarters.forEach((quarter, qi) => {
+        const units = Math.round(20 + rng() * 180 + ri * 15 + qi * 10);
+        const price = product === 'Platform' ? 1200 : product === 'Support' ? 450 : 300;
+        rows.push({ region, product, quarter, units, revenue: units * price });
+      })));
+
+      const fmt = n => n.toLocaleString('en-US');
+      const money = n => '$' + fmt(Math.round(n));
+
+      const sum = (arr, k) => arr.reduce((s, r) => s + r[k], 0);
+      const groupSum = (key, metric) => {
+        const m = new Map();
+        rows.forEach(r => m.set(r[key], (m.get(r[key]) || 0) + r[metric]));
+        return [...m.entries()].sort((a, b) => b[1] - a[1]);
+      };
+
+      // SQL syntax highlighter
+      const hl = (sql) => sql
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+        .replace(/\b(SELECT|FROM|WHERE|GROUP BY|ORDER BY|LIMIT|DESC|ASC|AS|AND)\b/g, '<span class="kw">$1</span>')
+        .replace(/\b(SUM|COUNT|AVG|MAX|MIN|ROUND)\b/g, '<span class="fn">$1</span>')
+        .replace(/('[^']*')/g, '<span class="str">$1</span>');
+
+      const renderTable = (cols, data) => {
+        const thead = '<thead><tr>' + cols.map(c => `<th>${c.label}</th>`).join('') + '</tr></thead>';
+        const tbody = '<tbody>' + data.map(row =>
+          '<tr>' + cols.map(c => `<td>${c.fmt ? c.fmt(row[c.key]) : row[c.key]}</td>`).join('') + '</tr>'
+        ).join('') + '</tbody>';
+        return thead + tbody;
+      };
+
+      // Intent matcher → {answer, sql, cols, data}
+      function answer(qRaw) {
+        const q = qRaw.toLowerCase();
+        const metric = /unit|volume|quantity/.test(q) ? 'units' : 'revenue';
+        const metricLabel = metric === 'units' ? 'Units' : 'Revenue';
+        const metricFmt = metric === 'units' ? fmt : money;
+
+        const byDim = (dim, dimLabel) => {
+          const g = groupSum(dim, metric);
+          const data = g.map(([k, v]) => ({ [dim]: k, [metric]: v }));
+          const top = g[0];
+          return {
+            answer: `Top ${dimLabel.toLowerCase()} by ${metricLabel.toLowerCase()}: ${top[0]} with ${metricFmt(top[1])}.`,
+            sql: `SELECT ${dim},\n       SUM(${metric}) AS total_${metric}\nFROM sales\nGROUP BY ${dim}\nORDER BY total_${metric} DESC;`,
+            cols: [{ key: dim, label: dimLabel }, { key: metric, label: metricLabel, fmt: metricFmt }],
+            data
+          };
+        };
+
+        if (/region/.test(q)) return byDim('region', 'Region');
+        if (/product/.test(q)) return byDim('product', 'Product');
+        if (/quarter|quarterly|over time|trend/.test(q)) {
+          const order = { Q1: 1, Q2: 2, Q3: 3, Q4: 4 };
+          const g = groupSum('quarter', metric).sort((a, b) => order[a[0]] - order[b[0]]);
+          return {
+            answer: `${metricLabel} by quarter - peak in ${[...g].sort((a,b)=>b[1]-a[1])[0][0]}.`,
+            sql: `SELECT quarter,\n       SUM(${metric}) AS total_${metric}\nFROM sales\nGROUP BY quarter\nORDER BY quarter;`,
+            cols: [{ key: 'quarter', label: 'Quarter' }, { key: metric, label: metricLabel, fmt: metricFmt }],
+            data: g.map(([k, v]) => ({ quarter: k, [metric]: v }))
+          };
+        }
+        if (/total|overall|sum|how much|all/.test(q)) {
+          const total = sum(rows, metric);
+          return {
+            answer: `Total ${metricLabel.toLowerCase()} across all regions and products: ${metricFmt(total)}.`,
+            sql: `SELECT SUM(${metric}) AS total_${metric}\nFROM sales;`,
+            cols: [{ key: metric, label: 'Total ' + metricLabel, fmt: metricFmt }],
+            data: [{ [metric]: total }]
+          };
+        }
+        if (/average|avg|mean/.test(q)) {
+          const avg = Math.round(sum(rows, metric) / rows.length);
+          return {
+            answer: `Average ${metricLabel.toLowerCase()} per row: ${metricFmt(avg)}.`,
+            sql: `SELECT ROUND(AVG(${metric}), 0) AS avg_${metric}\nFROM sales;`,
+            cols: [{ key: metric, label: 'Avg ' + metricLabel, fmt: metricFmt }],
+            data: [{ [metric]: Math.round(avg) }]
+          };
+        }
+        // fallback: top rows by revenue
+        const data = [...rows].sort((a, b) => b.revenue - a.revenue).slice(0, 5);
+        return {
+          answer: `Here are the top 5 rows by revenue. Try asking about a <b>region</b>, <b>product</b>, or <b>quarter</b>.`,
+          sql: `SELECT region, product, quarter, units, revenue\nFROM sales\nORDER BY revenue DESC\nLIMIT 5;`,
+          cols: [
+            { key: 'region', label: 'Region' }, { key: 'product', label: 'Product' },
+            { key: 'quarter', label: 'Quarter' }, { key: 'units', label: 'Units', fmt: fmt },
+            { key: 'revenue', label: 'Revenue', fmt: money }
+          ],
+          data
+        };
+      }
+
+      function run(q) {
+        if (!q.trim()) return;
+        const r = answer(q);
+        document.getElementById('genie-answer').innerHTML = '💡 ' + r.answer;
+        document.getElementById('genie-sql').innerHTML = hl(r.sql);
+        document.getElementById('genie-table').innerHTML = renderTable(r.cols, r.data);
+        resultEl.hidden = false;
+      }
+
+      const samples = ['Total revenue by region', 'Which product sells the most?', 'Revenue by quarter', 'Total units overall', 'Average revenue'];
+      samples.forEach(s => {
+        const c = document.createElement('span');
+        c.className = 'genie-chip'; c.textContent = s;
+        c.addEventListener('click', () => { input.value = s; run(s); });
+        chipsEl.appendChild(c);
+      });
+
+      askBtn.addEventListener('click', () => run(input.value));
+      input.addEventListener('keydown', e => { if (e.key === 'Enter') run(input.value); });
     })();
   </script>
 </body>
