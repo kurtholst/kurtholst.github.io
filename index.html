@@ -252,6 +252,7 @@
 
     /* PROJECTS */
     .proj-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+    .card.proj-hidden { display: none; }
     .card {
       background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden;
       box-shadow: var(--shadow); transition: transform .15s, box-shadow .15s, border-color .15s; display: flex; flex-direction: column;
@@ -633,11 +634,13 @@
           <div class="tl-date">Jan 2025 – Present</div>
           <div class="tl-role">Solutions Architect</div>
           <div class="tl-org">Databricks · Copenhagen (Hybrid)</div>
-          <p>Showing how the Databricks Data Intelligence Platform solves complex data challenges, building tailored solutions with a customer-focused team.</p>
+          <p>The technical lead in the sales cycle - partnering with account executives to win and grow enterprise customers by proving how the Databricks Data Intelligence Platform solves their hardest data &amp; AI challenges.</p>
           <ul>
-            <li>Lead hands-on evaluations and build mock-ups using Databricks with Spark, Python, and SQL.</li>
-            <li>Develop reference architectures, how-to guides, and demo applications for customers.</li>
-            <li>Engage the Databricks technical community through workshops, seminars, and meetups.</li>
+            <li>Own the technical win in presales: run discovery to uncover business pain, map it to platform capabilities, and design the target architecture that becomes the customer's north star.</li>
+            <li>Lead hands-on evaluations and build mock-ups using Databricks with Spark, Python, Apps, and agentic solutions - turning customer requirements into working proof, not slideware. I prototype end to end: Lakeflow pipelines, Unity Catalog governance, model-serving and GenAI endpoints, Genie spaces, and full-stack Databricks Apps with multi-agent orchestration.</li>
+            <li>Lead value-based conversations with both technical teams and executive stakeholders, translating deep platform depth into clear business outcomes and ROI.</li>
+            <li>Guide customers through competitive evaluations and migrations, de-risking adoption with reference architectures, how-to guides, and best practices.</li>
+            <li>Build trust and pipeline across the Databricks technical community through workshops, seminars, and meetups.</li>
           </ul>
         </div>
         <div class="tl-item">
@@ -721,20 +724,20 @@
           <div class="tag-list">
             <span class="tag">Python</span><span class="tag">TypeScript</span><span class="tag">R</span>
             <span class="tag">SQL</span><span class="tag">FastAPI</span><span class="tag">React</span>
-            <span class="tag">Shell</span>
           </div>
         </div>
         <div class="skill-cat reveal">
           <h3><span class="ico">🗄️</span> Enterprise Data</h3>
           <div class="tag-list">
-            <span class="tag">SAP HANA</span><span class="tag">Data Modeling</span><span class="tag">Medallion Architecture</span>
+            <span class="tag">SAP HANA</span><span class="tag">SAP ERP</span><span class="tag">M3 / Movex</span>
+            <span class="tag">Data Modeling</span><span class="tag">Medallion Architecture</span>
             <span class="tag">Data Governance</span><span class="tag">ETL / ELT</span>
           </div>
         </div>
         <div class="skill-cat reveal">
           <h3><span class="ico">📊</span> Analytics &amp; Viz</h3>
           <div class="tag-list">
-            <span class="tag">Lakeview Dashboards</span><span class="tag">KPI Design</span><span class="tag">Recharts</span>
+            <span class="tag">Lakeview Dashboards</span><span class="tag">KPI Design</span>
             <span class="tag">Leaflet / Geospatial</span><span class="tag">Streamlit</span>
           </div>
         </div>
@@ -861,15 +864,6 @@
         </div>
 
         <div class="card reveal">
-          <div class="thumb"><span class="emoji">🏭</span><span class="lang">Python</span></div>
-          <div class="body">
-            <h3>Maintenance Control Tower</h3>
-            <p>A Databricks App that lets plant teams chat with manufacturing asset data – SQL tool-calling over Unity Catalog tables to generate actionable repair plans from natural-language questions.</p>
-            <div class="links"><a href="https://github.com/kurtholst/mct-app" target="_blank" rel="noopener">View repo →</a></div>
-          </div>
-        </div>
-
-        <div class="card reveal">
           <div class="thumb"><span class="emoji">📈</span><span class="lang">R</span></div>
           <div class="body">
             <h3>SAP HANA Machine Learning from R</h3>
@@ -878,7 +872,16 @@
           </div>
         </div>
 
-        <div class="card reveal">
+        <div class="card reveal proj-hidden">
+          <div class="thumb"><span class="emoji">🏭</span><span class="lang">Python</span></div>
+          <div class="body">
+            <h3>Maintenance Control Tower</h3>
+            <p>A Databricks App that lets plant teams chat with manufacturing asset data – SQL tool-calling over Unity Catalog tables to generate actionable repair plans from natural-language questions.</p>
+            <div class="links"><a href="https://github.com/kurtholst/mct-app" target="_blank" rel="noopener">View repo →</a></div>
+          </div>
+        </div>
+
+        <div class="card reveal proj-hidden">
           <div class="thumb"><span class="emoji">🔥</span><span class="lang">R</span></div>
           <div class="body">
             <h3>Spark ML on Azure</h3>
@@ -889,7 +892,10 @@
 
       </div>
       <div style="text-align:center; margin-top:36px" class="reveal">
-        <a class="btn btn-ghost" href="https://github.com/kurtholst?tab=repositories" target="_blank" rel="noopener">See all repositories on GitHub →</a>
+        <button class="btn btn-ghost" id="proj-more" onclick="
+          document.querySelectorAll('.card.proj-hidden').forEach(e=>e.classList.remove('proj-hidden'));
+          this.style.display='none';">Show more projects →</button>
+        <a class="btn btn-ghost" href="https://github.com/kurtholst?tab=repositories" target="_blank" rel="noopener" style="margin-left:10px">See all repositories on GitHub →</a>
       </div>
     </div>
   </section>
