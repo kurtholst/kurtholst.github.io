@@ -362,6 +362,40 @@
     .oee-gauge { position: relative; z-index: 1; display: grid; place-items: center; }
     #oee-arc { transition: stroke-dashoffset .4s ease, stroke .4s ease; }
     #oee-num { transition: fill .3s; }
+    /* OEE agentic RCA */
+    .oee-rca-btn { margin-top: 18px; position: relative; z-index: 1; }
+    .oee-rca-btn .btn { background: var(--accent); color: #fff; }
+    .oee-rca-btn .btn:hover { background: #ff7d4d; }
+    .oee-rca-btn .btn:disabled { opacity: .7; cursor: default; transform: none; }
+    .rca-panel { grid-column: 1 / -1; position: relative; z-index: 1; margin-top: 24px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.14); border-radius: 16px; padding: 24px 26px; }
+    .rca-panel[hidden] { display: none; }
+    .rca-head { font-family: 'Space Grotesk'; font-weight: 700; font-size: 1.05rem; color: #fff; margin-bottom: 4px; }
+    .rca-sub { font-size: .82rem; color: #94a3b8; margin-bottom: 16px; }
+    .rca-steps { list-style: none; padding: 0; margin: 0 0 18px; }
+    .rca-step { display: flex; align-items: flex-start; gap: 10px; font-size: .9rem; color: #cbd5e1; padding: 7px 0; opacity: .35; transition: opacity .3s; }
+    .rca-step.active { opacity: 1; color: #fff; }
+    .rca-step.done { opacity: 1; color: #cbd5e1; }
+    .rca-step .rca-ico { flex-shrink: 0; width: 22px; height: 22px; border-radius: 7px; display: grid; place-items: center; font-size: .72rem; background: rgba(255,107,53,.16); color: var(--accent); }
+    .rca-step.done .rca-ico { background: rgba(34,197,94,.18); color: #4ade80; }
+    .rca-step .rca-spin { display: inline-block; width: 12px; height: 12px; border: 2px solid rgba(255,255,255,.3); border-top-color: var(--accent); border-radius: 50%; animation: rca-spin .7s linear infinite; }
+    @keyframes rca-spin { to { transform: rotate(360deg); } }
+    .rca-source { font-size: .74rem; color: #94a3b8; margin-left: 32px; }
+    .rca-source code { color: var(--accent); font-family: 'SF Mono','Roboto Mono',Menlo,monospace; }
+    .rca-plan { border-top: 1px solid rgba(255,255,255,.12); padding-top: 18px; }
+    .rca-plan[hidden] { display: none; }
+    .rca-focus { font-size: .82rem; color: #cbd5e1; margin-bottom: 14px; }
+    .rca-focus b { color: var(--accent); }
+    .rca-action { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.08); }
+    .rca-action:last-child { border-bottom: 0; }
+    .rca-action .rca-n { flex-shrink: 0; font-family: 'Space Grotesk'; font-weight: 700; font-size: .8rem; color: var(--accent); width: 24px; height: 24px; border-radius: 7px; background: rgba(255,107,53,.14); display: grid; place-items: center; }
+    .rca-action .rca-title { font-weight: 600; font-size: .92rem; color: #fff; }
+    .rca-action .rca-detail { font-size: .82rem; color: #94a3b8; margin-top: 2px; line-height: 1.5; }
+    .rca-action .rca-cite { font-size: .72rem; color: #64748b; margin-top: 4px; }
+    .rca-action .rca-cite code { color: #94a3b8; }
+    .rca-uplift { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 18px; padding: 14px 18px; background: rgba(34,197,94,.1); border: 1px solid rgba(34,197,94,.28); border-radius: 12px; }
+    .rca-uplift .rca-metric { font-size: .78rem; color: #86efac; }
+    .rca-uplift .rca-metric b { display: block; font-family: 'Space Grotesk'; font-size: 1.3rem; color: #fff; font-weight: 700; }
+    .rca-note { font-size: .72rem; color: #64748b; font-style: italic; margin-top: 14px; }
 
     /* GENIE NL-TO-SQL DEMO */
     .genie-demo { margin-top: 24px; background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: 32px; box-shadow: var(--shadow); }
@@ -1525,6 +1559,9 @@
             <a href="https://github.com/kurtholst/blogpost-oee" target="_blank" rel="noopener">Reproducible repo →</a>
             <a href="#projects">See the case study →</a>
           </div>
+          <div class="oee-rca-btn">
+            <button class="btn" id="oee-rca-run">🧠 Agentic Root Cause Analysis</button>
+          </div>
         </div>
         <div class="oee-gauge">
           <svg viewBox="0 0 200 200" width="200" height="200">
@@ -1534,6 +1571,19 @@
             <text id="oee-num" x="100" y="98" text-anchor="middle" font-family="Space Grotesk" font-size="42" font-weight="700" fill="var(--ink)">85%</text>
             <text x="100" y="124" text-anchor="middle" font-size="13" fill="var(--muted)">OEE</text>
           </svg>
+        </div>
+
+        <!-- Agentic RCA (fictitious demo of the OEE optimization agent) -->
+        <div class="rca-panel" id="rca-panel" hidden>
+          <div class="rca-head">OEE Optimization Agent · Plant <span id="rca-plant">NORD-07</span></div>
+          <div class="rca-sub">A multi-agent workflow retrieves root-cause findings from similar plants and drafts an improvement plan. (Illustrative demo of the production agent.)</div>
+          <ul class="rca-steps" id="rca-steps"></ul>
+          <div class="rca-plan" id="rca-plan" hidden>
+            <div class="rca-focus" id="rca-focus"></div>
+            <div id="rca-actions"></div>
+            <div class="rca-uplift" id="rca-uplift"></div>
+            <div class="rca-note">Fictitious plant and figures for illustration. The real agent uses Genie over Delta OEE marts + an Agent Bricks Knowledge Assistant (RAG) over root-cause PDFs, orchestrated by a Mosaic AI supervisor and traced with MLflow.</div>
+          </div>
         </div>
       </div>
 
@@ -2155,6 +2205,136 @@
       };
       [a, p, q].forEach(s => s.addEventListener('input', render));
       render();
+    })();
+
+    /* ---- OEE Agentic Root Cause Analysis (fictitious demo) ---- */
+    (function () {
+      const runBtn = document.getElementById('oee-rca-run');
+      if (!runBtn) return;
+      const panel = document.getElementById('rca-panel');
+      const stepsEl = document.getElementById('rca-steps');
+      const planEl = document.getElementById('rca-plan');
+      const focusEl = document.getElementById('rca-focus');
+      const actionsEl = document.getElementById('rca-actions');
+      const upliftEl = document.getElementById('rca-uplift');
+      const a = document.getElementById('oee-a'), p = document.getElementById('oee-p'), q = document.getElementById('oee-q');
+
+      // Playbooks keyed on the weakest OEE pillar, each citing "RCA docs" from peer plants.
+      const PLAYBOOKS = {
+        availability: {
+          label: 'Availability', loss: 'unplanned downtime & changeover',
+          peers: ['NORD-02', 'BAVARIA-04', 'LYON-01'],
+          actions: [
+            { title: 'Shift to condition-based maintenance on the primary line', detail: 'Peer plants cut unplanned stops by routing vibration & temperature signals into a changepoint-detection model that flags bearings 7-10 days before failure.', cite: 'RCA-NORD-02 · "Bearing seizure, line 3"' },
+            { title: 'Attack changeover time with SMED', detail: 'Standardize and externalize changeover steps; the median peer recovered 4.2% availability by moving tooling prep off-line.', cite: 'RCA-BAVARIA-04 · "Changeover overrun"' },
+            { title: 'Spare-parts kanban for top-5 failure modes', detail: 'Stock the parts behind 80% of acute stops; eliminates wait-for-part downtime seen repeatedly across the fleet.', cite: 'RCA-LYON-01 · "Parts wait, 11h stop"' }
+          ]
+        },
+        performance: {
+          label: 'Performance', loss: 'speed loss & minor stops',
+          peers: ['NORD-05', 'TURIN-03', 'MALMO-02'],
+          actions: [
+            { title: 'Close the gap to ideal cycle time', detail: 'Line is running below rated speed. Peers recovered performance by re-tuning feed rates and removing a conservative speed cap left after a past jam.', cite: 'RCA-NORD-05 · "Speed cap never reset"' },
+            { title: 'Eliminate micro-stops at the infeed', detail: 'Minor stops under 2 min rarely get logged but dominate speed loss; a vision trigger + guide-rail fix removed most of them at peer sites.', cite: 'RCA-TURIN-03 · "Infeed jams < 2 min"' },
+            { title: 'Operator-pacing dashboard', detail: 'Real-time rate vs. target at the station lifted sustained performance by 3-5% across comparable plants.', cite: 'RCA-MALMO-02 · "Pacing variance by shift"' }
+          ]
+        },
+        quality: {
+          label: 'Quality', loss: 'defects & rework',
+          peers: ['NORD-09', 'PORTO-01', 'GHENT-06'],
+          actions: [
+            { title: 'SPC on the parameter driving scrap', detail: 'Peers traced the bulk of defects to drift in a single process parameter; adding statistical process control alarms caught it before scrap.', cite: 'RCA-NORD-09 · "Humidity drift, batch reject"' },
+            { title: 'First-pass-yield gate after the critical step', detail: 'An inline check right after the high-risk operation stopped defects from propagating, cutting downstream rework.', cite: 'RCA-PORTO-01 · "Rework cascade"' },
+            { title: 'Supplier incoming-quality audit', detail: 'A recurring defect across the fleet originated upstream; tightening incoming inspection removed it at the source.', cite: 'RCA-GHENT-06 · "Raw material variance"' }
+          ]
+        }
+      };
+
+      const STEPS = [
+        { ico: '📊', text: 'Querying plant OEE history via Genie (Delta marts)' },
+        { ico: '🔎', text: 'Retrieving RCA findings from similar plants (Knowledge Assistant / RAG)' },
+        { ico: '🧩', text: 'Mosaic AI supervisor correlating losses to root causes' },
+        { ico: '📝', text: 'Drafting a prioritized improvement plan' }
+      ];
+
+      const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+      async function run() {
+        // Determine the weakest pillar from current slider values.
+        const av = +a.value, pv = +p.value, qv = +q.value;
+        const pillars = [['availability', av], ['performance', pv], ['quality', qv]];
+        pillars.sort((x, y) => x[1] - y[1]);
+        const weakest = pillars[0][0];
+        const pb = PLAYBOOKS[weakest];
+
+        runBtn.disabled = true;
+        panel.hidden = false;
+        planEl.hidden = true;
+        stepsEl.innerHTML = '';
+        document.getElementById('rca-plant').textContent = 'NORD-07';
+
+        // Render step list
+        const liEls = STEPS.map((s, i) => {
+          const li = document.createElement('li');
+          li.className = 'rca-step';
+          li.innerHTML = '<span class="rca-ico">' + s.ico + '</span><span class="rca-step-text">' + s.text + '</span>';
+          stepsEl.appendChild(li);
+          return li;
+        });
+
+        if (reduceMotion) {
+          liEls.forEach(li => li.classList.add('done'));
+        } else {
+          for (let i = 0; i < liEls.length; i++) {
+            const li = liEls[i];
+            li.classList.add('active');
+            const txt = li.querySelector('.rca-step-text');
+            const orig = txt.innerHTML;
+            txt.innerHTML = orig + ' &nbsp;<span class="rca-spin"></span>';
+            await sleep(850 + Math.random() * 500);
+            txt.innerHTML = orig;
+            // After the retrieval step, show which peer plants were pulled.
+            if (i === 1) {
+              const src = document.createElement('div');
+              src.className = 'rca-source';
+              src.innerHTML = 'Matched peers: ' + pb.peers.map(x => '<code>' + x + '</code>').join(', ');
+              li.insertAdjacentElement('afterend', src);
+            }
+            li.classList.remove('active');
+            li.classList.add('done');
+          }
+        }
+
+        // Render the plan
+        focusEl.innerHTML = 'Biggest lever at <b>Plant NORD-07</b>: <b>' + pb.label + '</b> (' + pb.loss +
+          '), currently the lowest pillar at <b>' + pillars[0][1] + '%</b>. Plan synthesized from ' + pb.peers.length + ' peer-plant RCA reports:';
+        actionsEl.innerHTML = pb.actions.map((act, i) =>
+          '<div class="rca-action"><div class="rca-n">' + (i + 1) + '</div><div>' +
+          '<div class="rca-title">' + act.title + '</div>' +
+          '<div class="rca-detail">' + act.detail + '</div>' +
+          '<div class="rca-cite">Source: <code>' + act.cite + '</code></div>' +
+          '</div></div>'
+        ).join('');
+
+        // Projected uplift: lift the weakest pillar partway toward best-in-class.
+        const current = (av / 100) * (pv / 100) * (qv / 100);
+        const lifted = Math.min(99, pillars[0][1] + Math.round((97 - pillars[0][1]) * 0.6));
+        const vals = { availability: av, performance: pv, quality: qv };
+        vals[weakest] = lifted;
+        const projected = (vals.availability / 100) * (vals.performance / 100) * (vals.quality / 100);
+        const curPct = Math.round(current * 100), projPct = Math.round(projected * 100);
+        upliftEl.innerHTML =
+          '<div class="rca-metric">Current OEE<b>' + curPct + '%</b></div>' +
+          '<div class="rca-metric">' + pb.label + ' target<b>' + lifted + '%</b></div>' +
+          '<div class="rca-metric">Projected OEE<b>' + projPct + '%</b></div>' +
+          '<div class="rca-metric">Estimated gain<b>+' + (projPct - curPct) + ' pts</b></div>';
+
+        planEl.hidden = false;
+        runBtn.disabled = false;
+        runBtn.textContent = '🧠 Re-run Root Cause Analysis';
+      }
+
+      runBtn.addEventListener('click', run);
     })();
 
     /* ---- Hero node network ---- */
